@@ -7,10 +7,65 @@
     <title>数组方法测试</title>
 </head>
 <style>
-
+    body{
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #input{
+        background: #1f1f1f;
+        color: #fff;
+        width: 800px;
+        height: auto;
+    }
+    button{
+        width: 80px;
+        height: 40px;
+    }
+    pre{
+        min-height: 200px;
+        width: 800px;
+        background: #eee;
+    }
 </style>
 <body>
+    <h1>输入代码</h1>
+    <textarea rows="30" cols="30" name="textarea" id="input"></textarea>
+    <button class="btn" id="btn">执行</button>
+    <h1>输出结果</h1>
+    <pre></pre>
     <script>
+        console.LOG = console.log
+        let preText 
+        let allText
+        console.log = function(){
+           console.LOG(arguments)
+           let arr = Array.from(arguments)
+           console.LOG(arr,'输出的数组值???')
+        //    allText.push(arr)
+           arr.forEach(item=>{
+            preText = `${preText}${item}`
+           })
+           
+
+        }
+        let inputBox = document.querySelector('#input')
+        let btn = document.querySelector('#btn')
+        let pre = document.querySelector('pre')
+        btn.onclick = function(){
+            preText = ''
+            allText = ''
+            let text = input.value
+            let newText = `try{${text}}catch(error){
+                console.log(error)
+            } `
+            eval(text)            
+           pre.innerText = preText
+        }        
     </script>
 </body>
 </html>
