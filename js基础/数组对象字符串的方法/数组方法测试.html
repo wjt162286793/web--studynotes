@@ -48,13 +48,14 @@
         width: 1200px;
         background: #d5e0e5;
         font-size: 20px;
+        overflow: auto;
     }
 </style>
 
 <body>
     <ul class="left">
         <li><button id="btn1">forEach方法</button></li>
-        <li><button>forEach方法</button></li>
+        <li><button id="btn2">map方法</button></li>
         <li><button>forEach方法</button></li>
         <li><button>forEach方法</button></li>
         <li><button>forEach方法</button></li>
@@ -112,6 +113,17 @@
                 console.log(item,'选项值')
                 console.log(index,'索引值')
             })
+            `
+        }
+
+        let btn2 = document.querySelector('#btn2')
+        btn2.onclick = function () {
+            input.value = `
+            let arr = [{name:'wjt',age:28},{name:'xiaoma',age:29}]
+            arr.map((item,index)=>{
+          item.newVal = item.name+item.age
+            })
+            console.log(arr)
             `
         }
     </script>
