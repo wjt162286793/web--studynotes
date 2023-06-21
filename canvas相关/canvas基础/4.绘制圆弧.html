@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绘制圆弧</title>
+</head>
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        /*完整的填充圆*/
+        // mode.arc(200,200,100,0,Math.PI*2,true)
+        // mode.fillStyle = 'blue'
+        // mode.fill()
+
+        /*路径圆弧*/
+        // mode.arc(200,200,100,90,Math.PI,false)
+        // mode.strokeStyle = 'green'
+        // mode.stroke()
+
+        /*填充半圆*/
+        // mode.arc(200,200,100,0,Math.PI,false)
+        // mode.fillStyle = 'yellow'
+        // mode.fill()
+
+        /*填充弧度*/
+        mode.arc(200,200,100,0,Math.PI*0.8,false)
+        mode.fillStyle = 'red'
+        mode.fill()
+    </script>
+</body>
+</html>

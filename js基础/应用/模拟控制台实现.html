@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组方法测试</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+    }
+
+    .left {
+        width: 100px;
+        height: auto;
+        max-height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        list-style-type: none;
+    }
+
+    #input {
+        background: #1f1f1f;
+        color: #fff;
+        width: 1200px;
+        height: auto;
+        font-size: 24px;
+    }
+
+    button {
+        margin-top: 10px;
+        width: 120px;
+        height: 40px;
+    }
+
+    pre {
+        min-height: 200px;
+        width: 1200px;
+        background: #d5e0e5;
+        font-size: 20px;
+        overflow: auto;
+    }
+</style>
+
+<body>
+    <ul class="left">
+        <li><button id="btn1">forEach方法</button></li>
+        <li><button id="btn2">map方法</button></li>
+    </ul>
+    <h1>输入代码</h1>
+    <textarea rows="15" cols="30" name="textarea" id="input"></textarea>
+    <button class="btn" id="btn">执行</button>
+    <h1>输出结果</h1>
+    <pre></pre>
+    <script>
+        console.LOG = console.log
+        let preText
+        let allText
+        let number = 0
+        console.log = function () {
+            number += 1
+            console.LOG(arguments)
+            let arr = Array.from(arguments)
+            console.LOG(arr, '输出的数组值???')
+            preText = `☆${number}:`
+            arr.forEach(item => {
+                console.LOG('>>>', item)
+                preText = `${preText} ${JSON.stringify(item)}`
+            })
+            allText = `${allText}
+        ${preText}`
+            preText = ''
+        }
+        let inputBox = document.querySelector('#input')
+        let btn = document.querySelector('#btn')
+        let pre = document.querySelector('pre')
+        btn.onclick = function () {
+            number = 0
+            preText = ''
+            allText = ''
+            let text = input.value
+            let newText = `try{${text}}catch(error){
+                console.log(error)
+            } `
+            eval(text)
+            pre.innerText = allText
+        }
+
+
+        let btn1 = document.querySelector('#btn1')
+        btn1.onclick = function () {
+            input.value = `
+            let arr = [{name:'wjt',age:28},{name:'xiaoma',age:29}]
+            arr.forEach((item,index)=>{
+                console.log(item,'选项值')
+                console.log(index,'索引值')
+            })
+            `
+        }
+
+        let btn2 = document.querySelector('#btn2')
+        btn2.onclick = function () {
+            input.value = `
+            let arr = [{name:'wjt',age:28},{name:'xiaoma',age:29}]
+            arr.map((item,index)=>{
+          item.newVal = item.name+item.age
+            })
+            console.log(arr)
+            `
+        }
+    </script>
+</body>
+
+</html>

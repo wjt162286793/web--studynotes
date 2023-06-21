@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>普通模板</title>
+</head>
+<style>
+    body {
+        margin: 0;
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #canvas {
+        border: 1px dashed red;
+        margin: auto;
+    }
+</style>
+
+<body>
+    <canvas width="1000" height="600" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        let starsList = []
+        for (let i = 1; i < 15; i++) {
+            for (let j = 1; j < 5; j++) {
+                starsList.push({
+                    x: i * 50 + 100 + Math.random() * (200 - 100),
+                    y: j * 10 + 100 + Math.random() * (50 - 1)
+                })
+            }
+        }
+        function draw() {
+            /*外层*/
+            mode.beginPath()
+            mode.rect(50, 50, 900, 500)
+            mode.strokeStyle = 'green'
+            mode.stroke()
+            mode.closePath()
+            drawSky()
+            drawSea()
+            starsList.forEach(item => {
+                drawStars(item)
+            })
+            drawMoon()
+            drawSailing()
+            drawIsland()
+            drawLighthouse()
+        }
+        /*天*/
+        function drawSky() {
+            mode.beginPath()
+            mode.rect(50, 50, 900, 200)
+            mode.fillStyle = '#1f1f1f'
+            mode.fill()
+            mode.closePath()
+        }
+        /*海*/
+        function drawSea() {
+            mode.beginPath()
+            mode.rect(50, 250, 900, 300)
+            mode.fillStyle = '#0d0249'
+            mode.fill()
+            mode.closePath()
+        }
+        /*月牙*/
+        function drawMoon() {
+            mode.beginPath()
+            mode.arc(350,150,15,0,Math.PI*2,true)
+            mode.fillStyle = '#f1d710'
+            mode.fill()
+            mode.closePath()
+            mode.beginPath()
+            mode.arc(330,150,22,0,Math.PI*2,true)
+            mode.fillStyle = '#1f1f1f'
+            mode.fill()
+            mode.closePath()
+        }
+        /*星空*/
+        function drawStars(item) {
+            mode.beginPath()
+            mode.arc(item.x, item.y, 1, 0, Math.PI * 2, true)
+            mode.fillStyle = '#fff'
+            mode.fill()
+            mode.closePath()
+        }
+        /*帆船*/
+        function drawSailing(){
+           mode.beginPath()
+           mode.moveTo(200,450)
+           mode.lineTo(250,450)
+           mode.lineTo(240,460)
+           mode.lineTo(210,460)
+           mode.fillStyle = '#5d1f1f'
+           mode.fill()
+           mode.closePath()
+           mode.beginPath()
+           mode.moveTo(230,450)
+           mode.lineTo(230,420),
+           mode.lineTo(215,450)
+           mode.fillStyle = '#fff'
+           mode.fill()
+           mode.closePath()
+        }
+        //海岛
+        function drawIsland(){
+            mode.beginPath()
+            mode.moveTo(950,270)
+            mode.quadraticCurveTo(200,300,950,420,950,600)
+            mode.fillStyle= '#181818'
+            mode.fill()
+            mode.closePath()
+            // mode.beginPath()
+            // mode.moveTo(850,300)
+            // mode.quadraticCurveTo(600,200,500,360)
+            // mode.fillStyle= 'red'
+            // mode.fill()
+            // mode.closePath()
+            
+        }
+        /*灯塔*/
+        function drawLighthouse(){
+            mode.beginPath()
+            mode.rect(700,300,20,60)
+            mode.fillStyle = '#192932'
+            mode.fill()
+            mode.closePath()
+            mode.beginPath()
+            mode.rect(710,320,4,4)
+            mode.fillStyle = '#f1d710'
+            mode.fill()
+            mode.closePath()
+            mode.beginPath()
+            mode.rect(710,340,4,4)
+            mode.fillStyle = '#f1d710'
+            mode.fill()
+            mode.closePath()
+            mode.beginPath()
+            mode.arc(710,300,10,0,Math.PI,true)
+            mode.fillStyle = '#f1d710'
+            mode.fill()
+            mode.closePath()
+        }
+
+        draw()
+
+    </script>
+</body>
+
+</html>

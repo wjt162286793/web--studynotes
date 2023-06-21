@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画布清除</title>
+</head>
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+        mode.fillRect(10,10,400,400)
+        mode.fillStyle = 'red'
+        let height = 10
+        setInterval(()=>{
+          mode.clearRect(10,height,400,20)
+          height+=20
+        },1000)
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>复合图形</title>
+</head>
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        /*路径六边形*/
+        // mode.beginPath()
+        // mode.moveTo(100,100)
+        // mode.lineTo(200,100)
+        // mode.lineTo(250,150)
+        // mode.lineTo(200,200)
+        // mode.lineTo(100,200)
+        // mode.lineTo(50,150)
+        // mode.closePath()
+        // mode.strokeStyle = 'red'
+        // mode.stroke()
+
+        /*大月牙*/
+          mode.beginPath()
+          mode.arc(250,250,100,0,Math.PI*2,true)
+          mode.fillStyle = '#ffd96a'
+          mode.fill()
+          mode.closePath()
+          mode.beginPath()
+          mode.arc(150,250,120,Math.PI*0.9,true)
+          mode.fillStyle = '#fff'
+          mode.fill()
+          mode.closePath()
+    </script>
+</body>
+</html>

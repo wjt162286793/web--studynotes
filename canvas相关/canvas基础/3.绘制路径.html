@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绘制路径</title>
+</head>
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        /*绘制路径*/
+
+        /*(100,100)到(200,200)的一条红色线段*/
+        // mode.beginPath()
+        // mode.moveTo(100,100)
+        // mode.lineTo(200,200)
+        // mode.strokeStyle = 'red'
+        // mode.stroke()
+        // mode.closePath()
+
+        /*绘制一个三角形*/
+        mode.beginPath()
+        mode.moveTo(50,50)
+        mode.lineTo(100,50)
+        mode.lineTo(75,100)
+        mode.fillStyle = 'green'
+        mode.fill()
+        mode.closePath()
+    </script>
+</body>
+</html>
