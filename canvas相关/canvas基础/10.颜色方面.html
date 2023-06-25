@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>颜色方面</title>
+</head>
+
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        //globalAlpha透明度值
+
+        // mode.globalAlpha = 0.01;
+        // let time = setInterval(() => {
+        //     if (mode.globalAlpha === 1) {
+        //         clearInterval(time)
+        //     }else{
+        //     mode.clearRect(0,0,400,200)
+        //     mode.arc(250, 250, 100, 0, Math.PI * 2, true)
+        //     mode.fillStyle = 'red'
+        //     mode.fill()
+        //     mode.globalAlpha += 0.01;
+        //     }
+        // }, 100)
+
+        //rgba的方式
+        flag = 0.01;
+        let time = setInterval(() => {
+            if (flag === 1) {
+                clearInterval(time)
+            }else{
+            mode.clearRect(0,0,500,500)
+            mode.arc(250, 250, 100, 0, Math.PI * 2, true)
+            mode.fillStyle = `rgba(55,125,230,${flag})`
+            mode.fill()
+            flag+= 0.01
+            }
+        }, 100)
+
+    </script>
+</body>
+
+</html>

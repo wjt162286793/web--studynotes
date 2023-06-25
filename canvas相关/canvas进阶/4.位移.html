@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>位移</title>
+</head>
+
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        for (let a = 0; a < 3; a++) {
+            mode.beginPath()
+            mode.fillStyle = `rgb(${a*10},${a*40},${a*70})`
+            mode.fillRect(0, 0, 100, 100);
+            mode.translate((a+1)*30,(a+1)*30);
+            mode.closePath();
+        }
+    </script>
+</body>
+
+</html>

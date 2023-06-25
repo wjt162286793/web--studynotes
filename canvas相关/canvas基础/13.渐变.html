@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>渐变</title>
+</head>
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        //线性渐变
+        // mode.rect(100,100,400,400)
+        // let lineGradientNode = mode.createLinearGradient(100,100,400,400);
+        // lineGradientNode.addColorStop(0, 'red');
+        // lineGradientNode.addColorStop(0.3, 'blue');
+        // lineGradientNode.addColorStop(0.7, 'yellow');
+        // lineGradientNode.addColorStop(1, 'red');
+        // mode.fillStyle = lineGradientNode
+        // mode.fill()
+
+        //径向渐变
+        mode.arc(250,250,100,0,Math.PI*2,true)
+        let radiaGradientNode =  mode.createRadialGradient(250,250,0,250,250,100)
+        radiaGradientNode.addColorStop(0, '#fff');
+        radiaGradientNode.addColorStop(1, '#0078d4');
+        mode.fillStyle = radiaGradientNode
+        mode.fill()
+        
+    </script>
+</body>
+</html>

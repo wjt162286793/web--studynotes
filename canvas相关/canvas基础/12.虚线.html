@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>虚线</title>
+</head>
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+        mode.clearRect(0,0,500,500)
+        mode.setLineDash([3,1])
+        mode.lineDashOffset= -10;
+        mode.strokeRect(10,10,200,200)
+    </script>
+</body>
+</html>

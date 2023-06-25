@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片</title>
+</head>
+<body>
+    <canvas width="1200" height="800" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        let img = new Image()
+        img.src = '../assets/baohusan.webp'
+        img.onload = ()=>{
+            //正常显示
+            // mode.drawImage(img,100,100)
+            //控制缩放大小
+            //mode.drawImage(img,100,100,500,500)
+            //切割
+            mode.drawImage(img,200,200,100,100,100,100,100,100)
+        }
+    </script>
+</body>
+</html>

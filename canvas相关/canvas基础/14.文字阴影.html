@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字阴影</title>
+</head>
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        mode.shadowOffsetX= 3;
+        mode.shadowOffsetY= 5;
+        mode.shadowBlur = 5
+        mode.shadowColor = 'blue'
+        mode.font = '50px Times'
+        mode.fillStyle = 'green'
+        mode.fillText('Hello Canvas',100,250)
+        
+    </script>
+</body>
+</html>

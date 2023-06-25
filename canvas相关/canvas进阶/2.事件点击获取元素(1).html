@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件绑定</title>
+</head>
+<style>
+    body{
+        margin: 0px !important;
+        display: flex;
+        height: 100vh;
+        width: 100%;
+    }
+    #canvas{
+        border:1px solid red;
+        margin: auto;
+    }
+</style>
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        canvas.addEventListener('click',clickHandler)
+        function clickHandler(el){
+        //   console.log(el,'点击事件')
+        //   console.log(canvas.getBoundingClientRect(),'位置信息')
+          let canvasPosition = canvas.getBoundingClientRect()
+          let positionInfo = {
+            x:el.clientX- canvasPosition.left,
+            y:el.clientY- canvasPosition.top
+          }       
+        //   console.log(positionInfo,'点击画布里面的位置')
+          draw(positionInfo)
+        }
+        const mode = canvas.getContext('2d')
+         
+        let rectList = [
+            {
+            x:10,
+            y:10,
+            width:20,
+            height:20,
+            name:'红色方块',
+            color:'red',
+            modeType:'rect',
+            styleType:'fill',
+            },
+            {
+            x:10,
+            y:50,
+            width:20,
+            height:20,
+            name:'蓝色方块',
+            color:'blue',
+            modeType:'rect',
+            styleType:'fill',
+            },
+            {
+            x:50,
+            y:10,
+            width:20,
+            height:20,
+            name:'黄色方块',
+            color:'yellow',
+            modeType:'rect',
+            styleType:'fill',
+            },
+    ]
+    draw(null)
+    function draw(positionInfo){
+        rectList.forEach(item=>{
+        mode.beginPath()
+        mode[item.modeType](item.x,item.y,item.width,item.height)
+        mode[item.styleType+'Style'] = item.color
+        mode[item.styleType]()
+        if(positionInfo){
+         //是否处于某个元素之中
+          const isFind =  mode.isPointInPath(positionInfo.x,positionInfo.y)  
+          if(isFind === true){
+            console.log(item,'点击到了某元素')
+          }
+        }
+        mode.closePath()
+    })
+    }
+
+    </script>
+</body>
+</html>

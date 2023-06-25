@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>保存与恢复</title>
+</head>
+<body>
+    <canvas width="500" height="500" id="canvas"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas')
+        const mode = canvas.getContext('2d')
+
+        mode.fillRect(0,0,200,200)
+        mode.save()
+        mode.fillStyle = 'red'
+        mode.fillRect(20,20,160,160)
+        mode.save()
+        mode.fillStyle = 'pink'
+        mode.globalAlpha=0.4;
+        mode.fillRect(50,50,100,100)
+        mode.restore()
+        mode.fillRect(80,80,40,40)
+    </script>
+</body>
+</html>
