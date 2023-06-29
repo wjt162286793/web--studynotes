@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变形</title>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script>
+      const canvas = document.querySelector('#canvas')
+      const mode = canvas.getContext('2d')
+      setInterval(()=>{
+      mode.clearRect(0,0,500,500)
+      mode.save()
+      mode.transform(Math.random(), Math.random(), Math.random(), 1, 0, 0);
+      mode.fillRect(100,100,100,100)
+      mode.restore()
+      
+      },100)
+
+      
+    </script>  
+</body>
+</html>

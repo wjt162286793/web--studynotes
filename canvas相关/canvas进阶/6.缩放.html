@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>旋转</title>
+    <title>缩放</title>
 </head>
+
 <body>
     <canvas width="500" height="500" id="canvas"></canvas>
     <script>
         const canvas = document.getElementById('canvas')
         const mode = canvas.getContext('2d')
-        
-        // mode.save()
-        mode.fillStyle = 'red'
-        mode.fillRect(250,250,100,100)
-        mode.rotate((Math.PI/180)*25)
-
-        mode.fillStyle = 'green'
-        mode.fillRect(250,250,100,100)
-        // mode.restore()
+        mode.save();
+        mode.scale(10, 3);
+        mode.fillRect(1, 10, 10, 10);
+        mode.restore();
+        mode.scale(-1, 1);
+        mode.font = '10px Times';
+        mode.fillText('hello canvas', -135, 120);
     </script>
 </body>
+
 </html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泡泡</title>
+</head>
+<body>
+    <canvas id="canvas" width="1200" height="800" style="border:1px red solid;background: black;"></canvas>
+    <script>
+        let mode = canvas.getContext('2d')
+
+        let list = [
+            {
+                X:250,
+                Y:250,
+                x:5,
+                y:5,
+                color:'#2dc2d8'
+            },
+            {
+                X:600,
+                Y:250,
+                x:5,
+                y:5,
+                color:'#f76832'
+            },
+        ]
+        function drawArc(){
+        mode.clearRect(0,0,canvas.width,canvas.height)
+        list.forEach((item,index)=>{
+            mode.beginPath()
+        mode.arc(item.X,item.Y,100,0,Math.PI*2,true)
+        let radiaGradientNode =  mode.createRadialGradient(item.X,item.Y,0,item.X,item.Y,100)
+        radiaGradientNode.addColorStop(0, '#000');
+        radiaGradientNode.addColorStop(0.85, '#000');
+        radiaGradientNode.addColorStop(1, item.color);
+        mode.fillStyle = radiaGradientNode
+        mode.fill()
+        mode.closePath()
+        item.X+= item.x
+        item.Y+= item.y
+        item.y*= 0.99
+        item.y+=0.25
+        judgeWall(item)
+        for(let i = 0;i<list.length;i++){
+            if(i !== index){
+                judgeArc(list[i],list[index])
+            }
+        }
+        })
+
+        requestAnimationFrame(drawArc)
+        }
+
+       drawArc()
+       //判断是否撞击到墙体
+       function judgeWall(item){
+        if(item.X+item.x+100>canvas.width||item.X+item.x-100<0){
+            item.x = -item.x
+        }
+        if(item.Y+item.y+100>canvas.height || item.Y+item.y-100<0){
+            item.y = -item.y
+        }
+       }
+
+       function judgeArc(arc1,arc2){
+        //    console.log(arc1,arc2,'判断碰撞')
+           let x = arc1.X-arc2.X
+           let y = arc1.Y-arc2.Y
+           let d = Math.sqrt(x*x+y*y)
+           if(d<(100+100-Math.abs(arc1.x)-Math.abs(arc2.x)) || d<(100+100-Math.abs(arc1.y)-Math.abs(arc2.y))){
+            console.log('撞上了',arc1,arc2)
+             arc1.x = -arc1.x
+             arc2.x = -arc2.x
+           }else{
+
+           }
+       }
+       /*两个气泡暂时确实不会出现问题,但是多放几个*/
+    </script>
+</body>
+</html>

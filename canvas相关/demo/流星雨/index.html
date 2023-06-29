@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流星雨</title>
+</head>
+<body>
+    <canvas id="canvas" width="1200" height="800"></canvas>
+    <script>
+        const canvas = document.querySelector('#canvas')
+        let demo = canvas.getContext('2d')
+
+        /*单个流星雨*/
+        /*let position = {
+            X:100,
+            Y:100,
+            x:1,
+            y:1,
+        }
+        function draw(){
+        position.X += position.x
+        position.Y += position.y
+        
+        demo.beginPath()
+        demo.fillStyle = 'rgba(0,0,0,0.1)'
+        demo.fillRect(0,0,1200,800)
+        demo.closePath()
+        demo.save()
+        demo.beginPath()
+        demo.arc(position.X,position.Y,1,Math.PI*2,0,true)
+        demo.closePath()
+        demo.fillStyle = 'rgba(93,230,11)'
+        demo.fill()
+        requestAnimationFrame(draw)
+        }
+        draw()*/
+        
+        /*流星雨,整齐版*/
+
+    //     let starList = []
+    //   //用class语法创建流星雨对象
+    //     class Star{
+    //       constructor(X,Y,x,y,color){
+    //         this.X = X
+    //         this.Y = Y
+    //         this.x = x
+    //         this.y = y
+    //         this.color = color
+    //       }
+    //     }
+
+    //     //生产随机颜色
+    //    function getColor(){
+    //     let str = '0123456789ABCDEF'
+    //     let color = '#'
+    //     for(let i = 0;i<6;i++){
+    //       color += `${str[Math.ceil(Math.random()*15)]}`
+    //     }
+    //     return color
+    //    }
+
+    //    //循环创建流星数组
+    //    for(let i = 0;i<30;i++){
+    //     let X = 10+i*10
+    //     let Y = 30
+    //     let x = 2
+    //     let y = 2
+    //     let color = getColor()
+    //     let star = new Star(X,Y,x,y,color)
+    //     starList.push(star)
+    //    }
+    
+    //    console.log(starList,'流星数组')
+    //    function draw(){
+    //     demo.beginPath()
+    //         demo.fillStyle = 'rgba(0,0,0,0.1)'
+    //         demo.fillRect(0,0,1200,800)
+    //         demo.closePath()
+    //     starList.forEach(item=>{
+    //       demo.beginPath()
+    //       demo.arc(item.X,item.Y,1,Math.PI*2,0,true)
+    //       demo.fillStyle = item.color
+    //       demo.fill()
+    //       demo.closePath()
+    //       item.X += item.x
+    //       item.Y += item.y
+    //     })
+    //     requestAnimationFrame(draw)
+    //    }
+    //    draw()
+
+    /*流星雨,最终版*/
+            let starList = []
+      //用class语法创建流星雨对象
+        class Star{
+          constructor(X,Y,x,y,color){
+            this.X = X
+            this.Y = Y
+            this.x = x
+            this.y = y
+            this.color = color
+          }
+        }
+
+        //生产随机颜色
+       function getColor(){
+        let str = '0123456789ABCDEF'
+        let color = '#'
+        for(let i = 0;i<6;i++){
+          color += `${str[Math.ceil(Math.random()*15)]}`
+        }
+        return color
+       }
+
+       //循环创建流星数组
+       function creatStarList(){
+        for(let i = 0;i<30;i++){
+        let X = 10+i*(Math.random()*(60-20)+20)
+        let Y = Math.random()*(60-20)+20
+        let x = 0.01
+        let y = Math.random()*(4-1)+1
+        let color = getColor()
+        let star = new Star(X,Y,x,y,color)
+        starList.push(star)
+       }
+       }
+
+    
+       console.log(starList,'流星数组')
+       function draw(){
+        demo.beginPath()
+            demo.fillStyle = 'rgba(0,0,0,0.1)'
+            demo.fillRect(0,0,1200,800)
+            demo.closePath()
+        starList.forEach(item=>{
+          demo.beginPath()
+          demo.arc(item.X,item.Y,1,Math.PI*2,0,true)
+          demo.fillStyle = item.color
+          demo.fill()
+          demo.closePath()
+          item.X += item.x
+          item.Y += item.y
+        })
+        requestAnimationFrame(draw)
+       }
+
+       creatStarList()
+       draw()
+       setInterval(()=>{
+        creatStarList()
+       },500)
+    </script>
+</body>
+</html>
