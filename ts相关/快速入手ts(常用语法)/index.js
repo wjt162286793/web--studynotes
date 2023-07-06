@@ -80,3 +80,39 @@ var typeobj_1 = {
     age: 28
 };
 console.log(typeobj_1, '别名对象');
+/*类型推论*/
+//不设定类型,会按照值的类型默认推导出来,再次赋值时如果类型不同,编译报错
+var val_1 = true;
+val_1 = false;
+// val_1 = '错的情况' //error
+/*类型断言*/
+var typeStr_1 = 'hello,wolrd';
+//语法1
+// let typeArr_1: Array<string> = (<string>typeStr_1).split(',')
+//语法2
+var typeArr_1 = typeStr_1.split(',');
+console.log(typeArr_1, typeStr_1, '断言的类型');
+//非空断言
+var not_null;
+// console.log(not_null.toUpperCase()) //error
+// console.log(not_null!.toUpperCase(), '非空断言') //编译通过
+//确定赋值断言
+//未赋值报错
+var send_val_1;
+// console.log(send_val_1) //error
+var send_val_2;
+console.log(send_val_2, '确定赋值断言');
+//联合类型
+var andVal_1;
+andVal_1 = 1;
+andVal_1 = '哈哈哈';
+console.log(andVal_1, '联合类型');
+// andType_1 = [1,2,3] //error
+var andtypeVal_1 = [true, false];
+console.log(andtypeVal_1, '联合类型别名');
+var cross_val_1 = {
+    name: "王惊涛",
+    age: 28,
+    work: '前端开发者'
+};
+console.log(cross_val_1, '交叉类型值');
