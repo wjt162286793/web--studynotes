@@ -23,6 +23,7 @@ let error_1 = function (a: string): never { //永不存在类型
 let tupleArr: [number, string] = [1, '字符串']  //元组类型,相当于特殊数组 
 let unknownVal: unknown = '不确定类型' //unknown类型
 console.log(fun_1_, any_1_, error_1, tupleArr, unknownVal, '特殊类型')
+/*------------------------------------------------------------------------------------------------------------*/
 
 /*对象类型*/
 //大小对象:object,Object
@@ -34,6 +35,7 @@ let obj__2: Object = { a: 1 }
 obj__2 = 'b'
 obj__2 = {}
 console.log(obj__1, obj__2, '对象类型')
+/*------------------------------------------------------------------------------------------------------------*/
 
 /*类*/
 class class_1_ {
@@ -49,6 +51,7 @@ class class_1_ {
 }
 let classObj_1 = new class_1_('wjt', 28)
 console.log(classObj_1, '类构造实例')
+/*------------------------------------------------------------------------------------------------------------*/
 
 /*函数*/
 //函数声明
@@ -65,6 +68,7 @@ let fun_4 = function (val_1: number, val_2?: boolean): void {
 }
 console.log(fun_2(2, '号函数'), fun_3(3, '号函数'))
 console.log(fun_4(10086))
+/*------------------------------------------------------------------------------------------------------------*/
 
 
 /*接口*/
@@ -110,7 +114,9 @@ let typeobj_1: typename_1 = {
     age: 28
 }
 console.log(typeobj_1, '别名对象')
+/*------------------------------------------------------------------------------------------------------------*/
 
+/*类型*/
 /*类型推论*/
 //不设定类型,会按照值的类型默认推导出来,再次赋值时如果类型不同,编译报错
 let val_1 = true
@@ -164,3 +170,79 @@ let cross_val_1: cross_1 & cross_2 = {
     work: '前端开发者'
 }
 console.log(cross_val_1, '交叉类型值')
+
+//类型守卫
+interface Inobj_1{
+    val_1:number,
+    val_2:string
+}
+interface InObj_2{
+    val_1:number,
+    val_3:string
+}
+//in方法
+function isIn(arg:Inobj_1 | InObj_2){
+    if('val_1' in arg){
+        console.log('类型守卫val_1',arg)
+    }
+    if('val_2' in arg){
+        console.log('类型守卫val_2',arg)
+    }
+}
+isIn({val_1:10,val_2:'年'})
+isIn({val_1:20,val_3:'年'})
+//typeof方法
+function isTypefun(arg:string | number){
+    if(typeof arg === 'number'){
+        console.log(arg,'数字类型')
+        return 'number'
+    } 
+    if(typeof arg === 'string'){
+        console.log(arg,'字符类型')
+        return 'string'
+    } else{
+        return '未定义'
+    }
+
+}
+isTypefun('字符类型')
+isTypefun(10)
+//instanceof方法
+function isInstanceof(arg:boolean | number[]){
+  if(arg instanceof Boolean){
+    console.log(arg,'布尔类型')
+  }else if(arg instanceof Array){
+    console.log(arg,'数组类型')
+  }
+}
+isInstanceof(true)
+isInstanceof([1,2,3])
+/*------------------------------------------------------------------------------------------------------------*/
+
+/*泛型*/
+//基础语法
+function genericity_1<A>(arg:A):A{
+    return arg
+}
+genericity_1<string>('字符串类型')
+
+//多个参数
+function genericity_2<Name,Age>(arg:[Name,Age]):string{
+    return '哈哈哈'
+}
+genericity_2<string,number>(['王惊涛',28])
+
+//泛型接口
+interface interGenericity_3<A,B>{
+    val_1:A
+    val_2:B
+}
+let interGenericity_3_1:interGenericity_3<string,number> = {
+    val_1:'王惊涛',
+    val_2:28
+}
+let interGenericity_3_2:interGenericity_3<number,string> ={
+    val_1:29,
+    val_2:'马师'
+}
+console.log(interGenericity_3_1,interGenericity_3_2,'泛型接口定义数据')

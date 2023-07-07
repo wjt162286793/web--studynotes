@@ -21,6 +21,7 @@ var error_1 = function (a) {
 var tupleArr = [1, '字符串']; //元组类型,相当于特殊数组 
 var unknownVal = '不确定类型'; //unknown类型
 console.log(fun_1_, any_1_, error_1, tupleArr, unknownVal, '特殊类型');
+/*------------------------------------------------------------------------------------------------------------*/
 /*对象类型*/
 //大小对象:object,Object
 //小object指的是非原始类型,大Object可以覆盖原始类型和引用类型,除了null和undefined
@@ -30,6 +31,7 @@ var obj__2 = { a: 1 };
 obj__2 = 'b';
 obj__2 = {};
 console.log(obj__1, obj__2, '对象类型');
+/*------------------------------------------------------------------------------------------------------------*/
 /*类*/
 var class_1_ = /** @class */ (function () {
     function class_1_(name, age) {
@@ -43,6 +45,7 @@ var class_1_ = /** @class */ (function () {
 }());
 var classObj_1 = new class_1_('wjt', 28);
 console.log(classObj_1, '类构造实例');
+/*------------------------------------------------------------------------------------------------------------*/
 /*函数*/
 //函数声明
 var fun_2 = function (val_1, val_2) {
@@ -80,6 +83,8 @@ var typeobj_1 = {
     age: 28
 };
 console.log(typeobj_1, '别名对象');
+/*------------------------------------------------------------------------------------------------------------*/
+/*类型*/
 /*类型推论*/
 //不设定类型,会按照值的类型默认推导出来,再次赋值时如果类型不同,编译报错
 var val_1 = true;
@@ -116,3 +121,62 @@ var cross_val_1 = {
     work: '前端开发者'
 };
 console.log(cross_val_1, '交叉类型值');
+//in方法
+function isIn(arg) {
+    if ('val_1' in arg) {
+        console.log('类型守卫val_1', arg);
+    }
+    if ('val_2' in arg) {
+        console.log('类型守卫val_2', arg);
+    }
+}
+isIn({ val_1: 10, val_2: '年' });
+isIn({ val_1: 20, val_3: '年' });
+//typeof方法
+function isTypefun(arg) {
+    if (typeof arg === 'number') {
+        console.log(arg, '数字类型');
+        return 'number';
+    }
+    if (typeof arg === 'string') {
+        console.log(arg, '字符类型');
+        return 'string';
+    }
+    else {
+        return '未定义';
+    }
+}
+isTypefun('字符类型');
+isTypefun(10);
+//instanceof方法
+function isInstanceof(arg) {
+    if (arg instanceof Boolean) {
+        console.log(arg, '布尔类型');
+    }
+    else if (arg instanceof Array) {
+        console.log(arg, '数组类型');
+    }
+}
+isInstanceof(true);
+isInstanceof([1, 2, 3]);
+/*------------------------------------------------------------------------------------------------------------*/
+/*泛型*/
+//基础语法
+function genericity_1(arg) {
+    return arg;
+}
+genericity_1('字符串类型');
+//多个参数
+function genericity_2(arg) {
+    return '哈哈哈';
+}
+genericity_2(['王惊涛', 28]);
+var interGenericity_3_1 = {
+    val_1: '王惊涛',
+    val_2: 28
+};
+var interGenericity_3_2 = {
+    val_1: 29,
+    val_2: '马师'
+};
+console.log(interGenericity_3_1, interGenericity_3_2, '泛型接口定义数据');
