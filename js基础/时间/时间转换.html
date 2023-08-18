@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间转换</title>
+</head>
+<body>
+    <script>
+        let dateNumber1 = 1691978517
+        let dateNumber2 = 1794919789672
+        // console.log(new Date(dateNumber1),new Date(dateNumber2))
+        let date1 = new Date(parseInt(dateNumber1))
+        let date2 = new Date(dateNumber2)
+ 
+        console.log(date1,'日期1')
+        console.log(date2,'日期2')
+
+        let month = date2.getMonth()
+        let day = date2.getDay()
+
+        let hour = date2.getHours()
+        let min = date2.getMinutes()
+
+        console.log(`${month}-${day} ${hour}:${min}`)
+        
+    </script>
+</body>
+</html>

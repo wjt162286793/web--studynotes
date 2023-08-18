@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖节流函数</title>
+</head>
+<body>
+    <button class="btn1">防抖按钮</button>
+    <button class="btn2">节流按钮</button>
+    <script>
+        const btn1 = document.querySelector('.btn1')
+        const btn2 = document.querySelector('.btn2')
+ 
+        let btn1Fun = function(){
+            console.log('点击防抖按钮')
+        }
+        let btn2Fun = function(){
+            console.log('点击节流按钮')
+        }
+
+        let fangdou = function(time,fn){
+            let timer
+            return function(){
+                clearTimeout(timer)
+                timer = setTimeout(()=>{
+                  fn()
+                  timer = null
+                },time)
+            }
+        }
+        let jieliu = function(time,fn){
+           let timer
+           let onceFlag = true
+           return function(){
+            if(onceFlag){
+                fn()
+                onceFlag = false
+                return
+            }else{
+               if(!timer){
+                timer =  setTimeout(()=>{
+                    fn()
+                    clearTimeout(timer)
+                    timer = null
+                },time)
+               }
+            }
+           }
+        }
+
+        btn1.onclick = fangdou(2000,btn1Fun)
+        btn2.onclick = jieliu(2000,btn2Fun)
+
+    </script>
+</body>
+</html>

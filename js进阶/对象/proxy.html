@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>proxy</title>
+</head>
+
+<body>
+    <button class="btn1">修改值</button>
+    <input type="text" class="input">
+    <button class="btn2">直接修改_data</button>
+    <button class="btn3">查看_data</button>
+    <script>
+        let btn1 = document.querySelector('.btn1')
+        let btn2 = document.querySelector('.btn2')
+        let btn3 = document.querySelector('.btn3')
+        let input = document.querySelector('.input')
+ 
+        input.oninput = ()=>{
+            data.age = Number(input.value)
+            console.log(data, 'data的数据,输入框')
+            console.log(_data, '_data的数据,输入框')
+        }
+
+        let data = {
+            name: 'wjt',
+            age: 28,
+        }
+        let _data = new Proxy(data,{
+            get:function(obj,prop,value){
+                console.log(obj,prop,value,'proxy内发现属性被查看')
+                return obj[prop]
+            },
+            set:function(obj,prop,value){
+                console.log(obj,prop,value,'proxy内发现属性被修改')
+                obj[prop] = value
+                return true;
+            }
+        })
+        console.log(data, 'data的数据')
+        console.log(_data, '_data的数据')
+
+        btn1.onclick = () => {
+            data.name = '王惊涛'
+            console.log(data, 'data的数据,修改后')
+            console.log(_data, '_data的数据,修改后')
+        }
+        btn2.onclick = ()=>{
+        _data.name = '马师'
+        _data.age = 30
+        console.log(data,'直接修改后的data')
+        console.log(_data,'直接修改后的_data')
+        }
+        btn3.onclick = ()=>{
+            console.log(_data.name,'查看_data.name')
+            console.log(_data.age,'查看_data.age')
+        }
+    </script>
+</body>
+
+</html>

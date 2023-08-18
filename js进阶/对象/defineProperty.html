@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>defineProperty</title>
+</head>
+<body>
+    <button class="btn1">查看age的值</button>
+    <button class="btn2">修改age的值</button>
+    <script>
+    let btn1 = document.querySelector('.btn1')
+    let btn2 = document.querySelector('.btn2')
+     let data = {
+        name:'wjt',
+        age:28,
+        done:()=>{
+            console.log('I am a coder')
+        }
+     }
+
+     let _data = {}
+     Object.defineProperty(_data,'name',{
+        get(){
+            console.log('触发了get方法')
+            return data.name
+        },
+        set(newVal){
+            console.log('触发了set方法')
+            data.name = newVal
+        },
+        enumerable:true,
+        configurable:true
+     })
+
+    btn1.onclick=()=>{
+        console.log(_data.name,'_data的name')
+    }
+    btn2.onclick=()=>{
+        _data.name = '王惊涛'
+        console.log(data,'data对象')
+        console.log(_data,'_data对象')
+    }
+    </script>
+</body>
+</html>

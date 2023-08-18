@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>aync和await方法</title>
+</head>
+<body>
+    <script>
+        async function asyncFun(){
+      return await new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            resolve('异步的值')
+        },3000)
+        
+      })
+        }
+        asyncFun().then(res=>{
+            console.log(res,'结果')
+        })
+    </script>
+</body>
+</html>

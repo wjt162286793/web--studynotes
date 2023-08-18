@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组合</title>
+</head>
+<body>
+    <canvas id="canvas" width="500" height="500"></canvas>
+    <script>
+        let canvas = document.querySelector('canvas')
+        let mode = canvas.getContext('2d')
+        mode.fillStyle = '#fff'
+        mode.strokeStyle = 'red'
+        mode.fillRect(0,0,200,200)
+        mode.strokeRect(0,0,200,200)
+        mode.fillStyle = 'green'
+        mode.font = '18px Times'
+        mode.fillText('Hello Canvas',50,100)
+    </script>
+</body>
+</html>

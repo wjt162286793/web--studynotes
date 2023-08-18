@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包</title>
+</head>
+<body>
+    <button class="btn1">闭包增值</button>
+    <button class="btn2">清除闭包</button>
+    <button class="btn3">重新定义</button>
+    <script>
+        const btn1 = document.querySelector('.btn1')
+        const btn2 = document.querySelector('.btn2')
+        const btn3 = document.querySelector('.btn3')
+        function closeFun(number){
+            //初始化一个值,函数内部的私有变量
+            let closeValue = number
+            return function(addValue){
+                closeValue = closeValue+addValue
+                return closeValue
+            }
+        }
+        let fun =  closeFun(1)
+        btn1.onclick = function(){
+           let val =  fun(1)
+           console.log(val,'获取到的闭包值')
+        } 
+        btn2.onclick = function(){
+          closeFun = null
+        }
+        btn3.onclick = function(){
+            closeFun = function(number){
+                let closeValue = number
+            return function(addValue){
+                closeValue = closeValue+addValue
+                return closeValue
+            }
+            }
+            fun = closeFun(2)
+        }
+
+        //闭包,本质上是作用域链的效果
+        //内部函数引用外部函数的变量时,就会访问上层作用域的变量,将作用域链延伸至上层
+        //内部函数作为一个值被return出去,所以当外层函数closeFun执行完之后,因为内部函数还需要引用外部函数closeFun的变量closeValue,所以外层函数closeFun就不会被销毁释放,一直保存在内存当中
+        //当外部点击事件时,就会将return内部的内部函数进行调用,fun(*)就可以对闭包函数进行操作,内部的值依然保存在函数里面
+    </script>
+</body>
+</html>
