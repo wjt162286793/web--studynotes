@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写深拷贝</title>
+</head>
+
+<body>
+    <script>
+        //这里的深拷贝仅限于常规对象和常规数组
+        function cloneDeep(value) {
+            let initVal = null
+            let valueType = toString.call(value)
+            switch (valueType) {
+                case '[object Object]':
+                initVal = {}
+                let arrs = Object.keys(value)
+                if(arrs.length>0){
+                    arrs.forEach((item)=>{
+                  initVal[item] = cloneDeep(value[item])
+                })
+                return initVal
+                }else{
+                 return {}
+                }
+                    break
+                case '[object Array]':
+                let arr = []
+                if(value.length>0){
+                 value.forEach((item,index)=>{
+                    arr[index] = cloneDeep(item)
+                 })
+                 return arr
+                }else{
+                    return []
+                }
+                    break
+                default:
+                    return value
+            }
+        }
+       
+        let family = [
+            {
+                name:'王惊涛',
+                age:27,
+                love:['吃饭','睡觉','写代码'],
+                gender:true,
+                work:{
+                    name:'coder',
+                    love:function(){
+                        console.log('编码')
+                    }
+                }
+            },
+            {
+                name:'马师',
+                age:28,
+                love:['吃饭','吃饭','还是吃饭'],
+                gender:false,
+                work:null,
+                pi:undefined
+            }
+        ]
+        let cloneShallow = family
+        let cloneFamily = cloneDeep(family)
+        console.log(cloneShallow === family,'浅拷贝')
+        console.log(cloneFamily === family,'递归深拷贝')
+        console.log(cloneFamily,'深拷贝后的对象')
+    </script>
+</body>
+
+</html>

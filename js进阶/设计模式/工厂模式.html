@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工厂模式</title>
+</head>
+<body>
+    <script>
+        //可以批量创建对象
+
+        // function Factory(type){
+        //    switch(type){
+        //     case 'type1':
+        //         return new Fun1()
+        //     break
+        //     case 'type2':
+        //         return new Fun2()
+        //     break
+        //    }
+        // }
+
+        // function Fun1(){
+        //     this.name = '对象1'
+        //     this.done = '出发'
+        // }
+        // function Fun2(){
+        //     this.anem = '对象2'
+        //     this.done = '结束'
+        // }
+
+        //封装一个类   
+
+        // class Factory{
+        //     constructor(type) {
+        //    switch(type){
+        //     case 'type1':
+        //         return new this.Fun1()
+        //     break
+        //     case 'type2':
+        //         return new this.Fun2()
+        //     break
+        //    }
+        //     }
+        //     Fun1 = function (){
+        //     this.name = '对象1'
+        //     this.done = '出发'
+        // }
+        //     Fun2 = function (){
+        //     this.anem = '对象2'
+        //     this.done = '结束'
+        // }
+        // }
+
+        // let obj1 = new Factory('type1')
+        // let obj2 = new Factory('type2')
+        // console.log(obj1,'对象1')
+        // console.log(obj2,'对象2')
+
+        //封装了一个类,需要去new这个类,并给他传递一个类型参数,然后他会给你返回一个对应的对象
+
+        //demo
+        //比如模拟一下jquery
+        //$('#app')是一个id为app的dom对象,$('.app')是一个class为app的dom对象
+
+        let $ = function(type){
+            switch(type){
+                case '.app':
+                  return obj1()
+                break
+                case '#app':
+                  return obj2()
+            }
+            function obj1(){
+                return {
+                    type:'dom',
+                    id:'app',
+                    name:'div',
+                    style:{
+                        background:'#000'
+                    }
+                }
+            }
+            function obj2(){
+                return {
+                    type:'dom',
+                    class:'app',
+                    name:'span',
+                    style:{
+                        color:'#fff'
+                    }
+                }
+            }
+        }
+
+         console.log($('.app'),'class为app的dom对象')
+         console.log($('#app'),'id为app的dom对象')
+    </script>
+</body>
+</html>

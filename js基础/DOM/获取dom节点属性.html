@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom属性</title>
+</head>
+<body>
+    <div>一个div</div>
+    <hr>
+    <input type="text" value="哈哈哈">
+    <hr>
+    <button>按钮</button>
+    <script id="script1">
+        let divDom = document.querySelector('div')
+        let inputDom = document.querySelector('input')
+        let btnDom = document.querySelector('button')
+        let script1 = document.querySelector('script')
+        console.log(divDom,'盒子属性')
+        console.log(script1.text,'script标签')
+    </script>
+</body>
+</html>

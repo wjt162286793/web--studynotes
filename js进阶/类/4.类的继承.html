@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类的继承</title>
+</head>
+<body>
+    <script>
+        class Person{
+            constructor(name,age){
+              this.name = name
+              this.age = age
+              this.eat = '吃饭'
+              this.run = '走路'
+            }
+        }
+        class Coder extends Person{
+            constructor(name,age,done){
+                super(name,age) //super里面定义的一定要写到最上层,里面定义的字段就是继承父的字段
+                this.work = '工作'
+            }
+         }
+         let wjt = new Coder('王惊涛',28,()=>{console.log('写代码')})
+         console.log(wjt,'王惊涛的实例')
+    </script>
+</body>
+</html>

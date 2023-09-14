@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象检测</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name:'王惊涛',
+            age:27
+        }
+        Object.defineProperty(data,'addname',{
+            configurable:true,
+            enumerable:true,
+            get(){
+                console.log('调用get方法')
+                return this.name
+            },
+            set(value){
+            
+            if(value === this.addname){
+                console.log(value,'修改')
+                data.addname = value
+            }
+            }
+        })
+        console.log(data.addname,'调用方法')
+        data.addname = '马师'
+        console.log(data,'data数据')
+    </script>
+</body>
+</html>

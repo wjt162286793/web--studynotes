@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise测试</title>
+</head>
+<body>
+    <script src="./自己手写promise.js"></script>
+    <script>
+        let fn = new PromiseFun((resolve,reject)=>{
+          resolve('成功的值')
+        })
+        fn.then(res=>{
+            console.log(res,'获取到的成功值')
+        },rej=>{
+
+        })
+
+    </script>
+</body>
+</html>

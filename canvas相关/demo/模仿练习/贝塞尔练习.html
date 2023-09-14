@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贝塞尔练习</title>
+</head>
+<body>
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+        //画布
+        let canvas = document.getElementById('canvas')
+        let ctx = canvas.getContext('2d')
+
+        //绘制网格
+        function drawTable(color,width){
+         ctx.save()
+         ctx.lineWidth = 0.5
+         ctx.strokeStyle = color
+         for(let i = width+0.5;i<canvas.width;i+=width){
+            ctx.beginPath()
+            ctx.moveTo(i,0)
+            ctx.lineTo(i,ctx.canvas.height)
+            ctx.stroke()
+         }
+         for(let i = width+0.5;i<canvas.height;i+=width){
+            ctx.beginPath()
+            ctx.moveTo(0,i)
+            ctx.lineTo(ctx.canvas.width,i)
+            ctx.stroke()
+         }
+         ctx.restore()
+        }
+        drawTable('#bcb4cc',10)
+
+
+        for(let i = 0,x;x = 1;){
+           console.log(i,x,'循环')
+           let b = 2
+            if(b>1){
+                break
+            }
+        }
+    </script>
+</body>
+</html>

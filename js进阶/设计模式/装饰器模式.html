@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>装饰器模式</title>
+</head>
+
+<body>
+    <script>
+    //    class Person{
+    //     constructor(name,age){
+    //         this.name = name
+    //         this.age = age
+    //     }
+    //    }
+    // //    let wjt = new Person('wangjingtao',27)
+    // //    console.log(wjt,'wjt')
+    // console.log(Person.prototype.arguments,'类')
+    //    class newPerson extends Person{
+    //         newFun = ()=>{
+    //             console.log('新功能')
+    //         }
+    //    }
+    //    let wjt = new newPerson('wjt',27)
+    //    console.log(wjt,'wjt')
+
+    const before = Symbol('before');
+    const after = Symbol('after');
+
+    // 定义AOP装饰函数
+    Function.prototype[before] = function (beforeFn) {
+        console.log(this,'this指向')
+      const _self = this; // 保存原函数引用
+
+      // 负责函数执行顺序
+      return function (...params) {
+        console.log(beforeFn,'洗手函数')
+        beforeFn.apply(this, params); // 插入之前函数执行
+        _self.apply(this, params); // 执行原函数
+      };
+    };
+
+    // 定义AOP装饰函数
+    Function.prototype[after] = function (afterFn) {
+      const _self = this; // 保存原函数引用
+
+      // 负责函数执行顺序
+      return function (...params) {
+        _self.apply(this, params); // 执行原函数
+        afterFn.apply(this, params); // 插入之后函数执行
+      };
+    };
+
+    let eat = function () {
+      console.log('好好吃饭长高高');
+    };
+
+    const wash = function () {
+      console.log('必须先洗手，不然不给吃饭');
+    };
+
+    const play = function () {
+      console.log('终于吃完了，我要去玩玩玩玩');
+    };
+
+    eat = eat[before](wash)[after](play);
+    eat();
+    </script>
+</body>
+
+</html>

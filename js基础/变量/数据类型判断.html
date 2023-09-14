@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据类型测试</title>
+</head>
+<body>
+    <script>
+        let argumentFun = function(a,b,c){
+            return arguments
+        }
+        class Myclass{
+            constructor(params) {
+                this.value = 1
+            }
+        }
+    let arr = [
+        '我是一个字符串',  //字符串
+        9999,  //number
+        true, //boolean
+        {name:'王惊涛'},  //存储对象
+        ['1','2','3'],  //数组
+        NaN,  //NaN
+        null, //null
+        undefined, //安迪范的
+        new Object(), //object
+        Symbol(10), //symbol
+        BigInt(999999999),  //bigInt
+        function(){console.log('普通函数')},  //普通函数
+        ()=>{console.log('箭头函数')}, //箭头函数
+        argumentFun(), //类数组
+        Myclass, //类
+        window, //全局的window
+        new Date(), //时间类型,
+        Math,  //Math
+        /^\w+$/ //正则
+    ]
+    /** typeof方法测试 */
+    // console.log('typeof方法---------------')
+    // typeofFun(arr)
+
+
+    //     function typeofFun(value){
+    //       arr.forEach(item=>{
+    //         console.log(item,':',typeof item)
+    //       })
+    //     }
+  
+
+    /** toString.call()方法 */
+    tocall(arr)
+    function tocall(value){
+        arr.forEach(item=>{
+            //好几种写法,一个意思
+            // console.log(item,':',toString.call(item))
+            // console.log(item,':',Object.prototype.toString.call(item)) 
+            // console.log(item,':',Object.prototype.toString.apply(item)) 
+            console.log(item,':',Object.prototype.toString.bind(item)()) 
+        })
+    }
+   
+
+    let str1 = '1'
+    let str2 = new String('1')
+    let udfd1 = undefined
+    let udfd2 = new Object(undefined)
+    let nan1 = NaN
+    let nan2 = new Number(NaN)
+    let obj1 = {
+        name:'wjt'
+    }
+    let obj2 = new Object({
+        name:'wjt'
+    })
+    let arr1 = [1,2,3]
+    let arr2 = new Array(1,2,3)
+    let reg1 = /^\w+$/
+    let reg2 = new RegExp(/^\w+$/)
+
+    let fun1 = function(a,b){
+        return arguments
+    }
+    let fun2 = new Function((a,b)=>{
+        return arguments
+    })
+            /** instanceof方法测试 */
+    // console.log(str1 instanceof String,'基础类型定义','str1')  //false
+    // console.log(str2 instanceof String,'包装类型定义','str2')  //true
+
+
+    // console.log(udfd1 instanceof Object,'基础类型定义','udfd1')  //false
+    // console.log(udfd2 instanceof Object,'包装类型定义','udfd2')  //true
+
+
+    // console.log(nan1 instanceof Number,'基础类型定义','nan1')  //false
+    // console.log(nan2 instanceof Number,'包装类型定义','nan2')  //true
+
+    // console.log(obj1 instanceof Object,'字面量定义','obj1')  //true
+    // console.log(obj2 instanceof Object,'new构造定义','obj2')  //true
+
+    // console.log(arr1 instanceof Array,'字面量定义','arr1')
+    // console.log(arr2 instanceof Array,'new构造定义','arr2')
+
+    // console.log(reg1 instanceof RegExp,'字面量定义','reg1')  //true
+    // console.log(reg2 instanceof RegExp,'new构造定义','reg2')  //true
+
+    // console.log(fun1 instanceof Function,'字面量定义','fun1')  //true
+    // console.log(fun2 instanceof Function,'new构造定义','fun2')  //true
+
+    // console.log(fun1() instanceof Object,'字面量定义','fun1()') //true
+    // console.log(fun2() instanceof Object,'new构造定义','fun2()') //true
+
+
+    /** constructor方法 */
+    // console.log(str1.constructor,'str1')
+    // console.log(str2.constructor,'str2')
+    // // console.log(udfd1.constructor,'udfd1')  error
+    // console.log(udfd2.constructor,'udfd2')
+    // console.log(nan1.constructor,'nan1')
+    // console.log(nan2.constructor,'nan2')
+    // console.log(obj1.constructor,'obj1')
+    // console.log(obj2.constructor,'obj2')
+    // console.log(reg1.constructor,'obj1')
+    // console.log(reg2.constructor,'obj2')
+    
+    // //下面的全为true
+    // console.log(str1.constructor === String)
+    // console.log(udfd2.constructor === Object)
+    // console.log(nan1.constructor === Number)
+    // console.log(obj1.constructor === Object)
+    // console.log(reg1.constructor === RegExp)
+    // console.log(arr1.constructor === Array)
+    // console.log(fun1().constructor === Object)
+    // // console.log(fun2().constructor,'========')  error
+
+    </script>
+</body>
+</html>

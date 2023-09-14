@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代理模式</title>
+</head>
+<body>
+    <script>
+        let obj1 = {
+            name:'wjt',
+            age:27
+        }
+        let obj2 = new Proxy(obj1,{
+            get:function(obj,prop,value){
+                return obj[prop]
+            },
+            set:function(obj,prop,value){
+                obj[prop] = value
+                return true
+            }
+        })
+        console.log(obj2,'代理的对象')
+    </script>
+</body>
+</html>

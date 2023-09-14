@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <script>
+        //new Object方法
+        let obj1 = new Object()
+        obj1.name = 'wjt1'
+        obj1.age = 27
+        obj1.fun = function(){
+            console.log('我是wjt1中的fun')
+        }
+
+        //字面量
+        let obj2 = {
+            name:'wjt2',
+            age:28,
+            fun:function(){
+                console.log(this.name,'this.name的值')
+            }
+        }
+
+        //构造函数
+        function ObjFun(name,age){
+         this.name = name
+         this.age = age
+         this.fun = function(){
+            console.log(age,'this.age的值')
+         }
+        }
+        let obj3 = new ObjFun('wjt3',29)
+
+        //class类构造
+        class Objclass{
+            constructor(name,age){
+               this.name = name
+               this.age = age
+               this.fun = function(){
+                console.log(this.name,this.age,'this的name和age')
+               }
+            }
+        }
+        let obj4 = new Objclass('wjt4',30)
+
+        console.log(obj1,'对象1')
+        console.log(obj2,'对象2')
+        console.log(obj3,'对象3')
+        console.log(obj4,'对象4')
+
+        
+        obj2.fun.apply({name:'新的对象'})
+        obj3.fun.call({age:100})
+        obj4.fun.bind({name:'拿破仑',age:52})()
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>构造函数模式</title>
+</head>
+<body>
+    <script>
+        //将函数强制转化为构造函数的方式使用
+        function Fn(name,age){
+            if(!(this instanceof Fn)){
+                return new Fn(name,age)
+            }
+            this.name = name
+            this.age = age
+        }
+
+        let obj1 = Fn('王惊涛',27)
+        let obj2 = new Fn('王惊涛',27)
+        console.log(obj1,obj2)
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试promise方法</title>
+</head>
+<body>
+    <script src="./promise源码.js"></script>
+    <script>
+        let p1 = new MyPromise((resolve,reject)=>{
+    setTimeout(()=>{
+        // resolve('王惊涛')
+        reject('错误的值')
+    },3000)
+})
+p1.then(res=>{
+    console.log('执行成功,拿到的返回值为'+res)
+},rej=>{
+    console.log('执行失败,拿到的返回值为'+rej)
+})
+    </script>
+</body>
+</html>

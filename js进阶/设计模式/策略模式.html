@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>策略模式</title>
+</head>
+<body>
+    <script>
+        //原始写法
+        // let doneFun = (type,num)=>{
+        //   if(type === 'add'){
+        //     return num[0]+num[1]
+        //   }
+        //   else if(type === 'subtraction'){
+        //     return num[0]-num[1]
+        //   }
+        //   else if(type === 'multiplication'){
+        //     return num[0]*num[1]
+        //   }
+        //   else if(type === 'division'){
+        //     return num[0]/num[1]
+        //   }
+        // }
+        // let value =  doneFun('add',[10,2])
+
+        //策略模式
+        let doneObj = {
+            add:(num)=>{
+               return num[0]+num[1]
+            },
+            subtraction:(num)=>{
+               return num[0]-num[1]
+            },
+            multiplication:(num)=>{
+               return num[0]*num[1]
+            },
+            division:(num)=>{
+               return num[0]/num[1]
+            }
+        }
+        let doneFun = function(type,num){
+           return (doneObj[type])(num)
+        }
+        let value = doneFun('add',[10,2])
+        console.log(value)
+    </script>
+</body>
+</html>

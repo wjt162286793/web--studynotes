@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型模式</title>
+</head>
+<body>
+    <script>
+        //原型模式主要是使用构造函数批量创造对象,避免字面量的同时,性能也好
+        function Fun(name,age){
+            this.name = name
+            this.age = age
+            this.done = ()=>{
+                console.log('I am a coder')
+            }
+            this.family = '山西运城'
+            Fun.prototype.type = ()=>{
+                console.log('北漂')
+            }
+        }
+
+        let wjt = new Fun('王惊涛',27)
+        let ms = new Fun('马师',28)
+
+        console.log(wjt,ms)
+        console.log(wjt.done === ms.done,'构造的属性')
+        console.log(wjt.type === ms.type,'原型对象上的属性')
+
+        //在vue中,每个vuecomponent都是由vm构造的出的一个拥有vm原型方法的函数对象,比如router,就是使用prototype绑定到vm上,然后每个组件内都可以去使用.
+        
+    </script>
+</body>
+</html>

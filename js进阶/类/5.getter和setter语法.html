@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getter和setter</title>
+</head>
+<body>
+    <script>
+        class Person{
+            constructor(name,age){
+               this.name = name
+               this.age = age
+            }
+            get work(){
+                return '前端开发者'
+            }
+            set work(val){
+                console.log('修改的work值',val)
+            }
+        }
+        let wjt = new Person('王惊涛',28)
+        console.log(wjt,'王惊涛实例')
+        wjt.age = 29
+        wjt.work = '全栈开发者'
+    </script>
+</body>
+</html>

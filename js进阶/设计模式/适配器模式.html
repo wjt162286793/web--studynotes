@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>适配器模式</title>
+</head>
+<body>
+    <script>
+        //原数据
+        let oldList = [
+            {
+                name:'wjt',
+                age:27
+            },
+            {
+                name:'ms',
+                age:28
+            },
+            {
+                name:'syd',
+                age:27
+            }
+        ]
+
+        //适配器函数
+        let adaptive = (list)=>{
+            let obj = {}
+          list.forEach((item1)=>{
+            for(let item2 in item1){
+                console.log(item1,item2)
+                if(!obj[item2]){
+                    obj[item2] = []
+                }
+                obj[item2].push(item1[item2])
+            }
+          })
+          return obj
+        }
+        
+        //调用适配器函数
+        let newList = adaptive(oldList)
+        console.log(newList,'新数据')
+    </script>
+</body>
+</html>

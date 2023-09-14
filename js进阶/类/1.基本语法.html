@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类:基本语法</title>
+</head>
+<body>
+    <script>
+        /**构造函数的语法*/
+
+        function Person(name,age){
+            this.name = name
+            this.age = age
+        }
+        Person.prototype.getString = function(){
+            return `${this.name}的年龄是${this.age}`
+        }
+        let wjt = new Person('王惊涛',27)
+        console.log(Person,'构造函数')
+        console.log(wjt,'实例对象')
+        console.log(Person.prototype,'构造函数的prototype==>原型对象')
+        console.log(wjt.__proto__,'实例对象的__proto__==>原型对象')       
+        console.log(Person.prototype === wjt.__proto__)
+
+        /**class的语法*/
+        // class Person{
+        //     constructor(name,age){
+        //         this.name = name
+        //         this.age = age
+        //     }
+        //     getString(){
+        //         return `${this.name}的年龄是${this.age}`
+        //     }
+        // }
+        // let wjt = new Person('王惊涛',27)
+        // console.log(Person,'类')
+        // console.log(wjt,'类构建的实例对象')
+        // console.log(Person.prototype,'类的prototype==>原型对象')
+        // console.log(wjt.__proto__,'实例对象的__proto__==>原型对象')
+        // console.log(Person.prototype === wjt.__proto__)
+    </script>
+</body>
+</html>

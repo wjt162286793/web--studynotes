@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>改变this指向的方法</title>
+</head>
+<body>
+    <script>
+        //apply 传值:(obj,[a,b]) 动态调用  
+        //call  传值:(obj,a,b)  动态调用
+        //bind  传值:(obj,a,b)  静态调用
+
+        let fun = function(a,b){
+            console.log(this,'this是什么')
+            console.log(a,b,'a和b的值')
+        }
+
+        // fun() //window  安迪范的 安迪范的
+        let obj1 = {
+            name:'王惊涛1',
+            age:27
+        }
+
+        fun.apply(obj1,['1','2'])
+        fun.call(obj1,'1','2')
+        fun.bind(obj1,'1','2')()
+
+    </script>
+</body>
+</html>

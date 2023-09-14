@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组扁平化</title>
+</head>
+<body>
+    <script>
+        function flatArr(value){
+          let newArr = []
+          value.forEach((item,index)=>{
+            if(toString.call(item) === '[object Array]'){
+                newArr = newArr.concat(flatArr(item))
+            }else{
+                newArr.push(item)
+            }
+          })
+          return newArr
+        }
+        let Arr = [1,2,3,[4,5,6,[7,8,9]]]
+        let newArrs = flatArr(Arr)
+        console.log(newArrs,'扁平后的数组')
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跳出forEach循环</title>
+</head>
+<body>
+    <script>
+        let arr = [1,2,3,4,5]
+
+        //return是无法跳出去的
+
+        // arr.forEach(item=>{
+        //     console.log(item,'打印次数')
+        //     if(item === 3){
+        //         return
+        //     }
+        // })
+
+        arr.forEach(item=>{
+            console.log(item,'打印次数')
+            if(item === 3){
+                throw('跳出')
+            }
+        })
+    </script>
+</body>
+</html>

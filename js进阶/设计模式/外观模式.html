@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外观模式</title>
+</head>
+<body>
+    <button id="btnShow">按钮</button>
+    <script>
+        function setBtnShow(){
+            let button = document.getElementById('btnShow')
+            return{
+                show:function(){
+                    button.style.display = 'block'
+                },
+                hide:function(){
+                    button.style.display = 'none'
+                }
+            }
+        }
+        setBtnShow().hide()
+    </script>
+</body>
+</html>

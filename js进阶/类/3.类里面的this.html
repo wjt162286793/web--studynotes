@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>class中的this</title>
+</head>
+<body>
+    <script>
+        class Person{
+            constructor(name,age,done){
+             console.log(this,'constructor里面的类')
+             this.name = name
+             this.age = age
+             this.done = done
+            }
+            fn1 = function(){
+             console.log(this,'fn1函数里面的this')
+           }
+           fn2 = ()=>{
+            console.log(this,'fn2函数里面的this')
+           }
+           name1 = this.name 
+        }
+
+        let wjt = new Person('王惊涛',28,function(){console.log('前端程序员')})
+        console.log(wjt,'wjt实例')
+        wjt.fn1()
+        wjt.fn2()
+        console.log(wjt.name,'wjt的name属性')
+    </script>
+</body>
+</html>

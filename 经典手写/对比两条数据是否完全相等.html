@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据对比</title>
+</head>
+
+<body>
+    <script>
+        let diffData = function (data1, data2) {
+            let result = null
+            if (toString.call(data1) === toString.call(data2)) {
+                switch (toString.call(data1)) {
+                    //对象类型
+                    case '[object Object]':
+                        let keys1 = Object.keys(data1)
+                        let keys2 = Object.keys(data2)
+                        //属性键值数量相同
+                        if (keys1.length === keys2.length) {
+                            //属性键相同
+                            if (keys1.every((item1, index1) => {
+                                return keys1[index1] === keys2[index1]
+                            })) {
+                                //键值数量相同并且键的值也相同,递归判断每一项是否都相同
+                                result = keys1.every((item2, index2) => {
+                                    return diffData(data1[item2], data2[item2])
+                                })
+                                return result
+                            }
+                            //属性键值不同
+                            else {
+                                result = false
+                                return result
+                            }
+                        }
+                        //属性键值数量不同
+                        else {
+                            result = false
+                            return result
+                        }
+                        break
+                    //数组类型
+                    case '[object Array]':
+                        //数组长度相同
+                        if (data1.length === data2.length) {
+
+                            //递归对比数组内的每一项
+                            result = data1.every((item1, index1) => {
+                                return diffData(data1[index1], data2[index1])
+                            })
+                            return result
+                        }
+                        //数组长度不同
+                        else {
+                            result = false
+                            return result
+                        }
+
+                        break
+                    default:
+                        //非对象和数组的其他类型,需要先全部转换为字符串形式,再进行对比
+                        if (`${data1}` === `${data2}`) {
+                            result = true
+                            return result
+                        } else {
+                            result = false
+                            return result
+                        }
+                }
+            } else {
+                result = false
+            }
+        }
+
+        let obj1 = {
+            name: '王惊涛',
+            age: 27,
+            obj: {
+                name: '小王王1',
+                d:null
+            },
+            arr: [1,2,3,{aa:1},undefined]
+        }
+        let obj2 = {
+            name: '王惊涛',
+            age: 27,
+            obj: {
+                name: '小王王1',
+                d:null
+            },
+            arr: [1,2,3,{aa:1},undefined]
+        }
+        let obj3 = {
+            name: '王惊涛',
+            age: 27,
+            obj: {
+                name: '小王王1',
+                d:null
+            },
+            arr: [1,2,3,{aa:1},'undefined']
+        }
+        console.log(diffData(obj1, obj2))
+        console.log(diffData(obj1, obj3))
+    </script>
+</body>
+
+</html>

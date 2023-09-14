@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this相关</title>
+</head>
+<body>
+    <script>
+        //谁调用这个函数,this就是谁
+        //严格模式下外层为window,函数内部为function
+
+        //普通函数
+        function normalFun(){
+            console.log(this,'普通函数this') //全局的
+        }
+        normalFun()  //window
+
+        //构造函数
+        function Fun(a,b){
+           this.a = a
+           this.b = b
+           console.log(this,'构造函数中的this')  //实例对象  
+        }
+        let funObj1 = new Fun('a','b')  //{a:'a',b:'b'}
+        let funObj2 = new Fun(1,2)  //{a:1,b:2}
+
+        //对象内部的函数
+        let obj1 = {
+           name:'wjt',
+           fun:function(){
+               console.log(this,'对象内的函数') //对象本身
+           }
+        }
+        obj1.fun()  //{name: 'wjt', fun: ƒ}
+
+        //对象内部的箭头函数
+        let obj2 = {
+            name:'ms',
+            fun:()=>{
+                console.log(this,'对象内的箭头函数')  //外层函数作用域的this
+            }
+        }
+        obj2.fun()  //window
+
+        //对象内部的this
+        let obj3 = {
+            a:1,
+            b:2,
+            c:{
+                a:this,  
+            }
+        }
+        console.log(obj3)  //a的值为window
+    </script>
+</body>
+</html>
