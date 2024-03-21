@@ -6,18 +6,186 @@
     <title>测试promise方法</title>
 </head>
 <body>
-    <script src="./promise源码.js"></script>
+    <script src="./自己手写promise.js"></script>
     <script>
-        let p1 = new MyPromise((resolve,reject)=>{
+        //测试第一步
+        // let pro = new myPromise((res, rej) => {
+        //     setTimeout(() => {
+        //         res('成功')
+        //         // rej('失败')
+        //     }, 3000)
+        // })
+        // pro.thenFun(res => {
+        //     console.log(res, '成功后的操作逻辑')
+        // }, rej => {
+        //     console.log(rej, '失败后的操作逻辑')
+        // })
+// p1.then(res=>{
+//     console.log('执行成功,拿到的返回值为'+res)
+// },rej=>{
+//     console.log('执行失败,拿到的返回值为'+rej)
+// })
+
+         //------------------------
+         //第二步的测试
+        // Promise.resolve('成功').then(res=>{
+        //     console.log(res,'成功的值')
+        // })
+        // Promise.reject('失败').catch(rej=>{
+        //     console.log(rej,'失败的值')
+        // })
+
+        // myPromise.resolve('成功').thenFun(res=>{
+        //     console.log(res,'成功的值')
+        // })
+        // myPromise.reject('失败').catchFun(rej=>{
+        //     console.log(rej,'失败的值')
+        // })
+
+
+        // let pro1 = new Promise((res,rej)=>{
+        //     setTimeout(()=>{
+        //         res(Promise.resolve('成功'))
+        //     },1000)
+        // })
+        // pro1.then(res=>{
+        //     console.log(res,'Promise本身的成功值')
+        // })
+
+        // let pro1 = new myPromise((res,rej)=>{
+        //     setTimeout(()=>{
+        //         // res(myPromise.resolve('成功的promise=>值'))
+        //         res('成功')
+        //     },3000)
+        // })
+        // pro1.thenFun(res=>{
+        //     console.log(res,'当前自定义myPromise的成功值1')
+        // },rej=>{
+        //     console.log(rej,'当前自定义myPromise的失败值2')
+        // })
+
+        // let pro2 = new myPromise((res,rej)=>{
+        //     setTimeout(()=>{
+        //         // rej(myPromise.resolve('失败的promise=>值'))
+        //         res('成功')
+        //     },5000)
+        // })
+        // pro2.thenFun(res=>{
+        //     console.log(res,'当前自定义myPromise的成功值1')
+        // },rej=>{
+        //     console.log(rej,'当前自定义myPromise的失败值2')
+        // })
+
+        //层层依赖形成执行链
+    //     let pro = new Promise(res=>{
+    //       setTimeout(()=>{
+    //         res('初始化成功')
+    //       })
+    //     })
+    //     pro.then(res => {
+    //       return new Promise(resolve => {
+    //           setTimeout(() => {
+    //               console.log(res,'第一层链')
+    //               resolve(res,'第一层返回成功值')
+    //           }, 2000)
+
+    //       })
+    //   }).then(res => {
+    //       return new Promise(resolve => {
+    //           setTimeout(() => {
+    //               console.log(res,'第二层链')
+    //               resolve('第二层返回成功值')
+    //           }, 2000)
+
+    //       })
+    //   }).then(res => {
+    //       return new Promise(resolve => {
+    //           setTimeout(() => {
+    //               console.log(res,'第三层链')
+    //               resolve('第三层返回成功值')
+    //           }, 2000)
+
+    //       })
+    //   }).then(res=>{
+    //     console.log(res,'最终的值')
+    //   })
+
+// let pro = new myPromise(res=>{
+//     setTimeout(()=>{
+//       res('初始化成功自定义的')
+//     })
+//   })
+//   pro.thenFun(res => {
+//     return new myPromise(resolve => {
+//         setTimeout(() => {
+//             console.log(res,'第一层链自定义的')
+//             resolve(res,'第一层返回成功值')
+//         }, 2000)
+
+//     })
+// }).thenFun(res => {
+//     return new myPromise(resolve => {
+//         setTimeout(() => {
+//             console.log(res,'第二层链自定义的')
+//             resolve('第二层返回成功值')
+//         }, 2000)
+
+//     })
+// }).thenFun(res => {
+//     return new myPromise(resolve => {
+//         setTimeout(() => {
+//             console.log(res,'第三层链自定义的')
+//             resolve('第三层返回成功值')
+//         }, 2000)
+
+//     },reject=>{
+        
+//     })
+// }).thenFun(res=>{
+//   console.log(res,'最终的值自定义的')
+// })
+
+//--------------------------------------------------------
+//第三阶段测试
+// myPromise.resolve('成功').thenFun(res=>{
+//     console.log(res,'成功的值')
+// })
+// let pro1 = new Promise(res=>{
+//     setTimeout(()=>{
+//         res('promise成功值')
+//     },2000)
+// })
+// Promise.resolve(pro1).then(res=>{
+//     console.log(res,'成功的值')
+// })
+
+// let pro2 = new myPromise(res=>{
+//     setTimeout(()=>{
+//         res('promise成功值')
+//     },1000)
+// })
+// myPromise.resolve(pro2).thenFun(res=>{
+//     console.log(res,'成功的值自定义的myPromise')
+// })
+
+
+let pro1 = new myPromise((res,rej)=>{
     setTimeout(()=>{
-        // resolve('王惊涛')
-        reject('错误的值')
+       res('成功1')
+    },1000)
+})
+let pro2 = new myPromise((res,rej)=>{
+    setTimeout(()=>{
+       res('成功2')
+    },2000)
+})
+let pro3 = new myPromise((res,rej)=>{
+    setTimeout(()=>{
+       res('成功3')
     },3000)
 })
-p1.then(res=>{
-    console.log('执行成功,拿到的返回值为'+res)
-},rej=>{
-    console.log('执行失败,拿到的返回值为'+rej)
+myPromise.all([pro1,pro2,pro3]).thenFun(res=>{
+    console.log(res,'全部执行完毕的结果')
 })
     </script>
 </body>

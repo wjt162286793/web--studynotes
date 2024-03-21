@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面向对象编程</title>
+</head>
+
+<body>
+    <canvas width="800" height="600" id="canvas"></canvas>
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+        class Rect {
+            constructor(x, y, width, height) {
+                this.x = x
+                this.y = y
+                this.width = width
+                this.height = height
+            }
+            update() {
+                this.x++
+            }
+            render() {
+                ctx.fillStyle = this.getRandomColor()
+                ctx.fillRect(this.x,this.y,this.width,this.height)
+            }
+            getRandomColor() {
+                const r = Math.floor(Math.random() * 256)
+                const g = Math.floor(Math.random() * 256)
+                const b = Math.floor(Math.random() * 256)
+                // 将RGB转换为十六进制颜色值
+                return `#${r.toString(16)}${g.toString(16)}${b.toString(16)}`
+            }
+        }
+        let rect = new Rect(0,0,50,50)
+        function drawFun(){
+            ctx.clearRect(0,0,canvas.width,canvas.height)
+            rect.update()
+            rect.render()
+            requestAnimationFrame(drawFun)
+        }
+        drawFun()
+    </script>
+</body>
+
+</html>

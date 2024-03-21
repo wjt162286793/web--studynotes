@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解释器模式</title>
+</head>
+<body>
+    <script>
+         //翻译词库
+         const wordList = [
+           {
+            text:'韩信前期有蓝有红,必须拿二杀。你要是有红有蓝,拿不了二杀,啧,那这把就很难赢了。弟弟,不要打超级兵!',
+            result:'信若有红蓝,必斩敌二将。若有红蓝而未斩敌首,呜呼,此局难胜矣。吾弟切记,勿攻铁甲军!'
+           }
+         ]
+         //古文翻译软件
+          class Interpreter{
+            interpret(text){
+              return wordList.find(item=>item.text === text).result
+            }
+          }
+          
+          const Interpreter1 = new Interpreter()
+          const result1 =  Interpreter1.interpret('韩信前期有蓝有红,必须拿二杀。你要是有红有蓝,拿不了二杀,啧,那这把就很难赢了。弟弟,不要打超级兵!')
+          console.log('文本1:',result1)
+
+          //js编译器
+          class jsCodeCompile{
+            interpret(jsCode){
+               eval(jsCode)
+            }
+          }
+          let jscompile1 = new jsCodeCompile()
+          jscompile1.interpret("console.log('这是一段控制台输出语句')")
+
+    </script>
+</body>
+</html>

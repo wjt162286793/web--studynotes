@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多种继承方法</title>
+</head>
+<body>
+    <script>
+        // //1.原型链继承
+        // //妈妈刘梅的构造函数
+        // function Liumei(){
+        //     this.name = '刘梅'
+        //     //方法1:定义时添加
+        //     this.xuexing = 'o型血'
+        // }
+        // //方法2:定义完毕再添加
+        // // Liumei.prototype.xuexing = 'o型血'
+        // //儿子刘星的构造函数
+        // function Liuxing(){
+        //     this.name = '刘星'
+        // }
+        // //刘星的原型对象继承刘梅
+        // Liuxing.prototype = new Liumei()
+        // console.log(Liuxing,'继承后刘星的构造函数')
+        // console.log(Liuxing.prototype,'刘星的原型对象')
+        // let liuxingPerson = new Liuxing()
+        // console.log(liuxingPerson,'刘星本人')
+        // console.log(liuxingPerson.name,'刘星本人名字')
+        // console.log(liuxingPerson.xuexing,'刘星本人血型')
+
+
+
+        //2.子构造函数继承父构造函数
+
+        //写法1
+        // function Liumei(){
+        //     this.name = '刘梅'
+        //     this.xuexing = 'o型'
+        // }
+        // function Liuxing(){
+        //     Liumei.call(this)
+        //     //这段代码要写在call方法后面,如果写在call方法前面,名字就会被覆盖掉。如果感觉不合适,可以让Liumei构造函数添加一个name参数,在call方法中加入刘星的名字
+        //     this.name = '刘星'  
+        // }
+    
+        // //写法2
+        // function Liumei(name = '刘梅'){
+        //     console.log(this,'这里的this在new刘星时,就是刘星实例对象')
+        //     this.name = name
+        //     this.xuexing = 'o型'
+        // }
+        // function Liuxing(name){
+        //     Liumei.call(this,name)
+        // }
+
+        // let liuxingPerson = new Liuxing('刘星')
+        // console.log(liuxingPerson,'刘星本人')
+
+        // //3.Object.create继承
+        // let LiumeiPerson = {
+        //     name:'刘梅',
+        //     xuexing:'o型'
+        // }
+        // let liuxingPerson = Object.create(LiumeiPerson)
+        // liuxingPerson.name = '刘星' 
+        // console.log(liuxingPerson,'刘星本人')
+
+    //     //4.寄生式继承
+    //     let LiumeiPerson = {
+    //         name:'刘梅',
+    //         xuexing:'o型'
+    //     }
+    //     function ParasitismFun(motherObj){
+    //         //记住,箭头函数不能当构造函数
+    //        function NewFun (name){
+    //         this.name = name
+    //        }
+    //        NewFun.prototype = motherObj
+    //       return NewFun
+    //    }
+    //    //传递刘梅的对象,将刘梅的对象属性添加一个构造函数的原型的原型上,返回值是那个添加了刘梅属性的构造函数
+    //    let Liuxing =  ParasitismFun(LiumeiPerson)
+    //    console.log(Liuxing,'刘星构造函数')
+    //    let liuxingPerson = new Liuxing('刘星')
+    //    console.log(liuxingPerson,'刘星本人')
+
+    //5.class类继承
+    class Liumei{
+        constructor(name){
+            this.name = name
+            this.xuexing = 'o型'
+        }
+    }
+    class Liuxing extends Liumei{
+        constructor(name){
+         super(name)
+        }
+    }
+    let liuxingPerson = new Liuxing('刘星')
+    console.log(liuxingPerson,'刘星本人')
+    </script>
+</body>
+</html>

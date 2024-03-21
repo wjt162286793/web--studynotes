@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>命令模式</title>
+</head>
+
+<body>
+    <script>
+        //创建
+        var CreateCommand = function (receiver) {
+            this.receiver = receiver;
+        }
+
+        CreateCommand.prototype.execute = function () {
+            this.receiver.action();
+        }
+
+        var TVOn = function () { }
+
+        TVOn.prototype.action = function () {
+            console.log('TVON')
+        }
+        var TVOff = function () { }
+
+        TVOff.prototype.action = function () {
+            console.log('TVOFF')
+        }
+        var Invoker = function (tvOnCommand, tvOffCommand) {
+            this.tvOnCommand = tvOnCommand;
+            this.tvOffCommand = tvOffCommand;
+        }
+
+        Invoker.prototype.tvOn = function () {
+            this.tvOnCommand.execute();
+        }
+
+        Invoker.prototype.tvOff = function () {
+            this.tvOffCommand.execute();
+        }
+        var tvOnCommand = new CreateCommand(new TVOn());
+        var tvOffCommand = new CreateCommand(new TVOff());
+        var invoker = new Invoker(tvOnCommand, tvOffCommand);
+        invoker.tvOn();
+        invoker.tvOff();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工厂模式</title>
+</head>
+<body>
+    <script>
+        function BtnFactory(type){
+           switch(type){
+            case 'primary':
+               return new PrimaryBtn()
+               break
+            case 'success':
+                return new SuccessBtn()
+                break
+            case 'warn':
+                return new WarnBtn()
+           }
+        }
+        class PrimaryBtn{
+            constructor(){
+                this.name = 'primaryBtn'
+                this.type = 'primary'
+                this.clickFun = ()=>{
+                    console.log('我是primary按钮的点击事件')
+                }
+            }
+        }
+        class SuccessBtn{
+            constructor(){
+                this.name = 'successBtn'
+                this.type = 'success'
+                this.clickFun = ()=>{
+                    console.log('我是success按钮的点击事件')
+                }
+            }
+        }
+        class WarnBtn{
+            constructor(){
+                this.name = 'warnBtn'
+                this.type = 'warn'
+                this.clickFun = ()=>{
+                    console.log('我是warn按钮的点击事件')
+                }
+            }
+        }
+
+        let btn1 = BtnFactory('primary')
+        let btn2 = BtnFactory('success')
+        let btn3 = BtnFactory('warn')
+        console.log(btn1,'btn1')
+        console.log(btn2,'btn2')
+        console.log(btn3,'btn3')
+
+
+        //工厂模式:只需要传递某些参数可以批量创建对象。
+        //可以将对象创建的过程和使用的业务逻辑区分开来,提高代码的重用性和可维护性
+    </script>
+</body>
+</html>

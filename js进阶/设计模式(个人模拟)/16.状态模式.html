@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>状态模式</title>
+</head>
+
+<body>
+    <button onclick="wjtUseCom1()">王惊涛上机</button>
+    <button onclick="swkUseCom1()">孙悟空上机</button>
+    <button onclick="wjtAddTime()">王惊涛续费</button>
+    <button onclick="aheadClose()">王惊涛提前下机</button>
+    <script>
+        //网吧上网
+
+        //电脑类
+        class Computer {
+            constructor(code) {
+                this.code = code
+            }
+            useName = null
+            status = 'close'
+            useTime = 0
+            canUseTime = 0
+
+            //快没钱了
+            warning() {
+                this.status = 'warning'
+                console.log(`${this.code}警告:尊敬的${this.useName}先生/女士,您的余额所剩不多,请到台前及时充值,当前状态${this.status}`)
+            }
+
+            //到时关闭或者提前下机
+            close(name,useFun) {
+                if(name !== this.useName){
+                    console.log(`你不是机器使用者,无权关闭`)
+                    return 
+                }
+                this.status = 'close'
+                this.canUseTime = 0
+                this.useTime = 0
+                if(useFun){
+                    clearInterval(useFun)
+                useFun = null
+                }
+
+                console.log('到时间了,当前状态:' + this.status)
+            }
+
+            //续费
+            addTime(addTime,name) {
+                if(name !== this.useName){
+                    console.log(`你充错机器了吧,现在这台机器是${this.useName}在使用`)
+                    return 
+                }
+                this.status = 'using'
+                this.canUseTime += addTime
+                console.log('续费成功,当前状态' + this.status)
+            }
+
+            useCom = function (name, canUseTime) {
+                if (this.status !== 'close') {
+                    console.log(`不好意思:${name}先生/女士${this.code}正在被${this.useName}使用,请你换一台`)
+                    return
+                }
+                this.useName = name
+                this.status = 'using'   //开机使用
+                console.log(`${name}开始使用${this.code},当前状态:${this.status}`)
+                this.canUseTime = canUseTime
+                
+                let useFun = setInterval(() => {
+                    if(this.status === 'close'){
+                        clearInterval(useFun)
+                        useFun = null
+                        this.canUseTime = 0
+                        this.useTime = 0
+                        return
+                    }
+                    this.useTime += 1000
+                    console.log(`已经使用${this.useTime}了,还剩${this.canUseTime - this.useTime}`)
+                    if (this.canUseTime - this.useTime === 5000) {  //时间不多了,警告提示
+                        this.warning()
+                    }
+                    if (this.useTime === this.canUseTime) {
+                        this.close(this.useName,useFun)   //时间到了,关闭
+
+                    }
+                }, 1000)
+            }
+        }
+
+        let computer1 = new Computer('1号机器')
+        let wjt = '王惊涛'
+        let sunwukong = '孙悟空'
+
+        const wjtUseCom1 = ()=>{
+            computer1.useCom(wjt, 10000)
+        }
+        const swkUseCom1 = ()=>{
+            computer1.useCom(sunwukong, 10000)
+        }
+        const wjtAddTime = ()=>{
+            computer1.addTime(10000,'王惊涛')
+        }
+        const aheadClose = ()=>{
+            computer1.close('王惊涛')
+        }
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>命令模式</title>
+</head>
+
+<body>
+    <script>
+        // 定义一个命令对象
+        class Command {
+            constructor(receiver, args) {
+                this.receiver = receiver;
+                this.args = args;
+                this.executed = false;
+            }
+
+            execute() {
+                if (!this.executed) {
+                    this.receiver.execute(this.args);
+                    this.executed = true;
+                }
+            }
+
+            undo() {
+                if (this.executed) {
+                    this.receiver.undo(this.args);
+                    this.executed = false;
+                }
+            }
+        }
+
+        // 定义一个接收者对象
+        class Receiver {
+            constructor() {
+                this.value = 0;
+            }
+
+            execute(args) {
+                this.value += args;
+                console.log(`执行操作，value = ${this.value}`);
+            }
+
+            undo(args) {
+                this.value -= args;
+                console.log(`撤销操作，value = ${this.value}`);
+            }
+        }
+
+        // 创建一个接收者对象和一些命令对象
+        const receiver = new Receiver();
+        const command1 = new Command(receiver, 1);
+        const command2 = new Command(receiver, 2);
+        const command3 = new Command(receiver, 3);
+
+        // 创建一个历史列表并将命令对象添加到其中
+        const history = [command1, command2, command3];
+
+        // 依次执行命令对象
+        history.forEach((command) => {
+            command.execute();
+        });
+
+        // 撤销最后一个操作
+        history.pop().undo(); // 撤销操作，value = 3
+        history.pop().undo(); // 撤销操作，value = 1
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>委托者模式</title>
+</head>
+<body>
+    <script>
+        //npm
+        const npm = {
+            downModules(name){
+                console.log(`下载${name}依赖包`)
+            }
+        }
+
+        //mirrornpm
+        const mirrornpm = {
+            src:npm,
+            downModules(name){
+               return this.src.downModules(name)
+            }
+        }
+        // npm镜像下载vue
+        mirrornpm.downModules('vue')
+    </script>
+</body>
+</html>

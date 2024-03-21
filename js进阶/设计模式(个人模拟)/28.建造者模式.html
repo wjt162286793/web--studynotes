@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>建造者模式</title>
+</head>
+<body>
+    <script>
+        
+        function render(h){
+        }
+
+        function h(){
+
+        }
+
+        function $mount(dom){
+       console.log(dom,'绑定的根节点')
+       console.log(this,'this是vue实例')
+        }
+
+        function use(plugin){
+        
+        }
+
+        function $attr(){
+
+        }
+
+        function $emit(){
+
+        }
+
+        class Vue{
+         constructor(vue){
+            this.render = render
+            this.$mount = $mount
+            this.use = use
+         }
+         attr = $attr
+         $emit = $emit
+         static self = function(){
+            return '看不到我'
+         }
+        }
+
+        //使用
+        let vueComponent1 =  new Vue({
+            beforeCreate(){},
+            created(){},
+            render:h=>h()
+        })
+
+        console.log(vueComponent1,'vue组件实例')
+        vueComponent1.$mount('#app')
+    </script>
+</body>
+</html>

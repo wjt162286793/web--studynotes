@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃豆</title>
+</head>
+<body>
+    <canvas id="canvas" height="600" width="700"></canvas>
+<script>
+const canvas = document.querySelector('#canvas')
+const ctx = canvas.getContext('2d')
+ctx.beginPath()
+ctx.arc(300,300,150,[Math.PI/180]*30,[Math.PI/180]*330)
+ctx.lineTo(300,300)
+ctx.closePath()
+ctx.fillStyle = 'yellow'
+ctx.fill()
+ctx.beginPath()
+ctx.arc(330,230,20,0,[Math.PI/180]*360)
+ctx.closePath()
+ctx.fillStyle = '#000'
+ctx.fill()
+ctx.beginPath()
+ctx.arc(500,300,20,0,[Math.PI/180]*360)
+ctx.closePath()
+ctx.fillStyle = 'green'
+ctx.fill()
+ctx.beginPath()
+ctx.arc(600,300,20,0,[Math.PI/180]*360)
+ctx.closePath()
+ctx.fillStyle = 'green'
+ctx.fill()
+</script>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>备忘录模式</title>
+</head>
+<body>
+    <script>
+        class Editor{
+            constructor(){
+                 this.allText = ''
+            }
+            edit(text){
+              this.allText += text
+            }
+            saveNow(){
+                return new EditorText(this.allText)
+            }
+            backspacing(editorText){
+                 this.allText = editorText.getText()
+                 console.log(this.allText,'???')
+            }
+        }
+
+        class EditorText{
+            constructor(text){
+                this.text = text
+            }
+            getText(){
+                return this.text
+            }
+        }
+
+        class History{
+            constructor(){
+                this.textNodeList = []
+            }
+            add(text){
+              this.textNodeList.push(text)
+            }
+            delete(){
+                this.textNodeList.pop()
+                return this.textNodeList[this.textNodeList.length-1]
+            }
+        }
+
+        const editor = new Editor()
+        const history = new History()
+
+        editor.edit('两个黄鹂鸣翠柳,')
+        history.add(editor.saveNow())
+        console.log(editor,'当前文本1')
+        console.log(history,'历史记录1')
+
+
+        editor.edit('一行白鹭上西天。')
+        history.add(editor.saveNow())
+        console.log(editor,'当前文本2')
+        console.log(history,'历史记录2')
+
+        //写的不对,撤回一下
+        editor.backspacing(history.delete())
+        console.log(editor,'当前文本3')
+        console.log(history,'历史记录3')
+
+        editor.edit('一行白鹭上青天。')
+        history.add(editor.saveNow())
+        console.log(editor,'当前文本4')
+        console.log(history,'历史记录4')
+    </script>
+</body>
+</html>

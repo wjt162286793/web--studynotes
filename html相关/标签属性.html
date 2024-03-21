@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>标签属性</title>
+</head>
+<body>
+    <p id="p1" class="p2_className" attr="自定义属性1">段落1</p>
+    <p id="p2" class="p2_className" attr="自定义属性2">段落2</p>
+    <script>
+       console.log(p1,'p1')
+       console.log(p1.getAttribute('attr'))
+
+       p2.setAttribute('attr','自定义属性3')
+       console.log(p2,'p2')
+       console.log(p2.getAttribute('attr'))
+    </script>
+</body>
+</html>

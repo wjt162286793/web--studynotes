@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getOwnPropertyDescriptor拦截</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name:'wjt',
+            age:29,
+            desProp:'属性信息'
+        }
+        let _data = new Proxy(data,{
+          getOwnPropertyDescriptor:(target,key)=>{
+            if(key === 'desProp'){
+             return Object.getOwnPropertyDescriptor(target,key)
+            }else{
+                return 
+            }
+          }
+        })
+
+       console.log(Object.getOwnPropertyDescriptor(_data,'name')) 
+       console.log(Object.getOwnPropertyDescriptor(_data,'age'))
+       console.log(Object.getOwnPropertyDescriptor(_data,'desProp'))
+    </script>
+</body>
+</html>

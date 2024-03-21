@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>单例模式</title>
+</head>
+<body>
+    <script>
+        function SingleFun(){
+             if(typeof SingleFun.instance === 'object'){
+                return SingleFun.instance
+             }
+             SingleFun.instance = this
+             this.name = '王惊涛'
+             this.age = 29
+        }
+
+        let obj1 = new SingleFun()
+        let obj2 = new SingleFun()
+        
+        console.log(obj1,'obj1')
+        console.log(obj2,'obj2')
+        console.log(obj1 === obj2)
+
+        //单例模式:让一个构造函数或者类只能由一个实例
+    </script>
+</body>
+</html>

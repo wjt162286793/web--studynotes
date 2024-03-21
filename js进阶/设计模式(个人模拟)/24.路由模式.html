@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由模式</title>
+</head>
+
+<body>
+    <script>
+        //这里模拟实现一个vue
+        class Vue{
+            constructor(options){
+               Object.keys(options).forEach(item=>{
+                this[item] = options[item]
+               })
+            }
+            $mount(node){
+               console.log(`挂载到${node}节点上`)
+               return this
+            }
+            static use(plugin){
+               console.log(`vue使用${plugin}插件`)
+            }
+        }
+    
+        class VueRouter{
+            constructor(options){
+             this.routes = options.routes
+            }
+            push(){}
+        }
+        Vue.use(VueRouter)
+        const Home = {name:'Home组件'}
+        const About = {name:'About组件'}
+        const Wjt = {name:'Wjt组件'}
+
+        
+        //路由会依次匹配
+        const routes = [
+            {
+                path: '/about',
+                component: About
+            },
+            {
+                path: '/wjt',
+                component: Wjt
+            },
+            {
+                path: '/',
+                component: Home
+            }
+        ]
+
+        const router = new VueRouter({
+            routes
+        })
+
+        const app =  new Vue({
+            router,
+            render: h => h(App)
+        }).$mount('#app')
+
+        console.log(app,'模拟的vue')
+    </script>
+</body>
+
+</html>

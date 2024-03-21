@@ -1,12 +1,379 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>对象方法测试</title>
 </head>
+
 <body>
-    
+    <script>
+        // console.log(Object.prototype,'对象方法')
+
+        //assign
+        // let obj1 = {name:'wjt'}
+        // let obj2 = {age:29}
+        // let newObj1 = Object.assign(obj1,obj2)
+        // console.log(newObj1,'合并后的对象')
+        // console.log(obj1,'修改后的')
+        // console.log(newObj1 === obj1,'是否相等')
+
+        // let obj3 = {name:'wjt',age:28}
+        // let obj4 = {love:'javascript',age:29}
+        // Object.assign(obj3,obj4)
+        // console.log(obj3,'属性覆盖')
+
+        // let obj5 = {}
+        // let obj6 = {name:'wjt',age:28,wife:{name:'xiaoma',age:28}}
+        // Object.assign(obj5,obj6)
+        // obj6.age = 29
+        // console.log(obj5,'修改第一层的属性')
+        // obj6.wife.age = 29
+        // console.log(obj6,'修改第二层的属性')
+
+        //create
+        // let personObj = {work:'coder',sex:'man'}
+        // let yyx = Object.create(personObj)
+        // yyx.name = '尤雨溪'
+        // let wjt = Object.create(personObj)
+        // wjt.name = '王惊涛'
+        // console.log(yyx,yyx.work,'前端大佬-尤大大')
+        // console.log(wjt,'前端菜狗-王惊涛')
+
+
+        //defineProperties
+        // let wjt = {}
+        // Object.defineProperties(wjt,{
+        //     name:{
+        //         value:'wjt',
+        //         writable:false  //不可修改
+        //     },
+        //     age:{
+        //         value:28,
+        //         writable:true   //可修改
+        //     }
+        // })
+        // console.log(wjt,'wjt对象')
+        // wjt.name = 'wangjingtao'
+        // wjt.age = 29
+        // console.log(wjt,'修改后的wjt对象')
+
+        //defineProperty
+        // let wjt = {}
+        // Object.defineProperty(wjt,'name',{
+        //     value:'wjt',
+        //     writable:false,   //修改
+        //     enumerable:true,   //枚举
+        //     configurable:false  //删除
+        // })
+        // Object.defineProperty(wjt,'age',{
+        //     value:29,
+        //     writable:true,
+        //     enumerable:true
+        // })
+        // Object.defineProperty(wjt,'privacy',{
+        //     value:()=>{console.log('个人的隐私信息,不想让别人知道')},
+        //     writable:true,
+        //     enumerable:false,
+        //     configurable:true
+        // })
+
+        // console.log(wjt,'对象信息')
+        // for(let value in wjt){
+        //     console.log(value,wjt[value],'迭代对象')
+        // }
+        // delete wjt.name
+        // delete wjt.privacy
+        // console.log(wjt,'删除属性后的对象')
+
+        // //数据代理
+        // let wjt = {name:'wjt',age:29,work:'coder'}  //字面量定义的对象数据
+        // let _wjt = {}   //代理对象
+        // console.log(wjt,'初始化的源对象')
+        // console.log(_wjt,'初始化的代理对象')
+        // Object.defineProperty(_wjt,'name',{
+        //     get(){
+        //         console.log('访问_wjt的name属性,我给他返回wjt的name属性')
+        //         return wjt.name
+        //     },
+        //     set(value){
+        //         console.log('修改了_wjt.name的属性,但其实这里我会把wjt.name也给改了')
+        //         wjt.name = value
+        //     }
+        // })
+        // console.log(_wjt.name,'查看_wjt的name属性')
+        // _wjt.name = 'wangjingtao'
+        // console.log(wjt,'源对象')
+        // console.log(_wjt,'代理对象')
+
+        //entries
+
+        // //对象
+        // let wjt = {name:'wjt',age:28,work:'coder'}
+        // console.log(Object.entries(wjt),'遍历了对象')
+
+        // //类数组
+        // let classArr = {0:'wjt',1:28,3:'coder'}
+        // console.log(Object.entries(classArr),'遍历类数组')
+
+        // //和Map配合使用
+        // let newMap = new Map(Object.entries(wjt))
+        // console.log(newMap,'正好我Map要的就是这种数据类型')
+        // console.log(newMap.get('name'),'访问Map中的name属性')
+
+
+        //freeze
+
+        // //对象
+        // let wjt = {name:'wjt',age:28}
+        // Object.freeze(wjt)
+        // wjt.age = 29
+        // console.log(wjt,'修改无效,age没变化')
+        // wjt.love = 'LoL'
+        // console.log(wjt,'不能添加,添加无效')
+
+        // //数组
+        // let arr = [1,2,3,4,5]
+        // Object.freeze(arr)
+        // arr[0] = '新的'
+        // console.log(arr,'修改数组无效')
+        // arr.push(6)
+        // console.log(arr,'无法新增')
+
+        // let wjt = {name:'wjt',age:28,love:{name:'LOL',hero:'虚空掠夺者'}}
+        // Object.freeze(wjt)
+        // wjt.age = 29
+        // wjt.love.hero = '嘉文四世'
+        // console.log(wjt,'第一层的不能改,但是内部属性如果是对象,是可以修改对象内的变量值的')
+
+
+        //formEntries
+        // let arr = [["name","wjt"],["age",28]]
+        // let wjt1 = Object.fromEntries(arr)
+        // console.log(wjt1,'数组转对象')
+
+        // let map = new Map([["name","wjt"],["age",28]]) 
+        // let wjt2 = Object.fromEntries(map)
+        // console.log(wjt2,'map转对象')
+
+        //getOwnPropertyDescriptor
+        // class Coder{
+        //     done = ()=>{console.log('正常生理活动')}
+        //     constructor(name,age){
+        //         this.name = name
+        //         this.age = age
+        //         this.type = 'person'
+        //     }
+        // }
+        // let wjt = new Coder('wjt',28)
+        // console.log(wjt,'创建的对象')
+        // let prop1 = Object.getOwnPropertyDescriptor(wjt,'name')
+        // let prop2 = Object.getOwnPropertyDescriptor(wjt,'type')
+        // let prop3 = Object.getOwnPropertyDescriptor(wjt,'done')
+        // let prop4 = Object.getOwnPropertyDescriptor(wjt,'not')
+        // console.log(prop1,'自定义的属性')
+        // console.log(prop2,'原型上的属性1')
+        // console.log(prop3,'原型上的属性2')
+        // console.log(prop4,'不存在的属性')
+
+
+        //getOwnPropertyDescriptors
+        // let wjt = {name:'wjt',age:29}
+        // console.log(Object.getOwnPropertyDescriptors(wjt),'全属性配置')
+
+        //getOwnPropertyNames
+        // let wjt = {name:'wjt',age:28,work:'coder'}
+        // console.log(Object.getOwnPropertyNames(wjt),'属性名集合')
+
+        //getOwnPropertySymbols
+        // let wjt = {}
+        // let name = Symbol('name')
+        // let age = Symbol('age')
+        // wjt[name] = 'wjt'
+        // wjt[age] = 28
+        // wjt.work = 'coder'
+        // console.log(wjt,'对象')
+        // console.log(Object.getOwnPropertySymbols(wjt),'symbol信息的属性')
+
+        //getPrototypeOf
+        // let obj = {name:'wjt',age:29}
+        // console.log(Object.getPrototypeOf(obj),'对象类型')
+        // let arr = [1,2,3,5,6]
+        // console.log(Object.getPrototypeOf(arr),'数组类型')
+        // console.log(Object.getPrototypeOf(()=>{}),'函数类型')
+        // console.log(Object.getPrototypeOf('字符串'),'字符串类型')
+        // console.log(Object.getPrototypeOf(0),'数字类型')
+        // console.log(Object.getPrototypeOf(true),'布尔类型')
+        // // console.log(Object.getPrototypeOf(null),'null类型')  //报错
+        // // console.log(Object.getPrototypeOf(undefined),'undefined类型') //报错
+        // let person = {type:'人类',done:'正常人类活动'}
+        // let wjt = Object.create(person)
+        // console.log(wjt,'wjt对象')
+        // console.log(Object.getPrototypeOf(wjt),'wjt对象的原型')
+        // console.log(Object.getPrototypeOf(wjt).__proto__ === Object.getPrototypeOf(obj),'是否相等')
+
+        //hasOwn
+        // let wjt = {name:'wjt',age:28}
+        // console.log(Object.hasOwn(wjt,'name'),'查看name属性')
+        // console.log(Object.hasOwn(wjt,'not'),'查看不存在的属性')
+        // console.log(Object.hasOwn(wjt,'toString'),'查看原型对象的toString属性')
+
+        // //hasOwnProperty
+        // let wjt = {name:'wjt',age:28}
+        // console.log(wjt.hasOwnProperty('name'),'name属性')
+        // console.log(wjt.hasOwnProperty('not'),'不存在的属性')
+        // console.log(wjt.hasOwnProperty('toString'),'原型上的属性')
+
+
+        //is
+        // console.log(Object.is(28,28),'相同数字')
+        // console.log(Object.is('wjt','wjt'),'相同字符串')
+        // console.log(Object.is(null,null),'两个null')
+        // console.log(Object.is(undefined,undefined),'两个undefined')
+        // console.log(Object.is(NaN,NaN),'两个NaN')
+        // console.log(Object.is(window,window),'两个window')
+        // let obj1 = obj2 =  {name:'wjt'}
+        // console.log(Object.is(obj1,obj2),'同一个地址的对象')
+        // console.log('------------------------------------')
+        // console.log(Object.is([1,2,3],[1,2,3]),'元素相同的数组')
+        // console.log(Object.is({name:'wjt'},{name:'wjt'}),'元素相同的对象')
+        // console.log(Object.is(()=>{},()=>{}),'两个空函数')
+
+        // console.log('------------------------------------')
+        // console.log(NaN === NaN,'NaN === NaN')
+        // console.log(undefined === undefined,'undefined === undefined')
+        // console.log(null === null,'null === null')
+
+
+        //preventExtensions
+        // let wjt = {name:'wjt',age:28}
+        // Object.preventExtensions(wjt)
+        // wjt.work = 'coder'
+        // console.log(wjt,'wjt对象新增work属性失败')
+
+        //isExtensible
+        // let wjt = {name:'wjt',age:28}
+        // console.log(Object.isExtensible(wjt),'未防止扩展前')
+        // Object.preventExtensions(wjt)
+        // console.log(Object.isExtensible(wjt),'禁止扩展后')
+
+        // let obj = Object.freeze({name:'wangjingtao'})
+        // console.log(Object.isExtensible(obj),'一个被冻结的对象')
+
+        // //isFrozen
+        // let wjt = {name:'wjt',age:28}
+        // console.log(Object.isFrozen(wjt),'冻结前')
+        // Object.freeze(wjt)
+        // console.log(Object.isFrozen(wjt),'冻结后')
+
+
+        //isPrototypeOf
+        //     class C1{
+        //         constructor(name,age){
+        //             this.name = name
+        //             this.age = age
+        //             this.work = 'coder'
+        //         }
+        //     }
+        //     let wjt1 = new C1('wjt',28)
+
+        //     function F1(name,age){
+        //         this.name = name
+        //         this.age = age
+        //         this.work = 'coder'
+        //     }
+        //     let wjt2 = new F1('wjt',28)
+        //     console.log(C1.isPrototypeOf(wjt1),'wjt1对象的原型链上有C1吗')
+        //     console.log(F1.isPrototypeOf(wjt2),'wjt2对象的原型链上有F1吗')
+
+        //     wjt1.__proto__ = C1
+        //     wjt2.__proto__ = F1
+        //     console.log(C1.isPrototypeOf(wjt1),'再来一次,wjt1对象的原型链上有C1吗')
+        //     console.log(F1.isPrototypeOf(wjt2),'再来一次,wjt2对象的原型链上有F1吗')
+        //     console.log('-------------------------------------')
+
+        //     let obj = {work:'coder'}
+        //     let wjt3 = Object.create(obj)
+        //     wjt3.name = 'wangjingtao'
+        //     wjt3.age = 28
+        //     console.log(wjt3,'wjt3对象')
+        //     console.log(obj.isPrototypeOf(wjt3),'wjt3的原型链上有obj吗')
+
+        //seal
+        // let wjt = {name:'wjt',age:28}
+        // Object.seal(wjt)
+        // wjt.name = 'wangjingtao'
+        // wjt.work = '工作'
+        // delete wjt.age
+        // console.log(wjt,'wjt对象')
+
+        //isSealed
+        // let wjt = {name:'wjt',age:28}
+        // console.log(Object.isSealed(wjt),'封禁前')
+        // Object.seal(wjt)
+        // console.log(Object.isSealed(wjt),'封禁后')
+
+        //keys
+        // let wjt = {name:'wjt',age:28}
+        // let work = Symbol('work')
+        // wjt[work] = 'coder'
+        // console.log(wjt,'wjt对象')
+        // console.log(Object.keys(wjt),'key的集合')
+
+
+        //propertyIsEnumerable
+        // let wjt = {name:'wjt',age:28}
+        // let arr = [1,2,3]
+        // console.log(wjt.propertyIsEnumerable('name'),'对象自定义的可枚举属性name')
+        // console.log(wjt.propertyIsEnumerable('toString'),'原型上的不可枚举toString')
+        // console.log(arr.propertyIsEnumerable(1),'自定义的可枚举索引1')
+        // console.log(arr.propertyIsEnumerable('length'),'原型上的不可枚举的length')
+
+
+        //setPrototypeOf
+        // let wjt = {name:'wjt',age:28}
+        // let coder = {work:'coder'}
+        // Object.setPrototypeOf(wjt,coder)
+        // console.log(wjt,'更换原型为coder后的wjt对象')
+        // Object.setPrototypeOf(wjt,null)
+        // console.log(wjt,'更换原型为null后的wjt对象')
+
+        // let date = new Date(Date.UTC(2023, 12, 29, 16, 40, 10))
+        // console.log(date.toLocaleString('ar-EG'))
+        // console.log(date.toLocaleString('en-EN'))
+        // console.log(date.toLocaleString('zh-ZH'))
+
+        //toString
+        // console.log({name:'wjt',age:28}.toString(),'对象')
+        // console.log([1,2,3,4].toString(),'数组')
+        // console.log(new String('常规字符串').toString(),'字符串')
+        // console.log(new Number(123).toString(),'普通数字')
+        // console.log(new Number(NaN).toString(),'NaN')
+        // console.log(new Function(()=>{}).toString(),'函数')
+        // console.log(new Boolean(false).toString(),'布尔值')
+        // console.log(Symbol('id').toString(),'symbol类型')
+        // console.log(BigInt(111111111111111).toString(),'BigInt类型')
+
+        //valueOf
+        // function Fn(name,age){
+        //     this.name = name
+        //     this.age = age
+        // }
+        // Fn.prototype.valueOf = function(){
+        //     return this.age
+        // }
+        // let wjt = new Fn('wjt',28)
+        // console.log(wjt,'wjt对象')
+        // console.log(wjt+1,'wjt这个时候调用就是this.age,也就是28')
+
+        //values
+        let wjt = {name:'wjt',age:28,work:'coder'}
+        console.log(Object.values(wjt),'对象值集合')
+        let arr = [1,2,3,4]
+        console.log(Object.values(arr),'数组值集合')
+    </script>
 </body>
+
 </html>

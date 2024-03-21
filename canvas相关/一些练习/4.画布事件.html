@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>画布事件</title>
+</head>
+
+<body>
+    <canvas width="800" height="600" id="canvas"></canvas>
+    <script>
+        //画布生成类
+        class Canvas {
+            constructor() {
+                this.canvasNode = null
+                this.canvasPosition = null
+            }
+            instance = (nodeId) => {
+                this.canvasNode = document.querySelector(nodeId).getContext('2d')
+                this.addEventHandler(this.canvasNode)
+                return this.canvasNode
+            }
+            judge = () => {
+
+            }
+            eventList = [
+                {
+                    name: 'click',
+                    handler: (el) => {
+                        this.canvasPosition = this.canvasNode.canvas.getBoundingClientRect()
+                        this.canvasPosition = {
+                            x: el.clientX - this.canvasPosition.left,
+                            y: el.clientY - this.canvasPosition.top
+                        }
+                        drawFun(this.canvasPosition,'click','点击事件')
+                    }
+                },
+                {
+                    name: 'mouseover',
+                    handler: (el) => {
+                        
+                        this.canvasPosition = this.canvasNode.canvas.getBoundingClientRect()
+                        this.canvasPosition = {
+                            x: el.clientX - this.canvasPosition.left,
+                            y: el.clientY - this.canvasPosition.top
+                        }
+                        drawFun(this.canvasPosition,'mouseover','鼠标移入')
+                    }
+                },
+                {
+                    name: 'mousemove',
+                    handler: (el) => {
+                        
+                        this.canvasPosition = this.canvasNode.canvas.getBoundingClientRect()
+                        this.canvasPosition = {
+                            x: el.clientX - this.canvasPosition.left,
+                            y: el.clientY - this.canvasPosition.top
+                        }
+                        drawFun(this.canvasPosition,'mousemove','鼠标持续移动')
+                    }
+                }
+            ]
+
+            addEventHandler(canvasNode) {
+                this.eventList.forEach(item => {
+                    canvasNode.canvas.addEventListener(item.name, item.handler)
+                })
+
+            }
+
+        }
+        //矩形类
+        class Rect {
+            constructor(nodeName, alias, x, y, width, height, color, background) {
+                this.nodeName = nodeName
+                this.alias = alias
+                this.type = 'rect'
+                this.x = x
+                this.y = y
+                this.width = width
+                this.height = height
+                this.color = color
+                this.background = background
+            }
+            drawHandler(ctx) {
+                ctx[this.type](this.x, this.y, this.width, this.height)
+                if (this.color) {
+                    ctx.strokeStyle = this.color
+                    ctx.stroke()
+                }
+                if (this.background) {
+                    ctx.fillStyle = this.background
+                    ctx.fill()
+                }
+            }
+        }
+        //弧,圆类
+        class Arc {
+            constructor(nodeName, alias, x, y, radius, start, end, direction, color, background) {
+                this.nodeName = nodeName
+                this.alias = alias
+                this.type = 'arc'
+                this.x = x
+                this.y = y
+                this.radius = radius
+                this.start = start
+                this.end = end
+                this.direction = direction
+                this.color = color
+                this.background = background
+            }
+            drawHandler(ctx) {
+                ctx[this.type](this.x, this.y, this.radius, ([Math.PI / 180]) * (this.start), ([Math.PI / 180]) * (this.end), this.direction)
+                if (this.color) {
+                    ctx.strokeStyle = this.color
+                    ctx.stroke()
+                }
+                if (this.background) {
+                    ctx.fillStyle = this.background
+                    ctx.fill()
+                }
+            }
+        }
+        //canvas实例
+        const ctx = new Canvas().instance('#canvas')
+        //数据列表
+        let dataList = [
+            new Rect('rect1','红色填充矩形',50, 50, 50, 50, null, 'red'),
+            new Rect('rect2', '绿色描边矩形',50, 200, 50, 50, 'green', null),
+            new Arc('arc1','蓝色填充圆',200, 200, 50, 0, 360, true, null, 'blue'),
+            new Arc('arc2','粉色圆弧',100, 400, 50, 50, 270, false, 'pink', null)
+        ]
+        //绘制函数
+        function drawFun(position,eventName,eventAlias) {
+            dataList.forEach(item => {
+                ctx.beginPath()
+                item.drawHandler(ctx)
+                ctx.closePath()
+                if (position) {
+                    const isBeTrigger = ctx.isPointInPath(position.x, position.y)
+                    if (isBeTrigger === true) {
+                        console.log(item, `${item.alias}触发了${eventAlias}`)
+                    }
+                }
+            })
+        }
+        drawFun(null)
+
+    </script>
+</body>
+
+</html>

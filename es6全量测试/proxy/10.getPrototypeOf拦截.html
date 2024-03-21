@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getPrototypeOf拦截</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name:'wjt',
+            age:29
+        }
+        let obj = {
+            prop:'被作为原型对象'
+        }
+        
+        let _data = new Proxy(data,{
+          getPrototypeOf(target){
+            return obj
+          }
+        })
+        console.log(Object.getPrototypeOf(data),'data的原型对象是默认的原型对象')
+        console.log(Object.getPrototypeOf(_data),'_data的原型对象是使用obj')
+    </script>
+</body>
+</html>

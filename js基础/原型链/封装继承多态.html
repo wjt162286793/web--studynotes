@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装继承多态</title>
+</head>
+
+<body>
+    <script>
+        //面向对象三大特性:封装,继承,多态
+
+
+        //封装,可以封装公共方法和功能函数,供创建的对象去使用。
+        //通俗描述:
+        //一个构造函数就像是一个家庭,这个家庭有一些资产,是大家所共有的,每个家庭成员都可以去使用和调配这些资产。
+
+        //封装:我不会包饺子,但我会吃饺子哦。这些东西只要你是这个家庭成员,你就可以用它。你可以不用知道这个东西的构造原理是什么,你只需要会使用它。
+        //继承:对原型链上的属性进行新增,重写都会使由该原型对象的所有实例对象的属性发生修改。
+        //多态:龙生九子,子子不同。不同的人做同一件事,得到结果不一定相同。
+
+        function Family(name, gender, token) {
+            //姓名
+            this.name = name
+            //性别
+            this.gender = gender
+            //身份
+            this.token = token
+            //家里有好多本书
+            this.bookList = ['资治通鉴', '百家菜谱', '七龙珠', '三体']
+            //家里的厨房可以用来做饭
+            this.useChuFang = function (type, name) {
+                console.log(`我用${type}做出了我想吃的${name}`)
+            }
+            //使用电脑
+            this.computer = function (type) {
+                //电脑有显卡,键盘,内存条,处理器等
+                let xianka = () => { }
+                let jianpan = () => { }
+                let chuliqi = () => { }
+                let write = () => {
+                    console.log(`我是${this.name},我会用电脑写小说`)
+                }
+                let playGame = () => {
+                    console.log(`我是${this.name},我会用电脑打游戏`)
+                }
+                switch (type) {
+                    case "write":
+                        write()
+                        break
+                    case "playGame":
+                        playGame()
+                        break
+                    default:
+                        console.log(`我是${this.name}抱歉,我不懂电脑的构造和具体原理`)
+                }
+            }
+            //使用化妆品
+            this.useHuaZhuangPin = function(){
+                if (this.gender === 'woman') {
+                    console.log(this.name,'你是女性,可以使用这些化妆品')
+                } else {
+                    console.log(this.name,'男人就别作妖了')
+                }
+            }
+            //私有变量,10瓶饮料
+            drinks = 10
+            //闭包返回函数
+            let fn = (num,name, drinks) => {
+                if(drinks>-1){
+                    console.log(`我是${name},我拿了${num}瓶饮料,还剩${drinks}瓶饮料`)
+                }else{
+                    console.log(`我是${name},我想拿饮料,发现没了`)
+                }
+                
+            }
+            //闭包封装私有变量,家里的饮料
+            this.drinkFun = (num,name) => {
+                drinks = drinks - num
+                return fn(num,name, drinks)
+            }
+                        //家庭有一笔1百万的存折
+                         bankBook = 1000000
+        }
+
+        //es6的类
+        // class Family{
+        //                 //私有变量,10瓶饮料
+        //     constructor(name, gender, token){
+        //     //姓名
+        //     this.name = name
+        //     //性别
+        //     this.gender = gender
+        //     //身份
+        //     this.token = token
+        //     //家里有辆奔驰车
+        //     this.car = '奔驰'
+        //     //家里有好多本书
+        //     this.bookList = ['资治通鉴', '百家菜谱', '七龙珠', '三体']
+        //     //家里的厨房可以用来做饭
+        //     this.useChuFang = function (type, name) {
+        //         console.log(`我用${type}做出了我想吃的${name}`)
+        //     }
+        //     this.computer = function (type) {
+        //         //电脑有显卡,键盘,内存条,处理器等
+        //         let xianka = () => { }
+        //         let jianpan = () => { }
+        //         let chuliqi = () => { }
+        //         let write = () => {
+        //             console.log('我会用电脑写小说')
+        //         }
+        //         let playGame = () => {
+        //             console.log('我会用电脑打游戏')
+        //         }
+        //         switch (type) {
+        //             case "write":
+        //                 write()
+        //                 break
+        //             case "playGame":
+        //                 playGame()
+        //                 break
+        //             default:
+        //                 console.log('抱歉,我不懂电脑的构造和具体原理')
+        //         }
+        //     }
+        //     //家庭有一笔1百万的存折
+        //     this.bankBook = 1000000
+        //     //家里有一套化妆品
+        //     let huaZhuangPin = ['面膜', '水乳', '画眉笔']
+        //     //使用化妆品
+        //     this.useHuaZhuangPin = (gender) => {
+        //         if (gender === 'women') {
+        //             console.log('你是女性,可以使用这些化妆品')
+        //         } else {
+        //             console.log('男人就别作妖了')
+        //         }
+        //     }
+
+        //     //闭包返回函数
+        //     let fn = (num,name, drinks) => {
+        //         drinks = drinks - num
+        //         if(drinks>-1){
+        //             console.log(`我是${name},我拿了${num}瓶饮料,还剩${drinks}瓶饮料`)
+        //         }else{
+        //             console.log(`我是${name},我想拿饮料,发现没了`)
+        //         }
+                
+        //     }
+        //    drinks = 10
+        //     //闭包封装私有变量,家里的饮料
+        //     this.drinkFun = (num,name) => {
+                
+        //         return fn(num,name, drinks)
+        //     }
+        // }
+         
+        // }
+
+        Family.prototype.bankBook = 1000000
+        Family.prototype.car = '奔驰'
+        //接下来我就用代码来清晰的展示面向对象的这些特征
+        //构建家庭成员,其实构造函数的本质作用,就是用来批量创建一些拥有相同属性或者方法的对象,不让代码大量冗余重复。
+        let XiaDongHai = new Family('夏东海', 'man', '父亲')
+        let XiaoXue = new Family('小雪', 'woman', '女儿')
+        let LiuMei = new Family('刘梅', 'woman', '母亲')
+        let LiuXing = new Family('流星', 'man', '儿子')
+        console.log(XiaDongHai, '夏东海')
+        console.log(XiaoXue, '小雪')
+        console.log(LiuMei, '刘梅')
+        console.log(LiuXing, '流星')
+
+
+        // //封装
+
+        //1.构造函数封装公共方法
+        //解析:我不会包饺子,但我会吃饺子哦。
+        //夏东海用电脑写文章
+        XiaDongHai.computer('write')
+        //流星用电脑打游戏
+        LiuXing.computer('playGame')
+        //你问他们电脑的显卡原理是什么
+        XiaDongHai.computer('xiaka')
+        //他们虽然不懂电脑是怎么运行的,但是他们可以用电脑做到自己想做的事。
+
+        //2.闭包封装私有变量
+        XiaDongHai.drinkFun(3,'夏东海')
+        LiuMei.drinkFun(2,'刘梅')
+        LiuXing.drinkFun(4,'流星')
+        XiaoXue.drinkFun(1,'小雪')
+        XiaDongHai.drinkFun(1,'夏东海')
+
+        // //继承
+        
+        //原型链可以添加,重写一些公共属性,所有实例对象都会受到影响
+        //夏东海将原来的奔驰车卖掉了,换了一辆新宝马车,花了10万元
+        Family.prototype.car = '宝马'
+        console.log(Family.prototype.bankBook,'???')
+        Family.prototype.bankBook = Family.prototype.bankBook - 100000
+  
+        console.log(XiaDongHai.car,XiaDongHai.bankBook,'夏东海')
+        console.log(LiuMei.car,LiuMei.bankBook,'刘梅')
+
+        // //多态
+        // //不同的方法被不同的对象调用,结果会多样性
+
+        //夏东海和刘梅做饭
+        LiuMei.useChuFang('鸡块','大盘鸡')
+        XiaDongHai.useChuFang('方便面','泡面')
+        //流星和小雪化妆
+        LiuXing.useHuaZhuangPin()
+        XiaoXue.useHuaZhuangPin()
+    </script>
+</body>
+
+</html>

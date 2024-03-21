@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原型模式</title>
+</head>
+<body>
+    <script>
+        // 定义一个表单对象的原型
+var formPrototype = {
+  fields: [],
+  addField: function(field) {
+    this.fields.push(field);
+  },
+  getFields: function() {
+    return this.fields;
+  },
+  clone: function() {
+    // 克隆表单对象并返回新对象
+    var newForm = Object.create(this);
+    newForm.fields = Object.create(this.fields);
+    return newForm;
+  }
+};
+
+// 创建一个表单对象
+var form = Object.create(formPrototype);
+
+// 添加表单字段
+form.addField('name');
+form.addField('email');
+form.addField('phone');
+
+// 克隆表单对象并修改其中的字段
+var newForm = form.clone();
+newForm.addField('address');
+
+// 打印表单对象和新表单对象的字段
+console.log(form.getFields()); // ["name", "email", "phone"]
+console.log(newForm.getFields()); // ["name", "email", "phone", "address"]
+
+    </script>
+</body>
+</html>

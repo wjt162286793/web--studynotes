@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桥接模式</title>
+</head>
+<body>
+    <script>
+        // 抽象部分
+class Button {
+  constructor(implementation) {
+    this.implementation = implementation;
+  }
+
+  click() {
+    this.implementation.onClick();
+  }
+
+  render() {
+    return this.implementation.render();
+  }
+}
+
+// 实现部分 - 默认样式
+class DefaultButton {
+  onClick() {
+    console.log("DefaultButton clicked");
+  }
+
+  render() {
+    return "<button class='default'>Default Button</button>";
+  }
+}
+
+// 实现部分 - 轮廓样式
+class OutlineButton {
+  onClick() {
+    console.log("OutlineButton clicked");
+  }
+
+  render() {
+    return "<button class='outline'>Outline Button</button>";
+  }
+}
+
+// 创建不同类型的按钮
+const primaryButton = new Button(new DefaultButton());
+const secondaryButton = new Button(new OutlineButton());
+
+// 渲染并绑定按钮事件
+document.body.innerHTML = `
+  ${primaryButton.render()}
+  ${secondaryButton.render()}
+`;
+
+document.querySelector(".default").addEventListener("click", () => {
+  primaryButton.click();
+});
+
+document.querySelector(".outline").addEventListener("click", () => {
+  secondaryButton.click();
+});
+
+    </script>
+</body>
+</html>

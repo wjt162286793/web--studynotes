@@ -1,0 +1,1 @@
+console.log(process.memoryUsage(),'进程信息')

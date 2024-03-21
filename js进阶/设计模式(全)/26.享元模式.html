@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>享元模式</title>
+</head>
+<body>
+    <script>
+        // 定义享元工厂
+const FlyweightFactory = function () {
+  const flyweights = {};
+
+  const get = function (key) {
+    if (flyweights[key]) {
+      return flyweights[key];
+    }
+    const flyweight = {
+      // 共享的状态信息
+      key: key,
+      // 具体的操作方法
+      operation: function () {
+        console.log('Executing operation for key: ' + this.key);
+      }
+    };
+    flyweights[key] = flyweight;
+    return flyweight;
+  };
+
+  return {
+    get
+  };
+};
+
+// 使用享元工厂创建享元对象
+const factory = new FlyweightFactory();
+const flyweight1 = factory.get('key1');
+const flyweight2 = factory.get('key2');
+
+console.log(flyweight1,flyweight2)
+// 调用共享的操作方法
+flyweight1.operation(); // 输出: "Executing operation for key: key1"
+flyweight2.operation(); // 输出: "Executing operation for key: key2"
+
+    </script>
+</body>
+</html>

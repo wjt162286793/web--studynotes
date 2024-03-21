@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>defineProperty拦截</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name:'wjt',
+            age:29
+        }
+        let _data = new Proxy(data,{
+            defineProperty:(target,key,descriptor)=>{
+                return false
+            }
+        })
+        _data.newProp1 = '_datanewProp'
+        data.newProp2 = 'datanewProp'
+        console.log(_data,'_data')
+        console.log(data,'data')
+    </script>
+</body>
+</html>

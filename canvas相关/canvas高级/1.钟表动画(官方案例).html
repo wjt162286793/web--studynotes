@@ -1,156 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>动画</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>动画</title>
 </head>
+
 <body>
-    <canvas width="500" height="500" id="canvas"></canvas>
-    <script>
-        const canvas = document.getElementById('canvas')
-        const mode = canvas.getContext('2d')
+  <canvas width="500" height="500" id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas')
+    const mode = canvas.getContext('2d')
 
-/*前提:
-Math.PI是π,它对应的角度应该是180,画一个圆形需要*2,画一个半圆就是Math.PI,如果想要90度,就是Math.PI*2,这里简单点理解: PI === 180度*/
+    /*前提:
+    Math.PI是π,它对应的角度应该是180,画一个圆形需要*2,画一个半圆就是Math.PI,如果想要90度,就是Math.PI*2,这里简单点理解: PI === 180度*/
 
-        function clock(){
-          /*当前时间戳*/
-  var now = new Date();
-  /*canvas容器*/
-  var mode = document.getElementById('canvas').getContext('2d');
-  /*保存状态*/
-  mode.save();
-  /*清空画布*/
-  mode.clearRect(0,0,150,150);
-  /*位移*/
-  mode.translate(75,75);
-  /*缩放*/
-  mode.scale(0.4,0.4);
-  /*逆时针旋转90度*/
-  mode.rotate(-Math.PI/2);
-  /*外圈颜色设置*/
-  mode.strokeStyle = "black";
-  /*填充颜色设置*/
-  mode.fillStyle = "white";
-  /*线条的粗细*/
-  mode.lineWidth = 8;
-  /*线条端点样式*/
-  mode.lineCap = "round";
+    function clock() {
+      /*当前时间戳*/
+      var now = new Date();
+      /*canvas容器*/
+      var mode = document.getElementById('canvas').getContext('2d');
+      /*保存状态*/
+      mode.save();
+      /*清空画布*/
+      mode.clearRect(0, 0, 150, 150);
+      /*位移*/
+      mode.translate(75, 75);
+      /*缩放*/
+      mode.scale(0.4, 0.4);
+      /*逆时针旋转90度*/
+      mode.rotate(-Math.PI / 2);
+      /*外圈颜色设置*/
+      mode.strokeStyle = "black";
+      /*填充颜色设置*/
+      mode.fillStyle = "white";
+      /*线条的粗细*/
+      mode.lineWidth = 8;
+      /*线条端点样式*/
+      mode.lineCap = "round";
 
-  // Hour marks
-  /*保存前面的设置*/
-  mode.save();
-  /*12次循环---时*/
-  for (var i=0;i<12;i++){
-    /*起始路径*/
-    mode.beginPath();
-    /*顺时针旋转15度,也就是走一个刻度字,比如从1到2*/  
-    mode.rotate(Math.PI/6);
-    /*来到画布起点*/
-    mode.moveTo(100,0);
-    /*连线*/
-    mode.lineTo(120,0);
-    /*描边*/
-    mode.stroke();
-  }
-  /*上面的整体流程画一个小线段,画一次顺时针转动15度,一共画了12次,现在(时)的刻度就出来*/
-  mode.restore();
-  
-  // Minute marks
-  mode.save();
-  /*修改线条宽度*/
-  mode.lineWidth = 5;
-  /*旋转60次,画(分),理念同上,一个分的刻度角度为6度,*/
-  for (i=0;i<60;i++){
-    /*不过,在(时)的刻度上已经有了,5分,10分,15分等等,所以这里就不需要再画了,跳过时的点位*/
-    if (i%5!=0) {
+      // Hour marks
+      /*保存前面的设置*/
+      mode.save();
+      /*12次循环---时*/
+      for (var i = 0; i < 12; i++) {
+        /*起始路径*/
+        mode.beginPath();
+        /*顺时针旋转15度,也就是走一个刻度字,比如从1到2*/
+        mode.rotate(Math.PI / 6);
+        /*来到画布起点*/
+        mode.moveTo(100, 0);
+        /*连线*/
+        mode.lineTo(120, 0);
+        /*描边*/
+        mode.stroke();
+      }
+      /*上面的整体流程画一个小线段,画一次顺时针转动15度,一共画了12次,现在(时)的刻度就出来*/
+      mode.restore();
+
+      // Minute marks
+      mode.save();
+      /*修改线条宽度*/
+      mode.lineWidth = 5;
+      /*旋转60次,画(分),理念同上,一个分的刻度角度为6度,*/
+      for (i = 0; i < 60; i++) {
+        /*不过,在(时)的刻度上已经有了,5分,10分,15分等等,所以这里就不需要再画了,跳过时的点位*/
+        if (i % 5 != 0) {
+          mode.beginPath();
+          mode.moveTo(117, 0);
+          mode.lineTo(120, 0);
+          mode.stroke();
+        }
+        mode.rotate(Math.PI / 30);
+      }
+      mode.restore();
+      /*获取当前秒*/
+      var sec = now.getSeconds();
+      /*获取当前分*/
+      var min = now.getMinutes();
+      /*获取当前时*/
+      var hr = now.getHours();
+      /*如果超过12点,比如14点,就减去12,也就是2点*/
+      hr = hr >= 12 ? hr - 12 : hr;
+      /*修改填充颜色*/
+      mode.fillStyle = "black";
+
+      // write Hours
+      /*时针*/
+      mode.save();
+      /*旋转: 
+      计算: 时*(180/30)度+分*(180/60/60)度+秒*(180/60/60/60)度
+      */
+      mode.rotate(hr * (Math.PI / 6) + (Math.PI / 360) * min + (Math.PI / 21600) * sec)
+      /*线条粗细*/
+      mode.lineWidth = 14;
+      /*开始画时针*/
       mode.beginPath();
-      mode.moveTo(117,0);
-      mode.lineTo(120,0);
+      /*起点*/
+      mode.moveTo(-20, 0);
+      /*终点*/
+      mode.lineTo(80, 0);
+      /*描边*/
       mode.stroke();
+      mode.restore();
+
+      // write Minutes
+      /*分针*/
+      mode.save();
+      mode.rotate((Math.PI / 30) * min + (Math.PI / 1800) * sec)
+      mode.lineWidth = 10;
+      mode.beginPath();
+      mode.moveTo(-28, 0);
+      mode.lineTo(112, 0);
+      mode.stroke();
+      mode.restore();
+
+      // Write seconds
+      /*秒针*/
+      mode.save();
+      mode.rotate(sec * Math.PI / 30);
+      mode.strokeStyle = "#D40000";
+      mode.fillStyle = "#D40000";
+      mode.lineWidth = 6;
+      mode.beginPath();
+      mode.moveTo(-30, 0);
+      mode.lineTo(83, 0);
+      mode.stroke();
+      mode.beginPath();
+      /*表盘中心点*/
+      mode.arc(0, 0, 10, 0, Math.PI * 2, true);
+      mode.fill();
+      mode.beginPath();
+      /*秒针指向点*/
+      mode.arc(95, 0, 10, 0, Math.PI * 2, true);
+      mode.stroke();
+      mode.fillStyle = "rgba(0,0,0,0)";
+      mode.arc(0, 0, 3, 0, Math.PI * 2, true);
+      mode.fill();
+      mode.restore();
+
+      mode.beginPath();
+      mode.lineWidth = 14;
+      mode.strokeStyle = '#325FA2';
+      /*外层圈*/
+      mode.arc(0, 0, 142, 0, Math.PI * 2, true);
+      mode.stroke();
+
+      mode.restore();
+
+      window.requestAnimationFrame(clock);
     }
-    mode.rotate(Math.PI/30);
-  }
-  mode.restore();
-  /*获取当前秒*/
-  var sec = now.getSeconds();
-  /*获取当前分*/
-  var min = now.getMinutes();
-  /*获取当前时*/
-  var hr  = now.getHours();
-  /*如果超过12点,比如14点,就减去12,也就是2点*/
-  hr = hr>=12 ? hr-12 : hr;
-  /*修改填充颜色*/
-  mode.fillStyle = "black";
 
-  // write Hours
-  /*时针*/
-  mode.save();
-  /*旋转: 
-  计算: 时*(180/30)度+分*(180/60/60)度+秒*(180/60/60/60)度
-  */
-  mode.rotate( hr*(Math.PI/6) + (Math.PI/360)*min + (Math.PI/21600)*sec )
-  /*线条粗细*/
-  mode.lineWidth = 14;
-  /*开始画时针*/
-  mode.beginPath();
-  /*起点*/
-  mode.moveTo(-20,0);
-  /*终点*/
-  mode.lineTo(80,0);
-  /*描边*/
-  mode.stroke();
-  mode.restore();
-
-  // write Minutes
-  /*分针*/
-  mode.save();
-  mode.rotate( (Math.PI/30)*min + (Math.PI/1800)*sec )
-  mode.lineWidth = 10;
-  mode.beginPath();
-  mode.moveTo(-28,0);
-  mode.lineTo(112,0);
-  mode.stroke();
-  mode.restore();
-
-  // Write seconds
-  /*秒针*/
-  mode.save();
-  mode.rotate(sec * Math.PI/30);
-  mode.strokeStyle = "#D40000";
-  mode.fillStyle = "#D40000";
-  mode.lineWidth = 6;
-  mode.beginPath();
-  mode.moveTo(-30,0);
-  mode.lineTo(83,0);
-  mode.stroke();
-  mode.beginPath();
-  /*表盘中心点*/
-  mode.arc(0,0,10,0,Math.PI*2,true);
-  mode.fill();
-  mode.beginPath();
-  /*秒针指向点*/
-  mode.arc(95,0,10,0,Math.PI*2,true);
-  mode.stroke();
-  mode.fillStyle = "rgba(0,0,0,0)";
-  mode.arc(0,0,3,0,Math.PI*2,true);
-  mode.fill();
-  mode.restore();
-
-  mode.beginPath();
-  mode.lineWidth = 14;
-  mode.strokeStyle = '#325FA2';
-  /*外层圈*/
-  mode.arc(0,0,142,0,Math.PI*2,true);
-  mode.stroke();
-
-  mode.restore();
-
-  window.requestAnimationFrame(clock);
-}
-
-window.requestAnimationFrame(clock);
-    </script>
+    window.requestAnimationFrame(clock);
+  </script>
 </body>
+
 </html>

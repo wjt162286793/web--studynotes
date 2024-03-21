@@ -294,6 +294,7 @@ class MyPromise {
           this.successCallback.push(() => {
             try {
               let x = successCallback(this.value)
+              console.log(promise2, x, resolve, reject,'???')
               resolvePromise(promise2, x, resolve, reject)
             } catch(e) {
               reject(e)
@@ -358,8 +359,72 @@ function resolvePromise(promise2, x, resolve, reject) {
     return reject(new TypeError('Chaining cycle detected for promise #<Promise>'))
   }
   if(x instanceof MyPromise) {
+    console.log(x,'返回的是一个promise对象')
     x.then(resolve, reject)
   } else {
+    console.log(x,'返回的是一个普通值')
     resolve(x)
   }
 }
+
+// let pro2 = new MyPromise((res,rej)=>{
+//   setTimeout(()=>{
+//       res('成功')
+//   },1000)
+// })
+// pro2.then(res=>{
+//   console.log(res,'当前自定义myPromise的成功值')
+//   res('再次成功')
+// })
+
+// let pro2 = new MyPromise((res,rej)=>{
+//   setTimeout(()=>{
+//       res(Promise.resolve('成功'))
+//   },1000)
+// })
+// pro2.then(res=>{
+//   console.log(res,'当前自定义myPromise的成功值')
+// })
+
+let pro2 = new Promise((res,rej)=>{
+  setTimeout(()=>{
+      res(Promise.resolve('成功'))
+  },1000)
+})
+pro2.then(res=>{
+  console.log(res,'当前自定义myPromise的成功值')
+})
+
+        //层层依赖形成执行链
+      //   let pro = new MyPromise(res=>{
+      //     setTimeout(()=>{
+      //       res('初始化成功')
+      //     })
+      //   })
+      //   pro.then(res => {
+      //     return new Promise(resolve => {
+      //         setTimeout(() => {
+      //             console.log(res,'第一层链')
+      //             resolve(res,'第一层返回成功值')
+      //         }, 2000)
+
+      //     })
+      // }).then(res => {
+      //     return new Promise(resolve => {
+      //         setTimeout(() => {
+      //             console.log(res,'第二层链')
+      //             resolve('第二层返回成功值')
+      //         }, 2000)
+
+      //     })
+      // }).then(res => {
+      //     return new Promise(resolve => {
+      //         setTimeout(() => {
+      //             console.log(res,'第三层链')
+      //             resolve('第三层返回成功值')
+      //         }, 2000)
+
+      //     })
+      // }).then(res=>{
+      //   console.log(res,'最终的值')
+      // })

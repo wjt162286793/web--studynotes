@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set容器</title>
+</head>
+
+<body>
+    <script>
+
+        //初始用
+        // let set1 = new Set([])
+        // console.log(set1, 'set1')
+        // let set2 = new Set([1, 2, 3, 4, 5])
+        // console.log(set2, 'set2')
+        // let set3 = new Set([1, 1, 2, 2, 'wjt', 'wjt', null, null, undefined, undefined, NaN, NaN, true, true, { name: 'wjt' }, { name: 'wjt' }, [1, 2, 3], [1, 2, 3]])
+        // console.log(set3, 'set3')
+
+        //实例方法
+        // let set1 = new Set(['wjt','mashi',1,2,3])
+        // console.log(set1,'初始化的set1')
+        // add
+        // set1.add(4)
+        // console.log(set1,'add方法新增')
+        // delete
+        // set1.delete(4)
+        // console.log(set1,'delete方法删除')
+        // //迭代器:entries
+        // console.log(set1.entries(),'entries方法')
+        //  //迭代器:keys方法
+        // console.log(set1.keys(),'keys方法')
+        // //迭代器:values方法
+        // console.log(set1.values(),'values方法')
+        // //forEach方法
+        // set1.forEach((item,index)=>{
+        //     console.log(item,index,'forEach内循环')
+        // })
+        // //has方法查询元素
+        // console.log(set1.has(1),'存在')
+        // console.log(set1.has(5),'不存在') 
+
+        // //size方法查看元素个数
+        // console.log(set1.size,'size方法')
+        // //clear方法清除
+        // set1.clear()
+        // console.log(set1,'清空clear')
+        
+        //数组去重
+        //值类型
+        let arr1 = [1,2,2,4,5,6,7,7,'1','2','1','wjt','wjt']
+        let newArr1 = [...new Set(arr1)]
+        console.log(newArr1,'去重后的值数组')
+
+        //复杂类型
+        let arr2 = [{name:'wjt'},{name:'wjt'},[1,2,3],[1,2,3]]
+        let newArr2 = [...new Set(arr2)]
+        console.log(newArr2,'失败的去重')
+
+        //特殊情况
+        let obj1 = {name:'wjt'}
+        let obj2 = obj1
+        let arr3 = [obj1,obj2]
+        console.log(arr3,'数组')
+        let set3 = new Set(arr3)
+        console.log(set3,'set容器') 
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>isExtensible拦截</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name:'wjt',
+            age:29
+        }
+        let _data1 = new Proxy(data,{
+            isExtensible:(target)=>{
+                return true
+            }
+        })
+        let _data2 = new Proxy(data,{
+            isExtensible:(target)=>{
+                return false
+            }
+        })
+        console.log(Object.isExtensible(_data1),'_data1')
+        console.log(Object.isExtensible(_data2),'_data2')
+    </script>
+</body>
+</html>

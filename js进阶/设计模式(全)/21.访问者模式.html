@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>访问者模式</title>
+</head>
+
+<body>
+    <script>
+        // 定义被访问者
+        class Element {
+            accept(visitor) {
+                visitor.visit(this);
+            }
+        }
+
+        // 定义访问者
+        class Visitor {
+            visit(element) {
+                // 处理元素
+            }
+        }
+
+        // 定义具体的元素
+        class ConcreteElement extends Element {
+            // 具体的实现
+        }
+
+        // 定义具体的访问者
+        class ConcreteVisitor extends Visitor {
+            visit(element) {
+                // 处理具体的元素
+            }
+        }
+
+        // 使用访问者模式
+        const element = new ConcreteElement();
+        const visitor = new ConcreteVisitor();
+        element.accept(visitor);
+
+    </script>
+</body>
+
+</html>

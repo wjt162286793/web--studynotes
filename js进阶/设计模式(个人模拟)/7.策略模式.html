@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>策略模式</title>
+</head>
+<body>
+    <script>
+        //策略对象
+        const arrangeFun = {
+            model1:(value1,value2,value3,value4)=>{
+              return `${value1}${value2}${value3}:${value4}`
+            },
+            model2:(value1,value2,value3,value4)=>{
+              return `${value4},${value3}${value1}${value2}`
+            },
+            model3:(value1,value2,value3,value4)=>{
+              return `${value2}!${value4}${value3}${value1}`
+            },
+        }
+        
+        class StringJoint{
+            constructor(fun){
+                this.useModel = (value1,value2,vlaue3,vlaue4)=>{
+                    return fun(value1,value2,vlaue3,vlaue4)
+                }
+            }
+        }
+
+        const model1 = new StringJoint(arrangeFun.model1)
+        const model2 = new StringJoint(arrangeFun.model2)
+        const model3 = new StringJoint(arrangeFun.model3)
+       
+        console.log(model1.useModel('我的','同学','是','秋雅'))
+        console.log(model2.useModel('我的','同学','是','秋雅'))
+        console.log(model3.useModel('我的','同学','是','秋雅'))
+
+        //用这四个字进行造句,可以有很多的策略,我们定义了一个集中的策略对象
+        //然后生成造句的实例,并将方法保存在实例当中
+        //实例调用自己身上的方法,就可以了
+        
+    </script>
+</body>
+</html>

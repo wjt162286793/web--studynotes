@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包基础实现</title>
+</head>
+<body>
+    <button onclick="closerFn(1)">按钮</button>
+    <script>
+        function fn(initNum){
+            //initNum就一直保存在了这个函数当中,这个函数因为return的是一个函数,而return出去的函数仍然需要用到initNum,所以函数fn不能被销毁,就会一直保存在内存当中,里面的initNum也因为函数没有被销毁,一直会保持更改之后的值,从而实现了一个数据持久化保存的方式
+            return function(addNum){
+                 initNum += addNum  //这条语句使用了initNum的数据,因为函数自身没有访问到了外部函数fn的作用域链,也就是闭包内部函数引用外部变量的理解
+                 console.log(initNum,'数字')
+            }
+        }
+        let closerFn = fn(0)
+    </script>
+</body>
+</html>

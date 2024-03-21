@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setPrototypeOf拦截</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name:'wjt',
+            age:29
+        }
+        let obj = {
+            name:'可以作为原型对象'
+        }
+        let _data = new Proxy(data,{
+            setPrototypeOf:(target,proto)=>{
+               return false
+            }
+        })
+        
+        console.log(Object.setPrototypeOf(data,obj),'data')
+        console.log(Object.setPrototypeOf(_data,obj),'_data')
+    </script>
+</body>
+</html>

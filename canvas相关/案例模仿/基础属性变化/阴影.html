@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>阴影</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="1000" height="800"></canvas>
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        ctx.beginPath()
+        ctx.rect(300,300,200,200)
+        ctx.shadowOffsetX = 30
+        ctx.shadowOffsetY = 20
+        ctx.shadowColor = 'red'
+        ctx.shadowBlur = 10
+        ctx.strokeStyle = 'red'
+        ctx.stroke()
+    </script>
+</body>
+
+</html>

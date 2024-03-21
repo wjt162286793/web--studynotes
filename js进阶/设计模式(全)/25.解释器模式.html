@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>解释器模式</title>
+</head>
+<body>
+    <script>
+        // 定义抽象表达式
+class Expression {
+  interpret() {}
+}
+
+// 定义终结符表达式
+class NumberExpression extends Expression {
+  constructor(number) {
+    super();
+    this.number = number;
+  }
+
+  interpret() {
+    return this.number;
+  }
+}
+
+// 定义非终结符表达式
+class AddExpression extends Expression {
+  constructor(left, right) {
+    super();
+    this.left = left;
+    this.right = right;
+  }
+
+  interpret() {
+    return this.left.interpret() + this.right.interpret();
+  }
+}
+
+class SubtractExpression extends Expression {
+  constructor(left, right) {
+    super();
+    this.left = left;
+    this.right = right;
+  }
+
+  interpret() {
+    return this.left.interpret() - this.right.interpret();
+  }
+}
+
+// 定义上下文
+class Context {
+  constructor() {
+    this.expression = null;
+  }
+
+  setExpression(expression) {
+    this.expression = expression;
+  }
+
+  evaluate() {
+    return this.expression.interpret();
+  }
+}
+
+// 使用示例
+const context = new Context();
+const expression = new SubtractExpression(
+  new AddExpression(new NumberExpression(10), new NumberExpression(5)),
+  new NumberExpression(2)
+);
+context.setExpression(expression);
+console.log(context.evaluate()); // 输出 13
+
+    </script>
+</body>
+</html>

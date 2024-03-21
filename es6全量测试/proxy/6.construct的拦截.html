@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>construct的拦截</title>
+</head>
+<body>
+    <script>
+        let Fn = function(){
+            console.log('必须是函数')
+        }
+        let _Fn = new Proxy(Fn,{
+            age:29,
+            construct:function(target,args){
+                console.log(target,'target的值')
+                console.log(args,'参数')
+                return {
+                    name:args[0].name,
+                    age:this.age  /*这里的this就是[[new Proxy(Fn,handler)]]中的handler,this.age也就是上面定义的age*/
+                }
+            }
+        })
+       console.log(new _Fn({name:'wjt'}),'使用_Fn构造的实例对象') 
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由模式</title>
+</head>
+
+<body>
+    <script>
+        import Vue from 'vue'
+        import VueRouter from 'vue-router'
+
+        Vue.use(VueRouter)
+
+        const routes = [
+            {
+                path: '/',
+                component: Home
+            },
+            {
+                path: '/about',
+                component: About
+            },
+            {
+                path: '/contact',
+                component: Contact
+            }
+        ]
+
+        const router = new VueRouter({
+            routes
+        })
+
+        new Vue({
+            router,
+            render: h => h(App)
+        }).$mount('#app')
+
+    </script>
+</body>
+
+</html>

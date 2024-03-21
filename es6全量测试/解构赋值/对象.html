@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象解构</title>
+</head>
+<body>
+    <script>
+        //基础使用
+        // let {name,age,work} = {name:'wjt',work:'coder',age:28}
+        // console.log(name,age,work)
+
+        //未匹配到
+        // let {hehe} = {haha:'哈哈',heihei:'嘿嘿'}
+        // console.log(hehe,'未匹配到')
+
+        //重命名的写法
+        // let {oldName:newName} = {oldName:'wjt'}
+        // // console.log(oldName,'我是引用属性名')  //is not defined
+        // console.log(newName,'我是重命名的变量')
+
+        //默认值
+        let {name='wjt',age=18} = {name:'WJT'}
+        console.log(name,age)
+    </script>
+</body>
+</html>

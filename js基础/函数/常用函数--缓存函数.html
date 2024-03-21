@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>缓存函数</title>
+</head>
+<body>
+    <script>
+
+let addFun = (num1,num2) => num1+num2   //普通的计算函数
+let memoize =function (func) {   //缓存函数,实际上利用闭包函数的原理
+     let cache= {}   //定义一个闭包函数内部的变量
+     return function (key) {  //将一个函数作为返回值
+       if(!cache[key]){   //cache如果内部没有找到[key]这个属性
+        console.log('没有缓存该值',key)
+        console.log(func,'这里的func--函数')
+        console.log(this,'这里的this')
+        console.log(arguments,'这里的参数集合')
+         cache[key] = func.apply(this,arguments)  //就给这个对象身上添加一个属性[key],值为addFun.apply(this,arguments)
+       }else{
+        console.log(cache[key],'缓存了之前的')
+       }
+       console.log(cache,'闭包内变量')
+       return cache[key]  //将闭包内变量的值作为返回值传回去
+     }
+   }
+let resultFun = memoize(addFun)
+let result1 =  resultFun(1,1)
+console.log(result1,'结果1')
+let result2 =  resultFun(2,2)
+console.log(result2,'结果2')
+let result3 =  resultFun(1,1)
+console.log(result3,'结果3')
+    </script>
+</body>
+</html>

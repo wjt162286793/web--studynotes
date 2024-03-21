@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>观察者模式</title>
+</head>
+<body>
+    <script>
+class Subject{
+    constructor(){
+        this.list = []
+    }
+
+    addSub(data){
+      this.list.push(data)
+    }
+    removeSub(data){
+        this.list = this.list.filter(item=>item !== data)
+    }
+    change(data){
+        this.list.forEach(item=>{
+            item.upData(data)
+        })
+    }
+}
+
+class Observe{
+    constructor(name){
+        this.name = name
+    }
+    upData(data){
+        console.log(`我是${this.name}我订阅了消息`,data)
+    }
+}
+
+
+const sub = new Subject()
+const observer1 = new Observe('person1')
+const observer2 = new Observe('person2')
+sub.addSub(observer1)
+sub.addSub(observer2)
+sub.change('一条消息')
+sub.removeSub(observer1 )
+sub.change('新的消息')
+    </script>
+</body>
+</html>

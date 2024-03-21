@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迭代器模式</title>
+</head>
+
+<body>
+    <script>
+        // 定义一个集合类
+        class Collection {
+            constructor() {
+                this.items = [];
+            }
+            add(item) {
+                this.items.push(item);
+            }
+            [Symbol.iterator]() {
+                let index = 0;
+                const items = this.items;
+                return {
+                    next() {
+                        if (index < items.length) {
+                            return { value: items[index++], done: false };
+                        } else {
+                            return { done: true };
+                        }
+                    }
+                };
+            }
+        }
+
+        // 创建一个集合对象
+        const collection = new Collection();
+        collection.add('item 1');
+        collection.add('item 2');
+        collection.add('item 3');
+
+        // 使用迭代器遍历集合对象
+        const iterator = collection[Symbol.iterator]();
+        let result = iterator.next();
+        while (!result.done) {
+            console.log(result.value);
+            result = iterator.next();
+        }
+
+        // item 1
+        // item 2
+        // item 3
+        // {done: true}
+
+    </script>
+</body>
+
+</html>

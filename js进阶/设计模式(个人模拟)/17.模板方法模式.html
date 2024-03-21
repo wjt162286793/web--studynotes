@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板方法模式</title>
+</head>
+<body>
+    <script>
+        //moba游戏原型设计方案
+        class MobaGame{
+            loadAssets(){
+                return{
+                    heroList:this.heroList(),
+                    equipmentList:this.equipmentList(),
+                    maps:this.maps()
+                }
+
+            }
+            heroList(){
+                throw new Error('具体游戏具体定义英雄')
+            }
+            equipmentList(){
+                throw new Error('具体游戏具体定义装备')
+            }
+            maps(){
+                throw new Error('具体游戏具体定义地图')
+            }
+        }
+        //根据moba游戏模式创建dota
+        class Dota extends MobaGame{
+            constructor(){
+                super()
+                this.from = '从魔兽争霸单机游戏里进入的,不用账号'
+            }
+            heroList(){
+                return ['末日使者','斧王','圣骑士','敌法师']
+            }
+            equipmentList(){
+                return ['圣剑','阿哈利姆神杖']
+            }
+            maps(){
+                return [{name:'天灾vs近卫地图'}]
+            }
+        }
+        //根据moba游戏模式创建lol
+        class LOL extends MobaGame{
+            constructor(code,password){
+                super()
+             this.code = code
+             this.password = password
+            }
+            heroList(){
+                return ['德玛西亚皇子','虚空女皇','刀锋之影','诡术妖姬']
+            }
+            equipmentList(){
+                return ['日炎斗篷','最后的轻语']
+            }
+            maps(){
+                return [{name:'召唤师峡谷'},{name:'扭曲丛林'}]
+            }
+        }
+        
+        //下载war3
+        let wjt_dota = new Dota()
+        //加载dota游戏资源
+        const dotaAssets = wjt_dota.loadAssets()
+        console.log(dotaAssets,'dota资源')
+        //下载英雄联盟
+        let wjt_lol = new LOL('123456','654321')
+        //加载lol资源
+        const lolAssets = wjt_lol.loadAssets()
+        console.log(lolAssets,'lol资源')
+    </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>命令模式</title>
+</head>
+<body>
+    <script>
+        //游戏机
+       class GameBox{
+        constructor(gameName,orderList){
+           this.gameName = gameName
+           this.orderList = orderList
+        }
+       }
+
+       //手柄
+       class HandShank{
+        constructor(game){
+            this.game = game
+            this.setKeyFun() 
+        }
+          //设置键位功能
+          setKeyFun = ()=>{
+            Object.keys(this.game.orderList).forEach(item=>{
+                this[item] = this.game.orderList[item]
+            })
+        }
+        }
+
+       //指令创建中心
+       class OrderBox{
+        constructor(list) {
+           this.orderList =  this.setOrder(list)
+        }
+        setOrder = (list)=>{
+           let orderObj = {}
+           Object.keys().forEach(item=>{
+            orderObj[item] = list[item]
+           })
+           return orderObj
+        }
+       }
+
+       //创建魂斗罗键位指令
+       let contraOrderList = {
+        top:()=>{
+            console.log('向上瞄准')
+        },
+        left:()=>{
+            console.log('朝左边移动')
+        },
+        right:()=>{
+            console.log('向右边移动')
+        },
+        bottom:()=>{
+            console.log('趴下')
+        },
+        start:()=>{
+            console.log('开始游戏')
+        },
+        a:()=>{
+            console.log('开火')
+        },
+        b:()=>{
+            console.log('跳跃')
+        }
+    }
+       //创建魂斗罗游戏,并注册键位指令
+       let game1 = new GameBox('魂斗罗',contraOrderList)
+       let handShank1 = new HandShank(game1)
+
+       //操作手柄:上下左右,BABA
+       handShank1.start()
+       handShank1.top()
+       handShank1.bottom()
+       handShank1.left()
+       handShank1.right()
+       handShank1.b()
+       handShank1.a()
+       handShank1.b()
+       handShank1.a()
+    </script>
+</body>
+</html>

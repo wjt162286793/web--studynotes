@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>职责链模式</title>
+</head>
+
+<body>
+    <script>
+
+        const wjt = (expressage) => {
+            if (expressage === '《js设计模式从入门到精通》') {
+                return `快递名称:${expressage}这是王惊涛的快递`
+            }
+            return null
+        }
+        const sunwukong = (expressage) => {
+            if (expressage === '《72变从入门到精通》') {
+                return `快递名称:${expressage}这是孙悟空的快递`
+            }
+            return null
+        }
+        const benladeng = (expressage) => {
+            if (expressage === '《原子弹制造从入门到精通》') {
+                return `快递名称:${expressage}这是本.拉登的快递`
+            }
+            return null
+        }
+
+        const expressageFun = (...args) => {
+            return expressage => args.reduce((res, callBack) => res !== null ? res : callBack(expressage), null)
+        }
+        const sendExpressage = expressageFun(wjt, sunwukong, benladeng)
+
+        console.log(sendExpressage('《js设计模式从入门到精通》'))
+        console.log(sendExpressage('《72变从入门到精通》'))
+        console.log(sendExpressage('《原子弹制造从入门到精通》'))
+        console.log(sendExpressage('《舔狗是怎样炼成的》'))
+    </script>
+</body>
+
+</html>

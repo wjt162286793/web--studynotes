@@ -7,10 +7,104 @@
 </head>
 <body>
     <script>
-        let arr = ['王惊涛','马师','哈哈哈','哈哈哈哈']
-        arr.splice(2,1)
-        console.log(arr,'??')
-        console.log(arr.includes('王惊涛'))
+    // 数组全部属性方法
+    // console.log(Array.prototype)
+
+    // //at方法
+    // let arr = [1,'2',false,{name:'序列3'}]
+    // console.log(arr.at(2),'输出1')
+    // console.log(arr.at(-1),'输出2')
+    // console.log(arr.at(4),'输出3')
+    // console.log(arr.at(-5),'输出4')
+
+
+    // //concat方法
+    // let arr1 = ['1','2']
+    // let arr2 = [2,3]
+    // let arr3 = ['2',3,{name:'对象类型'}]
+    // console.log(arr1.concat(arr2),'第一次合并')
+    // console.log(arr1.concat(arr3),'第二次合并')
+    // console.log(arr1,arr2,arr3,'原数组不变')
+
+    // //constructor方法
+    // let arr1 = new Array()
+    // console.log(arr1,'新数组')
+    // let arr2 = new Array(2)
+    // console.log(arr2,'长度为2的新数组')
+    // let arr3 = new Array(1,'2',{name:'对象元素'})
+    // console.log(arr3,'自定义元素的数组')
+    // //另一种写法
+    // let arr4 = Array.prototype.constructor(1,'2','冷门写法')
+    // console.log(arr4,'冷门写法')
+
+    //copyWithin方法
+    // let arr1 = [1,2,3,4,5,6]
+    // console.log(arr1.copyWithin(2),'(2)')   
+    // console.log(arr1,'改变的arr1')
+    // let arr2 = [1,2,3,4,5,6]
+    // console.log(arr2.copyWithin(-3),'(-3)')  
+    // let arr3 = [1,2,3,4,5,6]
+    // console.log(arr3.copyWithin(2,1),'(2,1)')  
+    // let arr4 = [1,2,3,4,5,6]
+    // console.log(arr4.copyWithin(2,-1),'(2,-1)')
+    // let arr5 = [1,2,3,4,5,6]
+    // console.log(arr5.copyWithin(-2,2),'-2,2')
+    // let arr6 = [1,2,3,4,5,6]
+    // console.log(arr6.copyWithin(2,0,2),'(2,0,2)')
+
+    //entries方法
+    // let arr1 = [1,'2',true,{name:'4号'}]
+    // let iterator = arr1.entries()
+    // console.log(iterator,'迭代器')
+    // console.log(iterator.next(),'迭代一次')
+    // console.log(iterator.next(),'迭代二次')
+    // console.log(iterator.next(),'迭代三次')
+    // console.log(iterator.next(),'迭代四次')
+
+    // let arr2 = ['一','二','三']
+    // for(const [index,val] of arr2.entries()){
+    //     console.log(index,val,`迭代器循环第${index+1}次`)
+    // }
+
+    //every方法
+    // let arr = [10,11,12,13]
+    // console.log(arr.every(item =>item >=10),'全部大于等于10')
+    // console.log(arr.every(item=>item%2 === 0),'全部是偶数')
+
+    //fill方法
+    // let arr1 = new Array(4)
+    // arr1.fill('哈哈')
+    // console.log(arr1,'arr1')
+
+    // let arr2 = [0,0,0,0,0,0,0]
+    // arr2.fill('填充值',2)
+    // console.log(arr2,'arr2')
+    // let arr3 = [0,0,0,0,0,0,0]
+    // arr3.fill('填充值',2,5)
+    // console.log(arr3,'arr3')
+    // let arr4 = [0,0,0,0,0,0,0]
+    // console.log(arr4,'arr4')
+
+    //filter方法
+    // let arr1 = [1,2,3,4,5,6]
+    // let arr2 = arr1.filter(item=>item%2 === 0)
+    // console.log(arr1,'原数组')
+    // console.log(arr2,'新数组')
+
+    //find方法
+    // let arr = [{name:'name1',age:26},{name:'name2',age:28},{name:'name3',age:26}]
+    // console.log(arr.find(item=>item.age === 26),'查得到')
+    // console.log(arr.find(item=>item.name === 27),'查不到')
+
+    //findIndex方法
+    // let arr = [{name:'name1',age:26},{name:'name2',age:28},{name:'name3',age:26}]
+    // console.log(arr.findIndex(item=>item.age === 28),'查得到')
+    // console.log(arr.findIndex(item=>item.name === 27),'查不到')
+
+    //findLast方法
+    let arr = [{name:'name1',age:26},{name:'name2',age:28},{name:'name3',age:26}]
+    console.log(arr.findLast(item=>item.age === 26),'查得到')
+    console.log(arr.findLast(item=>item.name === 27),'查不到')
     </script>
 </body>
 </html>

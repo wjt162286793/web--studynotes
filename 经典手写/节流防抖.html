@@ -1,62 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>手写节流防抖</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>手写节流防抖</title>
 </head>
+
 <body>
-    <button class="btn1">防抖操作</button>
-    <button class="btn2">节流操作</button>
-    <script>
-      let btn1 = document.querySelector('.btn1')
-      let btn2 = document.querySelector('.btn2')
-      
-      btn1.onclick = fangdou(btn1Fun,2000)
-      btn2.onclick = jieliu(btn2Fun,2000)
+  <button class="btn1">防抖操作</button>
+  <button class="btn2">节流操作</button>
+  <script>
+    let btn1 = document.querySelector('.btn1')
+    let btn2 = document.querySelector('.btn2')
 
-      //防抖
-      function fangdou(fn,time){
-        let timer 
-        return function(){
-            if(timer){
-                clearTimeout(timer)
-                timer = null
-            }
-            timer = setTimeout(()=>{
-                fn()
-            },time)
+    btn1.onclick = fangdou(btn1Fun, 2000)
+    btn2.onclick = jieliu(btn2Fun, 2000)
+
+    //防抖
+    function fangdou(fn, time) {
+      let timer
+      return function () {
+        if (timer) {
+          clearTimeout(timer)
+          timer = null
         }
-     } 
-      function btn1Fun(){
-        console.log('点击防抖按钮')
+        timer = setTimeout(() => {
+          fn()
+        }, time)
+      }
+    }
+    function btn1Fun() {
+      console.log('点击防抖按钮')
+    }
+
+    //节流
+    function jieliu(fn, time) {
+      let timer
+      let flag = true
+      return function () {
+        if (flag) {
+          fn()
+          flag = false
+        } else {
+          if (!timer) {
+            timer = setTimeout(() => {
+              fn()
+              clearTimeout(timer)
+              timer = null
+            }, time)
+          }
+        }
+
+
       }
 
-      //节流
-      function jieliu(fn,time){
-        let timer 
-        let flag = true
-            return function(){
-                if(flag){
-                    fn()
-                    flag = false
-                }else{
-                    if(!timer){
-                    timer = setTimeout(()=>{
-                  fn()
-                  clearTimeout(timer)
-                  timer = null
-                },time) 
-                }
-                }
-
-
-            }
-        
-      }
-      function btn2Fun(){
-        console.log('点击节流按钮')
-      }
-    </script>
+    }
+    function btn2Fun() {
+      console.log('点击节流按钮')
+    }
+  </script>
 </body>
+
 </html>

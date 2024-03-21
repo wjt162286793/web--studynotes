@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>依赖注入模式</title>
+</head>
+<body>
+    <script>
+        class App{
+            constructor(appName,appFun){
+              this.appName = appName
+              this.appFun = appFun
+            }
+        }
+
+        class Phone{
+            constructor(app) {
+                this.name = app.appName
+                this.appFun = app.appFun
+            }
+            use(){
+                 this.appFun()
+            }
+        }
+
+        const bilibiliApp = new App('bili',()=>{console.log('学习')})
+        const lolmApp = new App('lol',()=>{console.log('娱乐')})
+
+        //在外部创建关系
+        const bili = new Phone(bilibiliApp)
+        const lolm = new Phone(lolmApp)
+        bili.use()
+        lolm.use()
+    </script>
+</body>
+</html>

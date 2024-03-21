@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>apply的拦截</title>
+</head>
+<body>
+    <script>
+        let fn = function(){
+            console.log('我是原始函数')
+        }
+        let _fn = new Proxy(fn,{
+            apply:function(target,ctx,args){
+              console.log(this,'this的值')
+              console.log(target,'target的值')
+              console.log(ctx,'ctx的值')
+              console.log(args,'arguments参数')
+              return `我是代理的_fn函数,我还传递了参数值1为${args[0][0]},参数值2是${args[0][1]}`
+            }
+        })
+        console.log(_fn(['wjt',29])) 
+    </script>
+</body>
+</html>

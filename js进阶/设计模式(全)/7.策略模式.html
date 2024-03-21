@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>策略模式</title>
+</head>
+<body>
+    <script>
+        // 定义一个策略对象
+const strategies = {
+  add: function(num1, num2) {
+    return num1 + num2;
+  },
+  subtract: function(num1, num2) {
+    return num1 - num2;
+  },
+  multiply: function(num1, num2) {
+    return num1 * num2;
+  },
+  divide: function(num1, num2) {
+    return num1 / num2;
+  }
+};
+
+// 定义一个计算器对象
+const Calculator = function(strategy) {
+  this.calculate = function(num1, num2) {
+    return strategy(num1, num2);
+  }
+};
+
+// 使用策略模式来创建一个计算器对象
+const addCalculator = new Calculator(strategies.add);
+const subtractCalculator = new Calculator(strategies.subtract);
+const multiplyCalculator = new Calculator(strategies.multiply);
+const divideCalculator = new Calculator(strategies.divide);
+
+// 使用计算器对象进行计算
+console.log(addCalculator.calculate(10, 5)); // 输出 15
+console.log(subtractCalculator.calculate(10, 5)); // 输出 5
+console.log(multiplyCalculator.calculate(10, 5)); // 输出 50
+console.log(divideCalculator.calculate(10, 5)); // 输出 2
+
+    </script>
+</body>
+</html>

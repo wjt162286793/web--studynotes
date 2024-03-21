@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        setTimeout(()=>{
+            console.log(1)  //异步
+        })
+        console.log(2)   //同步
+        new Promise(res=>{
+            console.log(3)  //同步
+            res('成功')
+        }).then((res,rej)=>{
+            console.log(4)  //异步
+            rej('失败')
+        }).catch(reason=>{
+            console.log(5)  //异步
+        })
+        setTimeout(()=>{
+          console.log(6)  //异步
+        },1000)
+
+        
+    </script>
+</body>
+</html>

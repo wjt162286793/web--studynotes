@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>放大</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="1000" height="800"></canvas>
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        /** 放大 */
+        function draw() {
+            ctx.beginPath()
+            ctx.rect(100, 100, 30, 30)
+            ctx.fillStyle = 'red'
+            ctx.fill()
+            ctx.closePath()
+        }
+        let num = 0
+        draw()
+        let interVal = setInterval(() => {
+            num++
+            if (num === 4) {
+                clearInterval(interVal)
+                interVal = null
+            }
+            ctx.scale(1.5, 1.5)
+            draw()
+        }, 500)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器模式</title>
+</head>
+<body>
+    <script>
+        class Filter{
+            constructor(filterHandler){
+                this.filterHandler = filterHandler
+            }
+            filterFun(list){
+               return list.filter(list => this.filterHandler(list))
+            }
+        }
+
+        class CountryFilter extends Filter{
+            constructor(country) {
+                super(item => item.country === country)
+            }
+        }
+        class GenderFilter extends Filter{
+            constructor(gender) {
+                super(item => item.gender === gender)
+            }
+        }
+
+        const countryFilter = new CountryFilter('德玛西亚')
+        const genderFilter = new GenderFilter('woman')
+
+        const listArr = [
+            {
+                name:'wjt',
+                country:'中国',
+                gender:'man'
+            },
+            {
+                name:'嘉文四世',
+                country:'德玛西亚',
+                gender:'man'
+            },
+            {
+                name:'乐芙兰',
+                country:'诺克萨斯',
+                gender:'woman'
+            },
+            {
+                name:'吉安娜.普罗德摩尔',
+                country:'洛丹伦',
+                gender:'woman'
+            },
+        ]
+
+        const dmList = countryFilter.filterFun(listArr)
+        const womanList = genderFilter.filterFun(listArr)
+        console.log(dmList,'德玛西亚的人')
+        console.log(womanList,'女性')
+    </script>
+</body>
+</html>

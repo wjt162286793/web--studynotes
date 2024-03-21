@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>两数求和</title>
+</head>
+<body>
+    <script>
+        // 时间复杂度O(n)、 空间复杂度O(n)
+// function twoNumAdd(arr, target) {
+//   if (Array.isArray(arr)) {
+//     // 使用map将遍历过的数字存起来，空间换时间
+//     let map = {};
+//     for (let i = 0; i < arr.length; i++) {
+//       // 从map中查找是否有key 等于 target-nums[i]，如果有，则条件成立，返回结果
+//       console.log(i,'第几次循环',arr[i],'arr[i]的值')
+//       console.log(target - arr[i],'map.的值')
+//       if (map[target - arr[i]] !== undefined) {
+//         console.log(map[target - arr[i]],'不是undefined')
+//         return [target - arr[i], arr[i]];
+//       } else {
+//         // 条件不成立，将该值存起来
+//         map[arr[i]] = i;
+//         console.log(map,'是undefined后map的值')
+//       }
+//     }
+//   }
+//   return [];
+// }
+
+// let result =  twoNumAdd([3,9,5,8,4,2,6],10)
+
+// //3-0,9-1,5-2,8-3,4-4,2-5
+// console.log(result,'结果值')
+
+
+/** 自己测试 */
+let arr = [12,6,14,23,50,54,23]
+let num = 73
+let addTwoNum = (arr,target)=>{
+  let obj = {}
+  for(let i = 0;i<arr.length;i++){
+    if(obj[target-arr[i]] !== undefined){
+    return [target-arr[i],arr[i]]
+  }else{
+    obj[arr[i]] = i
+  }
+  }
+  return []
+}
+console.log(addTwoNum(arr,num))
+//解析:
+//创建一个空对象,对参数1进行遍历,给对象赋值,key是当前遍历的数值,value是当前遍历的索引值。
+//设定(某数值)=(参数2减去当前遍历的数值后),这个(某数值)如果已经是对象中的某个key了,那么这个某数值+遍历的数值=参数2
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代理模式</title>
+</head>
+<body>
+    <script>
+
+      let proxyFun = (obj)=>{
+        return new Proxy(obj,
+        {
+            get:(obj,prop,value)=>{
+                 return obj[prop]
+            },
+            set:(obj,prop,value)=>{
+                 obj[prop] = value
+                 return true
+            }
+        })
+      }
+
+      const wjt = {
+        name:'wjt',
+        age:29
+      }
+      const _wjt = proxyFun(wjt)
+      console.log(_wjt,'代理对象')
+
+      //修改代理对象
+      _wjt.age = 30
+      console.log(wjt,'源对象')
+      console.log(_wjt,'代理对象')
+
+      //修改源对象
+      wjt.name = '王惊涛'
+      console.log(wjt,'源对象')
+      console.log(_wjt,'代理对象')
+
+      //使用代理后,代理对象_wjt的自定义常规属性一旦修改,wjt也就会跟着修改,反之也一样
+
+    </script>
+</body>
+</html>

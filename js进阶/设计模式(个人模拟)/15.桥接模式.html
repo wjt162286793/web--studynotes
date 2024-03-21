@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>桥接模式</title>
+</head>
+
+<body>
+    <script>
+        class Obj {
+            constructor(person) {
+                this.person = person
+                this.name = person.name
+            }
+            getHobby(){
+                return this.person.hobby
+            }
+            getBehavior(){
+                return this.person.behavior()
+            }
+        }
+
+        class Human {
+            constructor(hobby) {
+                this.name = '打工人'
+                this.hobby = hobby
+            }
+            behavior() {
+                console.log('一身打工人的怨气')
+            }
+        }
+        class Deity {
+            constructor(hobby) {
+                this.name = '神仙'
+                this.hobby = hobby
+            }
+            behavior() {
+                console.log('过着神仙般的生活')
+            }
+        }
+
+        const wjt = new Obj(new Human('抖音刷美女,或者打游戏'))
+        const sunwukong = new Obj(new Deity('定身七仙女,然后吃桃子'))
+
+        console.log(wjt.name+'的爱好:'+wjt.getHobby())
+        console.log(sunwukong.name+'的爱好:'+sunwukong.getHobby())
+    </script>
+</body>
+
+</html>

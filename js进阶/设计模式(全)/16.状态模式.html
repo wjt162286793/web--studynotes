@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>状态模式</title>
+</head>
+
+<body>
+    <script>
+        class CartState {
+            addToCart() { }
+            removeFromCart() { }
+            showMessage() { }
+        }
+        class EmptyCartState extends CartState {
+            addToCart() {
+                console.log('Product added to cart');
+                // 将购物车状态设置为非空状态
+                this.cart.setState(new NonEmptyCartState(this.cart));
+            }
+
+            showMessage() {
+                console.log('Your cart is empty, please add some products.');
+            }
+        }
+
+        class NonEmptyCartState extends CartState {
+            removeFromCart() {
+                console.log('Product removed from cart');
+                // 如果商品列表为空，则将购物车状态设置为空状态
+                if (this.cart.products.length === 0) {
+                    this.cart.setState(new EmptyCartState(this.cart));
+                }
+            }
+
+            showMessage() {
+                console.log(`Your cart contains ${this.cart.products.length} products:`);
+                console.log(this.cart.products.join(', '));
+            }
+        }
+
+        class ShoppingCart {
+            constructor() {
+                // 初始状态为购物车为空
+                this.state = new EmptyCartState(this);
+                this.products = [];
+            }
+
+            setState(state) {
+                this.state = state;
+            }
+
+            addToCart(product) {
+                this.products.push(product);
+                this.state.addToCart();
+            }
+
+            removeFromCart(product) {
+                const index = this.products.indexOf(product);
+                if (index !== -1) {
+                    this.products.splice(index, 1);
+                    this.state.removeFromCart();
+                }
+            }
+
+            showMessage() {
+                this.state.showMessage();
+            }
+        }
+
+        const cart = new ShoppingCart();
+
+        cart.showMessage(); // Your cart is empty, please add some products.
+
+        cart.addToCart('apple');
+        cart.addToCart('banana');
+
+        cart.showMessage(); // Your cart contains 2 products: apple, banana.
+
+        cart.removeFromCart('apple');
+
+        cart.showMessage(); // Your cart contains 1 products: banana.
+
+        cart.removeFromCart('banana');
+
+        cart.showMessage(); // Your cart is empty, please add some products.
+
+
+    </script>
+</body>
+
+</html>

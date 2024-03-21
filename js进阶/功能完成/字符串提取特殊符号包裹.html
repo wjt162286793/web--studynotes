@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串提取特殊符号包裹</title>
+</head>
+<body>
+    <script>
+        let str = "[title]:我是title,[content]:我是内容。{我是一段特殊的文字}{我也是一段特殊的文字}普通文字,普通文字"
+        
+        //获取中括号包裹的值
+        function getList1(str){
+            let regex1 =  /\[(.+?)\]/g
+            let item1 = null
+            let arr1 = []
+            while((item = regex1.exec(str)) !== null){
+                arr1.push(item[1])
+            } 
+            return arr1
+        }
+
+        //获取大括号包裹的值
+        function getList2(str){
+            let regex2 =  /\{([^}]+)\}/g
+            let item2 = null
+            let arr2 = []
+            while((item = regex2.exec(str)) !== null){
+                arr2.push(item[1])
+            } 
+            return arr2
+        }
+
+        let list1 = getList1(str)
+        let list2 = getList2(str)
+        console.log(list1)  // ['title', 'content']
+        console.log(list2)  //['我是一段特殊的文字', '我也是一段特殊的文字']
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>依赖注入模式</title>
+</head>
+
+<body>
+    <script>
+        class UserService {
+            constructor(apiService) {
+                this.apiService = apiService;
+            }
+
+            getUser(id) {
+                return this.apiService.get(`/users/${id}`);
+            }
+        }
+
+        class ApiService {
+            constructor(httpService) {
+                this.httpService = httpService;
+            }
+
+            get(url) {
+                return this.httpService.get(url);
+            }
+        }
+
+        class HttpService {
+            get(url) {
+                // 发送HTTP请求
+            }
+        }
+
+        const httpService = new HttpService();
+        const apiService = new ApiService(httpService);
+        const userService = new UserService(apiService);
+
+        userService.getUser(1);
+
+    </script>
+</body>
+
+</html>

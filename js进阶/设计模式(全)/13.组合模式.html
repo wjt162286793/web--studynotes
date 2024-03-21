@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组合模式</title>
+</head>
+
+<body>
+    <script>
+        // Component
+        const Component = {
+            add: function () { },
+            remove: function () { },
+            getChild: function () { },
+        };
+
+        // Composite
+        function createComposite() {
+            const composite = Object.create(Component);
+            composite.children = [];
+
+            composite.add = function (child) {
+                this.children.push(child);
+            };
+
+            composite.remove = function (child) {
+                const index = this.children.indexOf(child);
+                if (index !== -1) {
+                    this.children.splice(index, 1);
+                }
+            };
+
+            composite.getChild = function (index) {
+                return this.children[index];
+            };
+
+            return composite;
+        }
+
+        // Leaf
+        function createLeaf() {
+            const leaf = Object.create(Component);
+
+            // Leaf 类实现自己的 add、remove、getChild 方法
+
+            return leaf;
+        }
+
+        // 使用示例
+        const root = createComposite();
+        const branch1 = createComposite();
+        const branch2 = createComposite();
+        const leaf1 = createLeaf();
+        const leaf2 = createLeaf();
+        const leaf3 = createLeaf();
+
+        root.add(branch1);
+        root.add(branch2);
+        branch1.add(leaf1);
+        branch2.add(leaf2);
+        branch2.add(leaf3);
+
+        console.log(root); // 输出树形结构
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>享元模式</title>
+</head>
+<body>
+    <script>
+        const Ipad = function(){
+           const apps = {}
+
+           const useApp = function(appName,appFun){
+                  if(apps[appName]){
+                    return apps[appName]
+                  }
+                  const app = {
+                    appName:appName,
+                    appFun:appFun
+                  }
+                  apps[appName] = app
+                  return app
+           }
+           return { useApp }
+        }
+
+        const ipad = new Ipad()
+        const bilibili = ipad.useApp('bilibili','学习编程技术')
+        const jingdong = ipad.useApp('jingdong','网购使用')
+        const lolm = ipad.useApp('lolm','游戏娱乐')
+         
+        console.log(ipad,'平板')
+        console.log(bilibili,jingdong,lolm,'应用')
+
+    </script>
+</body>
+</html>

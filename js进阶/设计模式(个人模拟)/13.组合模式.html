@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组合模式</title>
+</head>
+
+<body>
+    <script>
+        //一个树型的对象数据
+        class Organ {
+            constructor(label, value, parentName) {
+                this.label = label
+                this.value = value
+                this.parentName = parentName
+                this.childRen = []
+            }
+        }
+        //新增元素
+        Organ.prototype.addChildRen = function () {
+            let arr = Array.from(arguments)
+            arr.forEach(item => {
+                this.childRen.push(item)
+                this.flatList.push([this.value,item.value])
+            })
+            this.changeTreeNodeList()
+        }
+        //删除某个元素,其子节点也都会被一并删除
+        Organ.prototype.removeChildRen = function (nodeValue) {
+            let index = this.childRen.findIndex(val => val.value === nodeValue)
+             this.childRen.splice(index,1)
+             let arr = this.flatList.map(item=>{
+                if(!item.includes(nodeValue)){
+                    return item
+                }
+             })
+            this.flatList = arr.filter(item => item !== undefined)
+            this.changeTreeNodeList()
+        }
+        //过滤生成树的各条节点路线
+        Organ.prototype.changeTreeNodeList = function(){
+            this.treeNodeList.length = 0
+            this.flatList.forEach(item1=>{
+                let obj = this.flatList.find(item2 => item2[item2.length-1] === item1[0])
+                if(obj){
+                  this.treeNodeList.push([... new Set([].concat(obj).concat(item1))])
+                }
+            })
+        }
+        Organ.prototype.flatList = []
+        Organ.prototype.treeNodeList = []
+
+        //创建父级组织
+        const jituanjun1 = new Organ('第一集团军','jituanjun1',false)
+        //创建子级组织
+        const hechenglv1 = new Organ('合成1旅','hechenglv1','jituanjun1')
+        const hechenglv2 = new Organ('合成2旅', 'hechenglv2','jituanjun1')
+        //子级组织加入父级组织
+        jituanjun1.addChildRen(hechenglv1, hechenglv2)
+
+        //下面操作重复上面的操作
+        const bubingying1 = new Organ('步兵1营', 'bubingying1','hechenglv1')
+        const bubingying2 = new Organ('步兵2营', 'bubingying2','hechenglv1')
+        hechenglv1.addChildRen(bubingying1,bubingying2)
+        const bubingying3 = new Organ('步兵3营', 'bubingying3','hechenglv2')
+        const bubingying4 = new Organ('步兵4营', 'bubingying4','hechenglv2')
+        hechenglv2.addChildRen(bubingying3,bubingying4)
+        const bubingying5 = new Organ('步兵5营', 'bubingying5','hechenglv2')
+        hechenglv2.addChildRen(bubingying5)
+
+        //撤编
+        hechenglv2.removeChildRen('bubingying4')
+        console.log(jituanjun1,'第一集团军编制')
+        console.log(jituanjun1.treeNodeList,'树的所有完整节点流向')
+    </script>
+</body>
+
+</html>

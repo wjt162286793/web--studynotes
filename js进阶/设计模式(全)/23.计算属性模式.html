@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算属性模式</title>
+</head>
+<body>
+    <script>
+        const rectangle = {
+  length: 10,
+  width: 5,
+  get area() {
+    return this.length * this.width;
+  }
+};
+
+console.log(rectangle.area); // 50
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绘制转动的圆弧</title>
+</head>
+<body>
+    <canvas width="800" height="600" id="canvas"></canvas>
+    <script>
+ const canvas = document.querySelector('#canvas')
+ const ctx = canvas.getContext('2d')
+ class Arc{
+    constructor(x,y,radius,start,end,direction,color){
+        this.x = x
+        this.y = y
+        this.radius = radius
+        this.start = start
+        this.end = end
+        this.direction = direction
+        this.color = color
+    }
+    change(){
+        if(this.start === 360){
+            this.start = 0
+        }else{
+            this.start += 3
+        }
+        if(this.end === 360){
+            this.end = 0
+        }else{
+            this.end += 3
+        }
+    }
+    turnFun(){
+        ctx.beginPath()
+        ctx.arc(this.x,this.y,this.radius,([Math.PI/180]*this.start),([Math.PI/180]*this.end),this.direction)
+        ctx.strokeStyle = this.color
+        ctx.stroke()
+        ctx.closePath()
+    }
+ }
+ let arc = new Arc(300,300,20,0,270,false,'blue')
+ function drawer(){
+    ctx.clearRect(0,0,canvas.width,canvas.height)
+    arc.change()
+    arc.turnFun()
+    // setInterval(()=>{
+    // drawer()
+    // },100)
+    requestAnimationFrame(drawer)
+ }
+ drawer()
+    </script>
+</body>
+</html>

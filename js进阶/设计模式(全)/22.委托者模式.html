@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>委托者模式</title>
+</head>
+
+<body>
+    <script>
+        // 委托对象
+        const delegate = {
+            greet(name) {
+                return `Hello, ${name}!`;
+            }
+        };
+
+        // 代理对象
+        const proxy = {
+            delegate: delegate,
+            greet(name) {
+                return this.delegate.greet(name);
+            }
+        };
+
+        // 使用代理对象
+        console.log(proxy.greet("world")); // 输出：Hello, world!
+
+    </script>
+</body>
+
+</html>

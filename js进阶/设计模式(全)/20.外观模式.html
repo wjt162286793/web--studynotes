@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外观模式</title>
+</head>
+
+<body>
+    <script>
+        // 复杂的系统或子系统
+        const moduleA = {
+            method1: () => {
+                console.log('method1 from moduleA');
+            },
+            method2: () => {
+                console.log('method2 from moduleA');
+            },
+            method3: () => {
+                console.log('method3 from moduleA');
+            }
+        };
+
+        const moduleB = {
+            method4: () => {
+                console.log('method4 from moduleB');
+            },
+            method5: () => {
+                console.log('method5 from moduleB');
+            },
+            method6: () => {
+                console.log('method6 from moduleB');
+            }
+        };
+
+        // 外观对象，封装了底层的操作，提供了一个简单的接口
+        const facade = {
+            method1: () => {
+                moduleA.method1();
+            },
+            method2: () => {
+                moduleA.method2();
+            },
+            method3: () => {
+                moduleA.method3();
+            },
+            method4: () => {
+                moduleB.method4();
+            },
+            method5: () => {
+                moduleB.method5();
+            },
+            method6: () => {
+                moduleB.method6();
+            }
+        };
+
+        // 客户端调用外观对象的方法
+        facade.method1(); // 输出：method1 from moduleA
+        facade.method2(); // 输出：method2 from moduleA
+        facade.method4(); // 输出：method4 from moduleB
+        facade.method6(); // 输出：method6 from moduleB
+
+    </script>
+</body>
+
+</html>

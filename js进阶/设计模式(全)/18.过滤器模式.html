@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>过滤器模式</title>
+</head>
+
+<body>
+    <script>
+        class Filter {
+            constructor(criteria) {
+                this.criteria = criteria;
+            }
+
+            meetCriteria(elements) {
+                return elements.filter(element => this.criteria(element));
+            }
+        }
+
+        class PriceFilter extends Filter {
+            constructor(price) {
+                super(element => element.price <= price);
+            }
+        }
+
+        class BrandFilter extends Filter {
+            constructor(brand) {
+                super(element => element.brand === brand);
+            }
+        }
+
+        const products = [
+            { name: 'Product A', price: 10, brand: 'Brand A' },
+            { name: 'Product B', price: 20, brand: 'Brand B' },
+            { name: 'Product C', price: 30, brand: 'Brand C' },
+        ];
+
+        const priceFilter = new PriceFilter(20);
+        const brandFilter = new BrandFilter('Brand A');
+
+        const filteredProducts = priceFilter.meetCriteria(products);
+        const finalProducts = brandFilter.meetCriteria(filteredProducts);
+        console.log(filteredProducts)
+        // Output: [{name: 'Product A', price: 10, brand: 'Brand A'},{name: 'Product B', price: 20, brand: 'Brand B'}]
+        console.log(finalProducts);
+        // Output: [{ name: 'Product A', price: 10, brand: 'Brand A' }]
+
+    </script>
+</body>
+
+</html>

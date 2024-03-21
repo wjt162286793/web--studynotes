@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>观察者模式</title>
+</head>
+<body>
+    <script>
+        class TaobaoShop{
+            constructor(){
+                this.list = []
+            }
+            addSub(name,data){
+              this.list.push({name,data})
+            }
+            pubUser(name,data){
+                this.list.find(item=>item.name === name).data.awaitMsg(data)
+            }
+        }
+
+        class User{
+            constructor(name){
+                this.name = name
+            }
+            awaitMsg(msg){
+            console.log(`我是${this.name},商家通知我有货了,消息如下:${msg}`)
+            awaitHandler(this.name)
+            }
+        }
+        
+        function awaitHandler(name){
+         switch(name){
+            case '王惊涛':
+                console.log('可以开心的去学习react了')
+                break
+            case '孙悟空':
+                console.log('可以开心的去学习打妖怪了')
+         }
+
+        }
+
+        const tb = new TaobaoShop()
+        const wjt = new User('王惊涛')
+        const sunwukong = new User('孙悟空')
+        tb.addSub('王惊涛',wjt)
+        tb.addSub('孙悟空',sunwukong)
+        tb.pubUser('王惊涛','王先生,您的《react从入门到精通》有货了')
+        tb.pubUser('孙悟空','孙大圣,您的《72变化从入门到精通》有货了')
+
+        //跟发布订阅模式类似
+        //客户订阅淘宝的消息,就在淘宝商家处添加一个通知名单list,对象格式为{通知人:事件对象}
+        //然后根据用户去通知不同的内容,用户获取通知后,可以调用awaitHandler做出自己后续想做的事
+        //其实核心就是将观察者中定义的函数保存到通知者身上,在发通知的时候调用这个函数
+    </script>
+</body>
+</html>

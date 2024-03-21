@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>工厂模式</title>
+</head>
+<body>
+    <script>
+        function workFactory(workName,name){
+            switch(workName){
+               case 'jsCoder':
+                return new jsCoder(name)
+                break
+                case 'javaCoder':
+                return new javaCoder(name)
+                break                
+            }
+        }
+        function jsCoder(name){
+            this.workName = 'jsCoder'
+            this.language = 'js'
+            this.duty = function(){
+                console.log('写前端')
+            }
+            this.workerName = name
+        }
+        function javaCoder(name){
+            this.workName = 'javaCoder'
+            this.language = 'java'
+            this.duty = function(){
+                console.log('写后端')
+            }
+            this.workerName = name
+        }
+ 
+        //批量创建
+        const wjt = workFactory('jsCoder','王惊涛')
+        const wgq = workFactory('javaCoder','王港奇')
+        const ljx = workFactory('jsCoder','李晋旭')
+        console.log(wjt,wgq,ljx)
+
+        //实现一个工厂函数,该函数需要传入区别类型的参数
+        //例如这里根据workName去判断,从而使用不同的构造函数去构建
+        //name可以决定开发者的名字,同样传入到工产函数中
+
+        //使用工厂模式可以进行快捷批量的创建对象,只需要传入正确的参数即可
+    </script>
+</body>
+</html>

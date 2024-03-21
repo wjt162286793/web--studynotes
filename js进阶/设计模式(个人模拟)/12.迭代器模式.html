@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>迭代器模式</title>
+</head>
+
+<body>
+    <script>
+        class Life {
+            constructor(data) {
+                this.data = data
+                this.child = data.child
+                this.young = data.young
+                this.middle = data.middle
+                this.old = data.old
+            }
+            //创建迭代器
+            CreatIterator() {
+                let list = []
+                if (Object.prototype.toString.call(this.data) === '[object Object]') {
+                    let arr = []
+                    Object.keys(this.data).forEach((item) => {
+                        arr.push(this.data[item])
+                    })
+                    this.data = arr
+                    return arr[Symbol.iterator]()
+                } else if (Object.prototype.toString.call(this.data) === '[object Array]') {
+                    return this.data[Symbol.iterator]()
+                }
+            }
+            //执行生命周期
+            executeIterator(data) {
+                for (let i = 0; i < this.data.length; i++) {
+                    if (this.data[i]() === true) {
+                        //上个人生阶段完成,进行下一阶段
+                        data.next()
+                    } else {
+                        break
+                    }
+                }
+            }
+        }
+
+        //各生命周期阶段的经历
+        let wjt = {
+            child: () => {
+                console.log('少年:没有好好上学,平庸度过')
+                return true
+            },
+            young: () => {
+                console.log('青年:当兵转变观念,成为码农')
+                return true
+            },
+            middle: () => {
+                console.log('中年:创业成功,生活快乐')
+                return true
+            },
+            old: () => {
+                console.log('老年:身体健康,天伦之乐')
+                return true
+            }
+        }
+        console.log('新社会的人---王惊涛')
+
+        let wjt_life = new Life(wjt)
+        wjt_life.executeIterator(wjt_life.CreatIterator())
+
+        let luotuoxiangzi = {
+            child: () => {
+                console.log('少年:旧社会苦命儿,穷苦艰难')
+                return true
+            },
+            young: () => {
+                console.log('青年:好好拉车能买起自己的车,娶了虎妞')
+                return true
+            },
+            middle: () => {
+                console.log('中年:受尽苦难,啥都没了,混吃等死,生命到此终结')
+                return false
+            },
+            old: () => {
+                console.log('老年:没有走到这个阶段')
+                return false
+            }
+        }
+        console.log('旧社会的人---骆驼祥子')
+        let luotuoxiangzi_life = new Life(luotuoxiangzi)
+        luotuoxiangzi_life.executeIterator(luotuoxiangzi_life.CreatIterator())
+
+    </script>
+</body>
+
+</html>

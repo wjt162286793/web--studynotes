@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>适配器模式</title>
+</head>
+
+<body>
+    <script>
+        //原始数据
+        let oldData1 = [
+            {
+                name: '王惊涛',
+                age: 29
+            },
+            {
+                name: '孙悟空',
+                age: 800
+            },
+            {
+                name: '嘉文四世',
+                age: 27
+            },
+            {
+                name: '关羽',
+                age: 40
+            },
+            {
+                name: '伊利丹.怒风',
+                age: 10000
+            }
+        ]
+
+        let oldData2 = [
+            {
+                name: 'faker',
+                mvpNumber: 125,
+                winRate: '68%'
+            },
+            {
+                name: 'zeus',
+                mvpNumber: 23,
+                winRate: '61%'
+            },
+            {
+                name: 'gumayusi',
+                mvpNumber: 13,
+                winRate: '69%'
+            }, {
+                name: 'oner',
+                mvpNumber: 21,
+                winRate: '56%'
+            }, {
+                name: 'keria',
+                mvpNumber: 14,
+                winRate: '72%'
+            }
+        ]
+        //echarts需要的数据类型是[name1,name2,...][data1,data2,...]这种类型的
+        //我们这里需要设置一个功能函数,对我们所获取的原始数据进行一个适配,得到我们想要的数据类型
+        //如果后台的数据组织基本格式化,我们也需要针对格式化的数据进行一个格式化的处理
+        const AdaptiveFun = (list) => {
+            let obj = list[0]
+            let keyArr = Object.keys(obj)
+            let newObj = {}
+            keyArr.forEach(Item => {
+                newObj[`${Item}List`] = []
+                list.forEach(item => {
+                    newObj[`${Item}List`].push(item[Item])
+                })
+            })
+            return newObj
+        }
+        let newData1 = AdaptiveFun(oldData1)
+        let newData2 = AdaptiveFun(oldData2)
+        console.log(newData1,'数据1')
+        console.log(newData2,'数据2')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>let&const</title>
+</head>
+
+<body>
+    <script>
+        //Es5
+        // var a = 1
+        // function fn() { }
+        // b = 2
+
+        // console.log(a)
+        // console.log(fn)
+        // console.log(b)
+
+        //var特性
+        //1.直接给window
+        // var abc = '哈哈哈'
+        // console.log(window.abc,'var之后我在window上')
+
+        //2.可以重复命名
+        // var abc = null
+        // console.log(abc,'赋值为null')
+        // var abc = 111
+        // console.log(window.abc,'赋值数字')
+
+        //3.会变量提升
+        // console.log(abc,'赋值之前')
+        // var abc = '初始化数据'
+        // console.log(abc,'赋值以后')
+
+        //4.先声明再赋值
+        // var abc
+        // console.log(abc,'声明')
+        // abc = 'wjt'
+        // console.log(abc,'赋值')
+        //let特性
+        //1.不会变量提升
+        // console.log(abc)
+        // let abc = 'wjt'
+
+        //5.单变量模式
+        // var a ,b ,c
+        // a = 1
+        // b = 2
+        // c = 3
+        //2.不可以重复声明
+        // let abc = 1
+        // let abc = 2
+
+        
+        //3.先声明再赋值
+        // let abc
+        // console.log(abc,'声明')
+        // abc = 'wjt'
+        // console.log(abc,'赋值')
+        //const特性
+        //1.不会变量提升
+
+        //2.不可以重复声明
+
+        //3.变量值不可以修改
+        //基础类型
+        // const abc = 'wjt'
+        // abc = 'Wjt'
+        // console.log(abc)
+
+         //4.单变量模式
+        //  let a,b,c
+        //  console.log(a,b,c,'单变量')
+        //引用类型
+        //修改地址
+        // const arr = [1,2,3]
+        // arr = [2,3,4]
+
+        // const obj = {name:'wjt'}
+        // obj = {name:'Wjt'}
+        //修改地址内的值
+        // const arr = [1,2,3]
+        // arr.push(4)
+
+        // const obj = {name:'wjt'}
+        // obj.name = 'Wjt'
+        // console.log(arr,obj)
+
+        //4.不可以只声明不赋值
+        // const abc
+
+        //经典for循环
+        // for(var a = 0;a<3;a++){
+        //     console.log(a,'常规for循环var定义')
+        // }
+        // for(let b = 0;b<3;b++){
+        //     console.log(b,'常规for循环let定义')
+        // }
+        // for(const c = 0;c<3;c++){
+        //     console.log(c,'常规for循环const定义')
+        // }
+        //循环加定时器
+        // for(var a = 0;a<3;a++){
+        //     console.log(a,'我不在定时器内')
+        //     setTimeout(()=>{
+        //         console.log(a,'循环定时器var定义')
+        //     })
+        // }
+        for(let b = 0;b<3;b++){
+            console.log(b,'我不在定时器内')
+            setTimeout(()=>{
+                console.log(b,'循环定时器let定义')
+            })
+        }
+    </script>
+</body>
+
+</html>

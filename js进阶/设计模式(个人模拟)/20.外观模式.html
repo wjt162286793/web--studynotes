@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>外观模式</title>
+</head>
+<body>
+    <script>
+        const wjt = {
+            name:'王惊涛',
+            code:()=>{
+                console.log('会写代码')
+            },
+            game:()=>{
+                console.log('会打游戏')
+            },
+            love:()=>{
+                console.log('热爱美女')
+            }
+        }
+
+        const sunwukong = {
+            name:'孙悟空',
+            change:()=>{
+                console.log('72变化')
+            },
+            fly:()=>{
+                console.log('腾云架雾')
+            },
+            immobilize:()=>{
+                console.log('会定身术')
+            }
+        }
+
+        const sunwutao = {
+            name:'孙悟涛',
+            code:()=>{
+                wjt.code()
+            },
+            love:()=>{
+                wjt.love()
+            },
+            change:()=>{
+                sunwukong.change()
+            },
+            fly:()=>{
+                sunwukong.fly()
+            },
+            immobilize:()=>{
+                sunwukong.immobilize()
+            },
+        }
+
+        sunwutao.love()
+        sunwutao.immobilize()
+    </script>
+</body>
+</html>

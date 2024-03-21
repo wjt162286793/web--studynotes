@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>async和await</title>
+</head>
+
+<body>
+    <script>
+        // let value = null
+        // let proFn = new Promise((resolve,reject)=>{
+        //     setTimeout(()=>{
+        //       resolve('成功的值')
+        //     },2000)
+        // })
+        // proFn.then(res=>{
+        //     value = res
+        //     console.log(value,'异步返回值')
+        //     //...value获取到了值,可以处理后续的业务逻辑
+        // })
+
+        let proFn = ()=>{
+            return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve('成功的值')
+            }, 2000)
+        })
+        } 
+        async function getVal(){
+            let value = await proFn() //这条语句执行完毕,后续的代码都需要等value获取到了promise返回的值,才会开始去执行
+            console.log(value,'获取到了值')
+            
+        }
+        getVal()
+    </script>
+</body>
+
+</html>

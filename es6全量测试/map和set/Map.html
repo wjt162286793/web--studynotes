@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+</head>
+<body>
+    <script>
+        //初始用
+        // let map1 = new Map()
+        // console.log(map1,'初始化map1')
+        // //字符串作为键
+        // map1.set('name','wjt')
+        // map1.set('age',28)
+        // console.log(map1,'map1添加了name和age')
+
+
+        // // //使用对象作为键
+        // let obj = {title:'对象'}
+        // map1.set(obj,'键是一个对象,我是值')
+        // // console.log(map1,'使用对象作为键')
+        // // //使用数组作为键
+        // let arr = [1,2,3]
+        // map1.set(arr,[4,5,6])
+        // console.log(map1,'使用数组作为键')
+        // //null为键
+        // map1.set(null,'null为键')
+        // console.log(map1,'null为键')
+        // //undefined为键
+        // map1.set(undefined,'undefined为键')
+        // console.log(map1,'undefined为键')
+        // //NaN为键
+        // map1.set(NaN,NaN)
+        // console.log(map1,'NaN为键和值')
+
+        //操作方法
+        // //set增加
+        // let map2 = new Map()
+        // map2.set('name','wjt')
+        // map2.set('age',28)
+        // map2.set('coder',()=>'coder')
+        // map2.set('love','game')
+        // map2.set({title:'对象键'},{label:'对象值'})
+        // console.log(map2,'set方法增加')
+        // //set方法修改
+        // map2.set('age',29)
+        // console.log(map2,'set方法修改了age')
+        // //delete方法删除
+        // map2.delete({title:'对象键'})
+        // console.log(map2,'delete删除对象-->失败')  //无法删除,因为引用的是一个新的地址  
+        // map2.delete('love')
+        // console.log(map2,'delete删除值类型')
+        // //get查看
+        // console.log(map2.get('name'),'查找name')
+        // console.log(map2.get({title:'对象键'}),'找不到引用类型的值')  //和无法删除是一个原因
+        // //其余方法基本都差不多,这里就不做以演示了
+
+        // //查找删除引用类型
+        let map3 = new Map()
+        let arr = ['1','2']
+        map3.set(arr,[1,2])
+        console.log(map3,'新增一条')
+        console.log(map3.get(arr),'查找到了引用类型')
+        map3.delete(arr)
+        console.log(map3,'删除成功')
+
+    </script>
+</body>
+</html>

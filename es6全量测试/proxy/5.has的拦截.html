@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>has的拦截</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name:'wjt',
+            age:29,
+            hideProp:'我是隐藏的属性,不想被in运算符访问到'
+        }
+        let _data = new Proxy(data,{
+            has:(target,key)=>{
+                if(target[key] && key === 'hideProp'){
+                    return false
+                }else{
+                    return key in target
+                }
+            }
+        })
+        console.log('name' in _data,_data['name'],'查看name属性')
+        console.log('age' in _data,_data['age'],'查看age属性')
+        console.log('hideProp' in _data,_data['hideProp'],'查看hideProp属性')
+    </script>
+</body>
+</html>

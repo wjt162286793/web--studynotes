@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>set的拦截</title>
+</head>
+<body>
+    <button onclick="getName()">查看name属性</button>
+    <button onclick="getAge()">查看age属性</button>
+    <button onclick="addAge()">增加age</button>
+    <script>
+        let data = {
+            name:'wjt',
+            age:29
+        }
+        let _data = new Proxy(data,{
+            //get方法
+            get:(target,propKey,receiver)=>{
+              if(target[propKey]){  
+                return target[propKey]
+              }else{
+                return undefined
+              }
+            },
+
+            //set方法
+            set:(target,keyName,value)=>{
+                console.log(target,keyName,value,'修改_data的属性')
+                //...可以进行修改值的拦截操作
+                target[keyName] = value
+            }
+        })
+
+         
+        let getName = ()=>{
+            console.log(_data.name,'_data.name')
+        }
+        let getAge = ()=>{
+            console.log(_data.age,'_data.age')
+        }
+        let addAge = ()=>{
+            _data.age++
+            console.log(data,'data的值')
+            console.log(_data,'_data的值')
+        }
+        </script>
+</body>
+</html>

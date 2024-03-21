@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>基础使用</title>
+</head>
+<body>
+    <script>
+        // //成功的promise
+        // let prmFn1 = new Promise((resolve,jeject)=>{
+        //     setTimeout(()=>{
+        //         //模拟执行一个很消耗时间的任务
+        //         resolve('我是成功的值')
+        //     },5000)
+            
+        // })
+        // console.log(prmFn1,'还没有开始执行',prmFn1)
+        // prmFn1.then(resolve=>{
+        //     console.log(resolve)    //5秒后输出:我是成功的值
+        //     console.log('已经处理完异步之后',prmFn1)
+        // })
+
+
+        //失败的promise
+        let prmFn2 = new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                reject('我是失败的原因')
+            },5000)
+        })
+        console.log(prmFn2,'失败任务还没有开始执行',prmFn2)
+        prmFn2.then(resolve=>{
+            //成功才回被调用
+        },reject=>{
+            console.log('失败了被调用',reject)
+            console.log('失败任务处理完毕',prmFn2)
+        })
+    </script>
+</body>
+</html>

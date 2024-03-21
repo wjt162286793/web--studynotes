@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>职责链模式</title>
+</head>
+
+<body>
+    <script>
+        class Handler {
+            constructor() {
+                this.nextHandler = null;
+            }
+
+            setNextHandler(handler) {
+                this.nextHandler = handler;
+            }
+
+            handleRequest(request) {
+                if (this.nextHandler) {
+                    this.nextHandler.handleRequest(request);
+                }
+            }
+        }
+
+        class ConcreteHandler1 extends Handler {
+            handleRequest(request) {
+                if (request === 'request1') {
+                    console.log('ConcreteHandler1 handles the request');
+                } else {
+                    super.handleRequest(request);
+                }
+            }
+        }
+
+        class ConcreteHandler2 extends Handler {
+            handleRequest(request) {
+                if (request === 'request2') {
+                    console.log('ConcreteHandler2 handles the request');
+                } else {
+                    super.handleRequest(request);
+                }
+            }
+        }
+
+        const handler1 = new ConcreteHandler1();
+        const handler2 = new ConcreteHandler2();
+
+        handler1.setNextHandler(handler2);
+
+        handler1.handleRequest('request1'); // Output: "ConcreteHandler1 handles the request"
+        handler1.handleRequest('request2'); // Output: "ConcreteHandler2 handles the request"
+        handler1.handleRequest('request3'); // Output: Nothing is printed
+
+    </script>
+</body>
+
+</html>

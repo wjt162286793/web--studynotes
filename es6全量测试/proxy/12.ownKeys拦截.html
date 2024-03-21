@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ownKeys拦截</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name:'wjt',
+            age:29,
+            prop:'newProp'
+        }
+
+        let _data = new Proxy(data,{
+            ownKeys:(target)=>{
+              return ['name','age']
+            }
+        })
+        for(let key of Object.keys(_data)){
+            console.log(key,':',_data[key])
+        }
+    </script>
+</body>
+</html>

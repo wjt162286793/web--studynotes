@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>备忘录模式</title>
+</head>
+
+<body>
+    <script>
+        // Originator
+        class Editor {
+            constructor() {
+                this.content = '';
+            }
+
+            type(words) {
+                this.content += words;
+            }
+
+            save() {
+                return new EditorMemento(this.content);
+            }
+
+            restore(memento) {
+                this.content = memento.getContent();
+            }
+        }
+
+        // Memento
+        class EditorMemento {
+            constructor(content) {
+                this.content = content;
+            }
+
+            getContent() {
+                return this.content;
+            }
+        }
+
+        // Caretaker
+        class History {
+            constructor() {
+                this.states = [];
+            }
+
+            push(state) {
+                this.states.push(state);
+            }
+
+            pop() {
+                return this.states.pop();
+            }
+        }
+
+        // Usage
+        const editor = new Editor();
+        const history = new History();
+
+        // 编辑器输入内容
+        editor.type('Hello, ');
+        editor.type('World!');
+
+        // 将当前状态保存到备忘录中，并将备忘录添加到历史记录中
+        history.push(editor.save());
+
+        // 继续编辑器输入内容
+        editor.type(' How are you today?');
+
+        // 输出当前编辑器内容
+        console.log(editor.content); // 'Hello, World! How are you today?'
+
+        // 从历史记录中恢复上一个状态
+        editor.restore(history.pop());
+
+        // 输出恢复的编辑器内容
+        console.log(editor.content); // 'Hello, World!'
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代理模式</title>
+</head>
+
+<body>
+    <script>
+        // 原始对象 - 图片
+        class Image {
+            constructor(url) {
+                this.url = url;
+            }
+
+            // 加载图片
+            load() {
+                console.log(`Image loaded: ${this.url}`);
+            }
+        }
+
+        // 代理对象 - 图片
+        class ProxyImage {
+            constructor(url) {
+                this.url = url;
+                this.image = null; // 延迟加载
+            }
+
+            // 加载图片
+            load() {
+                if (!this.image) {
+                    this.image = new Image(this.url); // 延迟加载图片
+                    console.log(`Placeholder loaded for ${this.url}`);
+                }
+                this.image.load(); // 显示图片
+            }
+        }
+
+        // 客户端代码
+        const img1 = new ProxyImage('https://example.com/image1.jpg');
+        const img2 = new ProxyImage('https://example.com/image2.jpg');
+
+        img1.load(); // Placeholder loaded for https://example.com/image1.jpg, Image loaded: https://example.com/image1.jpg
+        img1.load(); // Image loaded: https://example.com/image1.jpg
+
+        img2.load(); // Placeholder loaded for https://example.com/image2.jpg, Image loaded: https://example.com/image2.jpg
+
+    </script>
+</body>
+
+</html>

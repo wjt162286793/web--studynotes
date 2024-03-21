@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布-订阅模式</title>
+</head>
+<body>
+    <script>
+        //发布者
+        let publisher = {
+            events:{},
+            addEvent:(event,callBack)=>{
+               if(!publisher.events[event]){
+                publisher.events[event] = []
+               }
+               publisher.events[event].push(callBack)
+               console.log('进行了订阅')
+            },
+            removeEvent:(event,callBack)=>{
+              if(publisher.events[event]){
+                for(let i = 0;i<publisher.events[event].length;i++){
+                    if(publisher.events[event][i] === callBack){
+                        publisher.events[event].splice(i,1)
+                        console.log('取消了订阅')
+                        break
+                    }
+                }
+              }
+            },
+            publishEvent:(event,data)=>{
+             if(publisher.events[event]){
+                for(let i = 0;i<publisher.events[event].length;i++){
+                    publisher.events[event][i](data)
+                    console.log('进行了发布')
+                }
+             }
+            }
+        }
+        
+        //订阅者
+        let subscriber = {
+            handleEvent:(message)=>{
+               console.log(message,'触发事件')
+            }
+        }
+      
+        publisher.addEvent('msg1',subscriber.handleEvent)
+        publisher.publishEvent('msg1','我是王惊涛订阅的消息1')
+        publisher.removeEvent('msg1',subscriber.handleEvent)
+    </script>
+</body>
+</html>

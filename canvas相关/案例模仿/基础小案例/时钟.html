@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时钟</title>
+</head>
+<body>
+    <canvas id="canvas" width="400" height="400"></canvas>
+    <script>
+        const canvas = document.querySelector('#canvas')
+        const ctx = canvas.getContext('2d')
+
+        let fontHeight = 15   //文本大小
+        let margin = 35       //外边距
+        let handTrunCation = canvas.width/25
+        let hourTrunCation = canvas.width/10
+        let numSpace = 20
+        let radius = canvas.width/2-margin
+        let handRadius = radius+numSpace
+
+        //绘制外圈
+        function drawCircle(){
+            ctx.beginPath()
+            ctx.arc(canvas.width/2,canvas.height/2,200,0,Math.PI*2,true)
+            ctx.stroke()
+        }
+
+        //绘制数字
+        function drawNumbers(){
+            let nums = [1,2,3,4,5,6,7,8,9,10,11,12]
+            let angle = 0
+            numWidth = 0
+            nums.forEach(num=>{
+                angle = Math.PI/6*(num-3)
+                console.log(Math.PI/6*(num-3),'???')
+                numWidth=ctx.measureText(num).width
+                ctx.fillText(num,canvas.width/2+Math.cos(angle)*handRadius-numWidth/2,canvas.height/2+Math.sin(angle)*handRadius+fontHeight/3)
+            })
+        }
+
+        drawCircle()
+        drawNumbers()
+    </script>
+</body>
+</html>

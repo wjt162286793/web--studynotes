@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>回调地狱</title>
+</head>
+
+<body>
+    <script>
+        function asyncFn(fn1, fn2, fn3) {
+            setTimeout(() => {
+                //处理第一个异步任务
+                fn1()
+                setTimeout(() => {
+                    //处理第二个异步任务
+                    fn2()
+                    setTimeout(() => {
+                        //处理第三个异步任务
+                        fn3()
+                    },2000)
+                },2000)
+            }, 2000)
+        }
+        function fn1(){
+          console.log('执行1')
+        }
+        function fn2(){
+          console.log('执行2')
+        }
+        function fn3(){
+          console.log('执行3')   
+        }
+        asyncFn(fn1, fn2, fn3)
+    </script>
+</body>
+
+</html>

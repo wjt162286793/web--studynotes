@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自定义封装canvas插件</title>
+</head>
+<body>
+    <canvas id="mycanvas"></canvas>
+    <script src="../myCanvasPlugins.js"></script>
+    <script>
+        const myCanvas = new CanvasPlugin().instance('#mycanvas',{width:800,height:600})
+        let canvasDataList = [
+            {
+                type:'rect',
+                nodeName:'rect1',
+                x:100,
+                y:100,
+                width:100,
+                height:100,
+                styleType:'fill',
+                strokeStyle:null,
+                fillStyle:'red',
+                event:{
+                    click:()=>{
+                        console.log('点击了rect1元素')
+                    }
+                }
+            },
+            {
+                type:'arc',
+                nodeName:'arc1',
+                x:300,
+                y:300,
+                radius:100,
+                start:0,
+                end:360,
+                direction:true,
+                styleType:'stroke',
+                strokeStyle:'blue',
+                fillStyle:null,
+                event:{
+                    click:()=>{
+                        console.log('点击了arc1元素')
+                    }
+                }
+            }
+        ]
+        myCanvas.draw(canvasDataList)
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>适配器模式</title>
+</head>
+<body>
+    <script>
+        // 目标接口
+class Target {
+  request() {
+    return 'Target: 请求完成！';
+  }
+}
+
+// 需要适配的对象
+class Adaptee {
+  specificRequest() {
+    return 'Adaptee: 请求完成！';
+  }
+}
+
+// 适配器对象
+class Adapter extends Target {
+  constructor(adaptee) {
+    super();
+    this.adaptee = adaptee;
+  }
+
+  request() {
+    const result = this.adaptee.specificRequest();
+    return `Adapter: ${result}`;
+  }
+}
+
+// 使用适配器模式
+const adaptee = new Adaptee();
+const adapter = new Adapter(adaptee);
+console.log(adapter.request()); // 输出：Adapter: Adaptee: 请求完成！
+
+    </script>
+</body>
+</html>

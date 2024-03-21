@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>get的拦截使用</title>
+</head>
+<body>
+    <script>
+        let data = {
+            name:'wjt',
+            age:29
+        }
+        let _data = new Proxy(data,{
+            get:(target,propKey,receiver)=>{
+              console.log(target,propKey,receiver,'函数参数')
+              if(target[propKey]){  /*Proxy参数1data对象中也存在该属性*/
+                return target[propKey]
+              }else{
+                /*data对象中不存在该属性时*/
+                return undefined
+              }
+            }
+        })
+        console.log(_data.name,'访问name属性')
+        console.log(_data.age,'访问age属性')
+        console.log(_data.game,'访问不存在的属性game')
+    </script>
+</body>
+</html>

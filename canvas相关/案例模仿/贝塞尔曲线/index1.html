@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二次贝塞尔曲线</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <textarea name="result" id="result" cols="60" rows="20"></textarea>
+</body>
+<script>
+    //画布节点
+    const canvas = document.querySelector('#canvas')
+    const ctx = canvas.getContext('2d')
+
+    //文本框
+    const result = document.querySelector('#result')
+
+    //各种标识
+    let isDragging = false
+    let startPoint = {}
+    let currBesizer = null
+    let dragIndex = -1
+    let beziers = []
+    ctx.lineCap = 'round'
+    
+    /** 网格模块 */
+
+    //画网格线
+    function drawGrid(color,stepx,stepy){
+      ctx.save()
+      ctx.lineWidth = 0.5
+      ctx.strokeStyle = color
+      
+      //竖线
+      for(let i = stepx+0.5;i<ctx.canvas.width;i+=stepx){
+        ctx.beginPath()
+        ctx.moveTo(i,0)
+        ctx.lineTo(i,ctx.canvas.height)
+        ctx.stroke()
+      }
+
+      //横线
+      for(let i = stepy+0.5;i<ctx.canvas.height;i+=stepy){
+        ctx.beginPath()
+        ctx.moveTo(0,i)
+        ctx.lineTo(ctx.canvas.width,i)
+        ctx.stroke()
+      }
+
+      ctx.restore();
+      
+    }
+
+    function clear(){
+        ctx.clearRect(0,0,canvas.width,canvas.height)
+        drawGrid('lightgray',10,10)
+    }
+    clear()
+
+    /** 画二次曲线 */
+    function QuadraticCurve(){
+        this.points = []
+    }
+
+    let prototype = {
+		//判断鼠标是否在点上面
+		isInPoint:function(x,y){
+			console.log(x,y,'判断是否在点上的x,y')
+			var index=-1;
+			this.points.forEach(function(point,i){
+				ctx.beginPath();
+				ctx.arc(point.x,point.y,5,0,Math.PI*2,false);
+				if(ctx.isPointInPath(x,y)){
+					index=i;return false;
+				}
+			});
+			return index;
+		},
+		drawPoint:function(){
+			ctx.save();
+			ctx.lineWidth=0.5;
+			ctx.strokeStyle='#a00';
+
+			//画控制点的连线
+			ctx.beginPath();//别忘了beginPath
+			ctx.moveTo(this.points[0].x, this.points[0].y);
+			ctx.lineTo(this.points[2].x, this.points[2].y);
+			ctx.moveTo(this.points[1].x, this.points[1].y);
+			ctx.lineTo(this.points[3].x, this.points[3].y);
+			ctx.stroke();
+
+			//画连接点和控制点
+			this.points.forEach(function(point,i){
+				ctx.fillStyle=i<2?'#00f':'#ff0';
+				ctx.beginPath();
+				ctx.arc(point.x,point.y,5,0,Math.PI*2,false);
+				ctx.stroke();
+				// ctx.fill();
+			});
+			ctx.restore();
+			return this;
+		},
+		drawBezier:function(){
+			ctx.save();
+			ctx.lineWidth=1;
+			ctx.strokeStyle='#00f';
+			ctx.beginPath();
+			ctx.moveTo(this.points[0].x, this.points[0].y);
+			ctx.bezierCurveTo(this.points[2].x,this.points[2].y,this.points[3].x,this.points[3].y,this.points[1].x,this.points[1].y);
+			ctx.stroke();
+			ctx.restore();
+			return this;
+		},
+		showCreateCode:function(){
+			var arr=[];
+			arr.push('ctx.beginPath();');
+			arr.push(`ctx.moveTo(${this.points[0].x},${this.points[0].y});`);
+			arr.push(`ctx.bezierCurveTo(${this.points[2].x},${this.points[2].y},${this.points[3].x},${this.points[3].y},${this.points[1].x},${this.points[1].y});`);
+			arr.push('ctx.stroke();');
+			return arr.join('\n');
+		}
+	}
+
+    QuadraticCurve.prototype.drawPoint=function(){
+		ctx.save();
+		ctx.lineWidth=0.5;
+		ctx.strokeStyle='#a00';
+
+		//画控制点的连线
+		ctx.beginPath();//别忘了beginPath
+		ctx.moveTo(this.points[0].x, this.points[0].y);
+		ctx.lineTo(this.points[2].x, this.points[2].y);
+		ctx.moveTo(this.points[1].x, this.points[1].y);
+		ctx.lineTo(this.points[2].x, this.points[2].y);
+		ctx.stroke();
+
+		//画连接点和控制点
+		this.points.forEach(function(point,i){
+			ctx.fillStyle=i<2?'#00f':'#ff0';
+			ctx.beginPath();
+			ctx.arc(point.x,point.y,5,0,Math.PI*2,false);
+			ctx.stroke();
+			// ctx.fill();
+		});
+		ctx.restore();
+		return this;
+	};
+	QuadraticCurve.prototype.drawBezier=function(){
+		ctx.save();
+		ctx.lineWidth=1;
+		ctx.strokeStyle='#00f';
+		ctx.beginPath();
+		ctx.moveTo(this.points[0].x, this.points[0].y);
+		ctx.quadraticCurveTo(this.points[2].x,this.points[2].y,this.points[1].x,this.points[1].y);
+		ctx.stroke();
+		ctx.restore();
+		return this;
+	};
+	QuadraticCurve.prototype.showCreateCode=function(){
+		var arr=[];
+		arr.push('ctx.beginPath();');
+		arr.push(`ctx.moveTo(${this.points[0].x},${this.points[0].y});`);
+		arr.push(`ctx.quadraticCurveTo(${this.points[2].x},${this.points[2].y},${this.points[1].x},${this.points[1].y});`);
+		arr.push('ctx.stroke();');
+		return arr.join('\n');
+	};
+
+    let f = function(){}
+    f.prototype = prototype
+    QuadraticCurve.prototype = new f()
+    QuadraticCurve.prototype.constructor = QuadraticCurve
+
+    canvas.onmousedown = function(e){
+      isDragging = true
+      startPoint = windowToCanvas(e.clientX,e.clientY)
+      for(let i = 0)
+    }
+</script>
+</html>

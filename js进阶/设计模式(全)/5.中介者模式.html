@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中介者模式</title>
+</head>
+<body>
+    <script>
+        // 中介者对象
+const Mediator = {
+  components: [],
+  addComponent(component) {
+    this.components.push(component);
+  },
+  broadcast(source, message) {
+    this.components
+      .filter(component => component !== source)
+      .forEach(component => component.receive(message));
+  }
+};
+
+// 组件对象
+class Component {
+  constructor() {
+    this.mediator = Mediator;
+    console.log(this,'this是什么')
+    this.mediator.addComponent(this);
+  }
+  send(message) {
+    this.mediator.broadcast(this, message);
+  }
+  receive(message) {
+    console.log(`Received message: ${message}`);
+  }
+}
+
+// 使用中介者模式进行组件之间的通信
+const componentA = new Component();
+const componentB = new Component();
+console.log(componentA,'组件A')
+console.log(componentB,'组件B')
+componentA.send("Hello from Component A");
+componentB.send("Hi from Component B");
+
+
+// Received message: Hello from Component A
+// Received message: Hi from Component B
+
+    </script>
+</body>
+</html>

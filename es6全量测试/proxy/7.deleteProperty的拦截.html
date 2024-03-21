@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>deleteProperty的拦截</title>
+</head>
+<body>
+    <script>
+        let data = {
+            canDeleteProp:'可以被删除的属性',
+            notDeleteProp:'不想被删除的属性'
+        }
+        let _data = new Proxy(data,{
+            deleteProperty:(target,key)=>{
+               if(key === 'notDeleteProp'){
+                // throw new Error('不可以被删除')
+                return false
+               }else{
+                delete target[key]
+                return true
+               }
+            }
+        })
+        delete _data.canDeleteProp
+        console.log(_data,data,'删除了canDeleteProp属性')
+        delete _data.notDeleteProp
+        console.log(_data,data,'notDeleteProp属性无法被删除')
+    </script>
+</body>
+</html>
