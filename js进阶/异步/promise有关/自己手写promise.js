@@ -1,5 +1,3 @@
-const { resolve, reject } = require("promise")
-
 class myPromise{
     //new myPromise((res,rej)=>{res('成功')})
     //new myPromise((res,rej)=>{rej('失败')})

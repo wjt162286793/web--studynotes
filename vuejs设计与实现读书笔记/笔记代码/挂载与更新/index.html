@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" class="inputDom" value="初始值">
+    <button onclick="changeValue()">修改值</button>
+     <script>
+        let inputDom = document.querySelector('.inputDom')
+        console.log(inputDom.value,'初次加载--inputDom.value')
+        console.log(inputDom.getAttribute('value'),'初次加载--getAttribute')
+        const changeValue = ()=>{
+            inputDom.value = '新的值'
+            console.log(inputDom.value,'修改后--inputDom.value')
+            console.log(inputDom.getAttribute('value'),'修改后--getAttribute')
+        }
+     </script>
+</body>
+</html>

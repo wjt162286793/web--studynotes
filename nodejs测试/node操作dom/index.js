@@ -19,6 +19,6 @@ const window = dom.window
 //     fs.writeFileSync('./index.html', dom.serialize())
 // })
 const app = document.getElementById('app')
-app.innerHTML = '<h1>hello world<h1>'
+app.innerHTML = '<h1>hello world</h1>'
 fs.writeFileSync('./index.html', dom.serialize())
 

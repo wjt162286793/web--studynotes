@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链表</title>
+</head>
+<body>
+    <script>
+        //链表是多个元素组成的列表
+        //元素存储不连续,用next指针连在一起
+        //js中没有链表,可以用object模仿链表
+
+        //数组和链表的区别:
+        //数组增删非首尾元素时需要移动元素;链表增删非首尾元素,不需要移动元素,只需要更改next的指向即可
+
+        //模拟链表
+        const a = {value:'a'}
+        const b = {value:'b'}
+        const c = {value:'c'}
+        const d = {value:'d'}
+        a.next = b
+        b.next = c
+        c.next = d 
+        
+        //遍历链表
+        let p = a
+        while(p){
+         console.log(p.value)
+         p = p.next
+        //  console.log(p,'p的值')
+        }
+        
+        //在链表中插入新值,在c和d之间插入e
+        // const e = {value:'e'}
+        // c.next = e
+        // e.next = d
+
+        //删除
+        // c.next = d
+
+        //函数:删除列表中的节点
+        //可以删除某个链表中给定的非末尾结点,只会给被删除的节点
+        //无法直接获取被删除节点的上一节点
+        //将被删除节点转移到下一节点
+        //思路:将被删除节点的值改为下一节点的值
+        //删除下一节点
+        // let deleteNode = function(node){
+        //     node.value = node.next.value
+        //     node.next = node.next.next 
+        // }
+        // deleteNode(b)
+        // console.log(a,'a节点')
+
+
+    </script>
+</body>
+</html>

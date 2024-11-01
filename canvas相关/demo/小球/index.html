@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>小球</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="1200" height="800"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+
+        class Bubble {
+            constructor(x, y, radius, color, dx, dy) {
+                this.x = x;
+                this.y = y;
+                this.radius = radius;
+                this.color = color;
+                this.dx = dx;
+                this.dy = dy;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+                ctx.closePath();
+            }
+
+            update() {
+                this.x += this.dx;
+                this.y += this.dy;
+                this.draw();
+            }
+        }
+
+
+        const bubbles = [];
+        for (let i = 0; i < 5; i++) {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height;
+            const radius = Math.random() * 20 + 10;
+            const color = `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, 0.5)`;
+            const dx = (Math.random() - 0.5) * 2;
+            const dy = (Math.random() - 0.5) * 2;
+            bubbles.push(new Bubble(x, y, radius, color, dx, dy));
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            bubbles.forEach(bubble => {
+                bubble.update();
+            });
+        }
+
+        animate();
+
+
+        function checkCollision(bubble1, bubble2) {
+            const dx = bubble1.x - bubble2.x;
+            const dy = bubble1.y - bubble2.y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            return distance < bubble1.radius + bubble2.radius;
+        }
+
+        function resolveCollision(bubble1, bubble2) {
+            const dx = bubble1.x - bubble2.x;
+            const dy = bubble1.y - bubble2.y;
+            const angle = Math.atan2(dy, dx);
+            const speed1 = Math.sqrt(bubble1.dx * bubble1.dx + bubble1.dy * bubble1.dy);
+            const speed2 = Math.sqrt(bubble2.dx * bubble2.dx + bubble2.dy * bubble2.dy);
+
+            const direction1 = Math.atan2(bubble1.dy, bubble1.dx);
+            const direction2 = Math.atan2(bubble2.dy, bubble2.dx);
+
+            const newSpeed1 = speed2;
+            const newSpeed2 = speed1;
+
+            bubble1.dx = newSpeed1 * Math.cos(direction1);
+            bubble1.dy = newSpeed1 * Math.sin(direction1);
+            bubble2.dx = newSpeed2 * Math.cos(direction2);
+            bubble2.dy = newSpeed2 * Math.sin(direction2);
+        }
+
+        function handleCollisions() {
+            for (let i = 0; i < bubbles.length; i++) {
+                for (let j = i + 1; j < bubbles.length; j++) {
+                    if (checkCollision(bubbles[i], bubbles[j])) {
+                        resolveCollision(bubbles[i], bubbles[j]);
+                    }
+                }
+            }
+        }
+
+        function updateBubbles() {
+            bubbles.forEach(bubble => {
+                bubble.update();
+            });
+            handleCollisions();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            updateBubbles();
+        }
+
+        animate();
+    </script>
+</body>
+
+</html>

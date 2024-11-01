@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set集合</title>
+</head>
+<body>
+    <script>
+        //Set集合
+        //特点:无序且唯一
+
+        //去重
+        let list_1 = [1,2,3,4,5,2,3,4,1]
+        let set_1 = new Set([...list_1])
+        console.log(list_1,set_1,'去重')
+
+        //判断元素是否在集合中
+        let set_2 = new Set(list_1)
+        let arr2 = Array.from(set_2)
+        console.log(arr2,'arr2的结果')
+        console.log(arr2[0],'arr2[0]')
+        console.log(set_2.has(1),'set_2.has(1)')
+
+    </script>
+</body>
+</html>

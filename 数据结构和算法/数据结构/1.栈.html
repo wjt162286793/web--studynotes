@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>栈</title>
+</head>
+<body>
+    <script>
+        //栈的特点是先进后出
+        //js中没有栈,可以使用Array进行模仿
+        
+        
+        //测试字符串中的括号是否规范匹配
+
+        const isValid = function( str ) {
+	// 如果字符串长度为奇数，直接可得不合法
+	if(str.length % 2 === 1) return false;
+	
+	const stack = [];
+	for(let i = 0; i < str.length; i++) {
+		const a = str[i];
+		if(a === '(' || a === '[' || a === '{') {
+			stack.push(a);
+		} else {
+			const top = stack[stack.length - 1]
+			if((top === '(' && a === ')') || (top === '[' && a === ']') || (top === '{' && a === '}') ) {
+				stack.pop();
+			} else {
+				return false;
+			}
+		}
+	}
+	return stack.length === 0;
+}
+
+
+console.log(isValid('[{()}]'))
+    </script>
+</body>
+</html>

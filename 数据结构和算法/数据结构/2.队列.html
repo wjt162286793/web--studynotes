@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>队列</title>
+</head>
+<body>
+    <script>
+        //队列是一个先进先出的数据结构
+        //js中没有队列,但是能用Array模仿队列
+
+        //js中的事件eventloop
+
+
+        //最近请求次数
+        let recentCounter = function(){
+            this.queue = []
+        }
+
+        recentCounter.prototype.ping = function(t){
+         this.queue.push(t)
+         while(this.queue[0] < t -3000){
+              this.queue.shift()
+         }
+         return this.queue.length
+        }
+    </script>
+</body>
+</html>

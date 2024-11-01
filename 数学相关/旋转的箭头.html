@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旋转的箭头</title>
+</head>
+
+<body>
+    <canvas id="canvas" width="1200" height="800"></canvas>
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        let x = canvas.width / 2;
+        let y = canvas.height / 2;
+        let width = 50;
+        let height = 20;
+        let color = 'red';
+        let rotation = 0;
+        let rotationSpeed = 0.02;
+
+        let targetX = 200; // 目标点的 x 坐标
+        let targetY = 200; // 目标点的 y 坐标
+
+        function drawArrow() {
+            ctx.save();
+            ctx.translate(x, y);
+
+            // 计算箭头指向目标点的角度
+            let dx = targetX - x;
+            let dy = targetY - y;
+            let angle = Math.atan2(dy, dx);
+
+            ctx.rotate(angle);
+
+            ctx.beginPath();
+            ctx.moveTo(-width / 2, -height / 2);
+            ctx.lineTo(width / 2, 0);
+            ctx.lineTo(-width / 2, height / 2);
+            ctx.closePath();
+
+            ctx.fillStyle = color;
+            ctx.fill();
+
+            ctx.restore();
+        }
+
+        function animate() {
+            requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            drawArrow();
+        }
+
+        animate();
+    </script>
+</body>
+
+</html>

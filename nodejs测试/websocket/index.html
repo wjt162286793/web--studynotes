@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通信测试</title>
+</head>
+ 
+<body>
+    <button onclick="sendMsg()">给服务端发送消息</button>
+    <script>
+        //创建连接实例
+        const socket = new WebSocket("ws://localhost:8081")
+ 
+        //连接成功
+        socket.onopen = function () {
+            console.log('客户端连接上了')
+        }
+ 
+        //接收消息
+        socket.onmessage = function (event) {
+            console.log('客户端到的消息', event)
+            if (event.data === '王惊涛你好,我是服务端,收到了你的消息') {
+                socket.send('看到了,看来我们连接成功了')
+            }
+        }
+ 
+        //关闭
+        socket.onclose = function () {
+            console.log('关闭')
+        }
+        
+        //发送消息
+        const sendMsg = () => {
+            socket.send('你好啊,我是王惊涛')
+        }
+    </script>
+</body>
+ 
+</html>

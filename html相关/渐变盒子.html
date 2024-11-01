@@ -1,0 +1,47 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Dynamic Gradient Border</title>  
+    <style>  
+        #gradientBox {  
+            width: 200px;  
+            height: 200px;  
+            margin: 50px auto;  
+            --border-gradient: linear-gradient(45deg, red, blue);  
+            border: 10px solid var(--border-gradient);  
+            display: flex;  
+            align-items: center;  
+            justify-content: center;  
+            color: white;  
+            font-size: 20px;  
+            background-color: rgba(0, 0, 0, 0.1);  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div id="gradientBox">Gradient Border</div>  
+  
+    <script>
+       document.addEventListener('DOMContentLoaded', () => {  
+    const gradientBox = document.getElementById('gradientBox');  
+  
+    let angle = 45;  
+    let colors = ['red', 'blue'];  
+  
+    function updateGradient() {  
+        angle = (angle + 1) % 360; // Increment the angle by 1 degree each time  
+        const gradient = `linear-gradient(${angle}deg, ${colors[0]}, ${colors[1]})`;  
+        gradientBox.style.setProperty('--border-gradient', gradient);  
+  
+        // Call this function again after 100 milliseconds to create an animation effect  
+        requestAnimationFrame(updateGradient);  
+    }  
+  
+    // Start the gradient update loop  
+    updateGradient();  
+});
+    </script>  
+</body>  
+</html>

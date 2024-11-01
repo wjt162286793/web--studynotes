@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class的处理</title>
+  </head>
+  <body>
+    <!-- vue中class的几种写法 -->
+
+    <!-- 字符串 -->
+    <div class="box1"></div>
+
+    <!-- 变量--对象 -->
+    <div :class="box2"></div>
+
+    <!-- 变量--数组 -->
+    <div :class="arr"></div>
+    <script>
+      const box2 = { class2: true };
+      const arr = ["box2", { class2: true }];
+
+      //因为class的值可以是很多类型的,所以必须在设置元素的class之前将值统一规划为统一的字符串形式,然后再把该字符串作为元素的class值去设置。
+      //因此,介意封装一个函数,将不同类型的class值正常化为字符串
+
+      //虚拟dom
+      let vnode = {
+        type: "div",
+        props: {
+          class: normalizeClass(arr),
+        },
+      };
+
+      //转化后的虚拟dom
+      vnode = {
+        type: "div",
+        props: {
+          class: "box2 class2",
+        },
+      };
+
+      //书中并没有给出normalizeClass的函数实现,其实很简单,就是将数组,对象,字符串这几种的值进行处理,统一拼成一个字符串
+
+      const normalizeClass = (classData) => {
+        let classResult = "";
+        let type = null;
+        //如果是数组
+        if (Array.isArray(classData)) {
+          type = "array";
+          classData.forEach((item) => {
+            let str = normalizeClass(item);
+            classResult = classResult + `${str}`;
+          });
+        } else if (typeof classData === "object") {
+          type = "object";
+          for (let key in classData) {
+            if (classData[key] === true) {
+              classResult = classResult + ` ${key}`;
+            }
+          }
+        } else {
+          classResult = classResult + ` ${classData}`;
+        }
+        return classResult;
+      };
+
+      let class1 = "class1";
+      let class2 = { class2: true };
+      let class3 = [
+        "class1",
+        {
+          class2: false,
+        },
+        {
+          class3: true,
+        },
+      ];
+
+      console.log(normalizeClass(class1), "--class1的值"); //class1 --class1的值
+      console.log(normalizeClass(class2), "--class2的值"); //class2 --class2的值
+      console.log(normalizeClass(class3), "--class3的值"); //class1 class3 --class3的值
+
+
+      //给class设置的方法中,性能对比el.className是最优的
+
+      const renderer = createRenderer({
+        patchProps(el,key,prevValue,nextValue){
+            //对class进行特殊处理
+            if(key === 'class'){
+                el.className = nextValue || ''
+            }else if(shouldSetAsProps(el,key,nextValue)){
+                 const type = typeof el[key]
+                 if(type === 'boolean' && nextValue === ''){
+                    el[key] = true
+                 }else{
+                    el[key] = nextValue
+                 }
+            }else{
+                el.setAttribute(key,nextValue)
+            }
+        }
+      })
+    </script>
+  </body>
+</html>

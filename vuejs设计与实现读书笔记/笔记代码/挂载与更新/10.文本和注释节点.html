@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本和注释节点</title>
+</head>
+<body>
+    <div>
+        <!-- 注释节点 -->
+         我是文本节点
+    </div>
+    <script>
+        //文本节点的vnode
+        const Text = Symbol()
+        const textVnode = {
+            type:Text,
+            children:'我是文本节点'
+        }
+        //注释节点的描述
+        const Comment = Symbol()
+        const commentVnode = {
+            type:Comment,
+            children:'注释节点'
+        }
+
+        //n1旧vnode,n2新vnode
+        function patch(n1,n2,container){
+            if(n1 && n1.type !== n2.type){
+                unmount(n1)
+                n1 = null
+            }
+            const {type} = n2
+
+            if(typeof type === 'string'){
+                if(!n1){
+                    mountElement(n2,container)
+                }else{
+                    patchElement(n1,n2)
+                }
+            }
+            //文本节点
+            else if(type === Text){
+               //如果没有旧节点,进行挂载
+               if(!n1){
+                //创建节点
+                const el = n2.el = document.createTextNode(n2.children)
+                //插入
+                insert(el,container)
+               }else{
+                //如果存在,进行替换操作
+                const el = n2.el = n1.el
+                if(n2.children !== n1.children){
+                    el.nodeValue = n2.children
+                }
+               }
+            }
+        }
+    </script>
+</body>
+</html>
